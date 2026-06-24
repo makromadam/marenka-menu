@@ -75,7 +75,7 @@
   /* International food terms kept in English casing (plain "I") even inside a
      Turkish dish name, so "Pizza" never renders dotted as "PİZZA" in one place
      and "PIZZA" in another. */
-  var LATIN_WORD_RE = /(Pizza|Spaghetti|Fettuccine|Profiterol|Tiramisu|Margherita|Arrabbiata|Linguine|Risotto|Ravioli|Panini|Bruschetta|Calzone|Penne)/gi;
+  var LATIN_WORD_RE = /(Pizza|Spaghetti|Fettuccine|Profiterol|Tiramisu|Margherita|Arrabbiata|Linguine|Risotto|Ravioli|Panini|Bruschetta|Calzone|Penne|Twist|Mojito|Mocktail|Milkshake)/gi;
 
   // Name node: EN span (always English casing) + TR span (Turkish casing, but
   // international words wrapped lang="en"; whole span English when value.latin).

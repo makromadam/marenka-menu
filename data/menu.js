@@ -8115,8 +8115,8 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Soda (Beypazari)",
-                "en": "Mineral Water (Beypazari)"
+                "tr": "Soda (Beypazarı)",
+                "en": "Mineral Water (Beypazarı)"
               },
               "prices": [
                 {
@@ -8170,8 +8170,8 @@ window.MENU_DATA = {
         },
         {
           "label": {
-            "tr": "Meşrubatlar",
-            "en": "Soft Drinks"
+            "tr": "Meşrubat",
+            "en": "Soft Drink"
           },
           "items": [
             {
@@ -8258,7 +8258,7 @@ window.MENU_DATA = {
           "items": [
             {
               "name": {
-                "tr": "Taze Sikilmiş Portakal Suyu",
+                "tr": "Taze Sıkılmış Portakal Suyu",
                 "en": "Freshly Squeezed Orange Juice"
               },
               "price": "275"
@@ -8279,7 +8279,7 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Ev Yapimi Li̇monata",
+                "tr": "Ev Yapımı Limonata",
                 "en": "Homemade Lemonade"
               },
               "price": "195"
@@ -8298,11 +8298,11 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Nar Twi̇st",
+                "tr": "Nar Twist",
                 "en": "Pomegranate Twist"
               },
               "desc": {
-                "tr": "Taze Sikilmiş Nar Ve Portakal Suyu",
+                "tr": "Taze Sıkılmış Nar Ve Portakal Suyu",
                 "en": "Freshly Squeezed Pomegranate & Orange Juice"
               },
               "price": "325"
@@ -8313,7 +8313,7 @@ window.MENU_DATA = {
                 "en": "Green Detox"
               },
               "desc": {
-                "tr": "Salatalik, Maydanoz, Yeşil Elma, Kereviz, Limon, Zencefil",
+                "tr": "Salatalık, Maydanoz, Yeşil Elma, Kereviz, Limon, Zencefil",
                 "en": "Cucumber, Parsley, Green Apple, Celery, Lemon, Ginger"
               },
               "allergens": {
@@ -8340,7 +8340,7 @@ window.MENU_DATA = {
                 "latin": true
               },
               "desc": {
-                "tr": "Greyfurt, Limon, Ev Yapimi Zencefilli Gazoz",
+                "tr": "Greyfurt, Limon, Ev Yapımı Zencefilli Gazoz",
                 "en": "Grapefruit, Lemon, Homemade Ginger Soda"
               },
               "price": "345"
@@ -8362,7 +8362,8 @@ window.MENU_DATA = {
         {
           "label": {
             "tr": "Mocktail",
-            "en": "Mocktails"
+            "en": "Mocktails",
+            "latin": true
           },
           "items": [
             {
@@ -8400,7 +8401,7 @@ window.MENU_DATA = {
                 "latin": true
               },
               "desc": {
-                "tr": "Taze Kuzukulaği, Citrus Blend, Fesleğen-Nane Yaği",
+                "tr": "Taze Kuzukulağı, Citrus Blend, Fesleğen-Nane Yağı",
                 "en": "Fresh Sorrel, Citrus Blend, Basil-Mint Oil"
               },
               "price": "295"
@@ -8460,18 +8461,19 @@ window.MENU_DATA = {
                 "latin": true
               },
               "desc": {
-                "tr": "Yasemin Çayi, Lime, Menta Cubana",
+                "tr": "Yasemin Çayı, Lime, Menta Cubana",
                 "en": "Jasmine Tea, Lime, Menta Cubana"
               },
               "price": "295"
             },
             {
               "name": {
-                "tr": "Vi̇rgi̇n Moji̇to",
-                "en": "Virgin Mojito"
+                "tr": "Virgin Mojito",
+                "en": "Virgin Mojito",
+                "latin": true
               },
               "desc": {
-                "tr": "Li̇me,soda,sprite,nane",
+                "tr": "Lime,soda,sprite,nane",
                 "en": "Lime, Soda, Sprite, Mint"
               },
               "price": "295"
@@ -8505,11 +8507,11 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Bitki Çaylari",
+                "tr": "Bitki Çayları",
                 "en": "Herbal Teas"
               },
               "desc": {
-                "tr": "Ihlamur / Tropical Mango Rooibos / Redberry Botanical / Hibiscus / Kiş Çayi / Yeşil Çay",
+                "tr": "Ihlamur / Tropical Mango Rooibos / Redberry Botanical / Hibiscus / Kış Çayı / Yeşil Çay",
                 "en": "Linden / Tropical Mango Rooibos / Red Berry Botanical / Hibiscus / Winter Tea / Green Tea"
               },
               "price": "195"
@@ -8652,7 +8654,7 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Sicak Çikolata",
+                "tr": "Sıcak Çikolata",
                 "en": "Hot Chocolate"
               },
               "allergens": {
@@ -8790,7 +8792,8 @@ window.MENU_DATA = {
         {
           "label": {
             "tr": "Milkshake",
-            "en": "Milkshakes"
+            "en": "Milkshakes",
+            "latin": true
           },
           "items": [
             {
