@@ -473,8 +473,9 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 .section-head__title {
   font-size: var(--fs-display);
   font-weight: 800;
-  letter-spacing: -0.01em;
-  line-height: 1.05;
+  text-transform: uppercase; /* headings always in caps */
+  letter-spacing: 0.03em;    /* gentle positive tracking suits all-caps */
+  line-height: 1.08;
   color: var(--cream);
 }
 .section-head__ornament {
