@@ -133,44 +133,71 @@
     return frag;
   }
 
-  function renderSection(section) {
-    var sec = el("section", "menu-section", { id: "sec-" + section.id, "aria-labelledby": "h-" + section.id });
+  // which sections belong to the "Drinks" macro-group (rest are "Food")
+  var DRINK_IDS = { kokteyl: 1, bira: 1, raki: 1, distile: 1 };
+  function macroGroup(id) {
+    return DRINK_IDS[id] ? { tr: "İçkiler", en: "Drinks" } : { tr: "Yemekler", en: "Food" };
+  }
 
-    // major banner (FOOD / DRINKS)
-    if (section.banner) {
-      var banner = el("div", "section-banner");
-      var eye = el("span", "section-banner__eyebrow");
-      eye.appendChild(bilingual("span", null, section.banner.eyebrow));
-      var btitle = el("h2", "section-banner__title");
-      btitle.appendChild(bilingual("span", null, section.banner.title));
-      var orn = el("div", "section-banner__ornament", { "aria-hidden": "true" });
-      orn.appendChild(el("span", "section-banner__diamond"));
-      banner.appendChild(eye);
-      banner.appendChild(btitle);
-      banner.appendChild(orn);
-      sec.appendChild(banner);
-    }
+  function renderSection(section, index, sections) {
+    var sec = el("section", "menu-section",
+      { id: "sec-" + section.id, "aria-labelledby": "h-" + section.id, role: "tabpanel", tabindex: "-1" });
 
-    // section header
+    // page header — consistent across every page: eyebrow (Food/Drinks) + title
     var head = el("div", "section-head");
+    var eye = el("span", "section-head__eyebrow");
+    eye.appendChild(bilingual("span", null, macroGroup(section.id)));
+    head.appendChild(eye);
     var title = el("h2", "section-head__title", { id: "h-" + section.id });
     title.appendChild(bilingual("span", null, section.label));
     head.appendChild(title);
+    var orn = el("div", "section-head__ornament", { "aria-hidden": "true" });
+    orn.appendChild(el("span", "section-head__diamond"));
+    head.appendChild(orn);
     if (section.note && (section.note.tr || section.note.en)) {
       head.appendChild(bilingual("p", "section-head__note", section.note));
     }
     sec.appendChild(head);
 
     (section.groups || []).forEach(function (g) { sec.appendChild(renderCategory(g)); });
+
+    // page-to-page pager (← previous section · next section →)
+    var prev = sections[index - 1], next = sections[index + 1];
+    if (prev || next) {
+      var pager = el("nav", "pager", { "aria-label": "Sayfalar / Pages" });
+      if (prev) {
+        var pb = el("button", "pager__btn pager__prev", { type: "button", "data-target": "sec-" + prev.id });
+        pb.appendChild(arrowSpan("‹"));
+        var pl = el("span", "pager__label"); pl.appendChild(bilingual("span", null, prev.navLabel || prev.label));
+        pb.appendChild(pl);
+        pager.appendChild(pb);
+      } else { pager.appendChild(el("span", "pager__spacer")); }
+      if (next) {
+        var nb = el("button", "pager__btn pager__next", { type: "button", "data-target": "sec-" + next.id });
+        var nl = el("span", "pager__label"); nl.appendChild(bilingual("span", null, next.navLabel || next.label));
+        nb.appendChild(nl);
+        nb.appendChild(arrowSpan("›"));
+        pager.appendChild(nb);
+      } else { pager.appendChild(el("span", "pager__spacer")); }
+      sec.appendChild(pager);
+    }
     return sec;
   }
 
-  /* ---- sub-nav ----------------------------------------------------------- */
+  function arrowSpan(ch) {
+    var s = el("span", "pager__arrow", { "aria-hidden": "true" });
+    s.textContent = ch;
+    return s;
+  }
+
+  /* ---- sub-nav (page tabs) ----------------------------------------------- */
   function renderNav(sections) {
     var track = document.getElementById("subnav-track");
     if (!track) return;
+    track.setAttribute("role", "tablist");
     sections.forEach(function (s) {
-      var a = el("a", "subnav__link", { href: "#sec-" + s.id, "data-target": "sec-" + s.id });
+      var a = el("a", "subnav__link",
+        { href: "#sec-" + s.id, "data-target": "sec-" + s.id, role: "tab" });
       a.appendChild(bilingual("span", null, s.navLabel || s.label));
       track.appendChild(a);
     });
@@ -202,14 +229,18 @@
   /* ---- view (cover ↔ menu) ---------------------------------------------- */
   function setView(view) {
     body.setAttribute("data-view", view);
+    window.scrollTo(0, 0);
     if (view === "menu") {
-      window.scrollTo(0, 0);
-      var first = document.querySelector(".subnav__link");
+      // replay the entrance animation on the active page now that it's visible
+      var active = document.querySelector(".menu-section.is-active");
+      if (active) {
+        active.classList.remove("page-enter");
+        void active.offsetWidth;
+        active.classList.add("page-enter");
+      }
       // move focus into the menu for keyboard/AT users
       var skip = document.getElementById("menu-main");
       if (skip) skip.focus({ preventScroll: true });
-    } else {
-      window.scrollTo(0, 0);
     }
   }
 
@@ -221,55 +252,80 @@
     setView("cover");
   }
 
-  /* ---- header compaction + scroll-spy ------------------------------------ */
-  function initScrollChrome(sections) {
+  /* ---- header compaction ------------------------------------------------- */
+  function initScrollChrome() {
     var onScroll = function () {
       body.setAttribute("data-scrolled", String(window.scrollY > 24));
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
+  }
 
-    // scroll-spy for the sub-nav active state
-    if (!("IntersectionObserver" in window)) return;
-    var links = {};
-    var firstId = null;
+  /* ---- paging (one section = one page) ----------------------------------- */
+  // Only the active section is shown; tabs and the prev/next pager switch
+  // pages, so one section never bleeds into the next.
+  var currentSection = null;
+  function initPaging(sections) {
+    var tabs = {};
     document.querySelectorAll(".subnav__link").forEach(function (l) {
-      var id = l.getAttribute("data-target");
-      links[id] = l;
-      if (firstId === null) firstId = id;
+      tabs[l.getAttribute("data-target")] = l;
     });
-    // Prime with the first section active and the strip at its start, so the
-    // first pill (e.g. "Kahvaltı") is never half-clipped on open. The strip is
-    // only auto-scrolled once the guest has actually scrolled the page.
-    var current = firstId;
-    if (firstId) links[firstId].setAttribute("aria-current", "true");
-    var hasScrolled = false;
-    window.addEventListener("scroll", function () { hasScrolled = true; }, { passive: true, once: true });
+    var pageEls = document.querySelectorAll(".menu-section");
 
-    var setCurrent = function (id) {
-      if (id === current) return;
-      current = id;
-      for (var key in links) links[key].setAttribute("aria-current", String(key === id));
-      var active = links[id];
-      if (!hasScrolled || !active || !active.parentNode) return;
-      // keep the active pill fully in view; bias toward its start so the
-      // previous pill is never left visibly cut at the left edge
-      var track = active.parentNode;
-      var pad = 16;
-      var left = active.offsetLeft - pad;
-      var right = active.offsetLeft + active.offsetWidth + pad;
-      if (left < track.scrollLeft) {
-        track.scrollTo({ left: left, behavior: "smooth" });
-      } else if (right > track.scrollLeft + track.clientWidth) {
-        track.scrollTo({ left: right - track.clientWidth, behavior: "smooth" });
+    function showSection(secId, opts) {
+      if (!secId || secId === currentSection) return;
+      currentSection = secId;
+      // pages
+      for (var i = 0; i < pageEls.length; i++) {
+        pageEls[i].classList.toggle("is-active", pageEls[i].id === secId);
       }
-    };
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) setCurrent(e.target.id);
+      // restart the entrance animation on the freshly shown page
+      var active = document.getElementById(secId);
+      if (active) {
+        active.classList.remove("page-enter");
+        // force reflow so the animation re-triggers every switch
+        void active.offsetWidth;
+        active.classList.add("page-enter");
+      }
+      // tabs
+      for (var key in tabs) {
+        var on = key === secId;
+        tabs[key].setAttribute("aria-current", String(on));
+        tabs[key].setAttribute("aria-selected", String(on));
+      }
+      // keep the active tab in view within the strip
+      var tab = tabs[secId];
+      if (tab && tab.parentNode) {
+        var track = tab.parentNode, pad = 16;
+        var l = tab.offsetLeft - pad, r = tab.offsetLeft + tab.offsetWidth + pad;
+        if (l < track.scrollLeft) track.scrollTo({ left: l, behavior: "smooth" });
+        else if (r > track.scrollLeft + track.clientWidth)
+          track.scrollTo({ left: r - track.clientWidth, behavior: "smooth" });
+      }
+      // start each page at the top, under the sticky chrome
+      if (!opts || opts.scroll !== false) window.scrollTo({ top: 0, behavior: "auto" });
+    }
+
+    // tab clicks
+    document.querySelectorAll(".subnav__link").forEach(function (l) {
+      l.addEventListener("click", function (e) {
+        e.preventDefault();
+        showSection(l.getAttribute("data-target"));
       });
-    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
-    document.querySelectorAll(".menu-section").forEach(function (s) { observer.observe(s); });
+    });
+    // pager clicks (event-delegated; buttons are inside the pages)
+    var mainEl = document.getElementById("menu-main");
+    if (mainEl) {
+      mainEl.addEventListener("click", function (e) {
+        var btn = e.target.closest ? e.target.closest(".pager__btn") : null;
+        if (btn) showSection(btn.getAttribute("data-target"));
+      });
+    }
+
+    // expose so the cover→menu entry can (re)assert the first page
+    initPaging.show = showSection;
+    initPaging.first = sections.length ? "sec-" + sections[0].id : null;
+    showSection(initPaging.first, { scroll: false });
   }
 
   /* ---- boot -------------------------------------------------------------- */
@@ -285,12 +341,13 @@
 
     renderNav(data.sections);
     var frag = document.createDocumentFragment();
-    data.sections.forEach(function (s) { frag.appendChild(renderSection(s)); });
+    data.sections.forEach(function (s, i) { frag.appendChild(renderSection(s, i, data.sections)); });
     main.appendChild(frag);
 
     initLang();
     initView();
-    initScrollChrome(data.sections);
+    initScrollChrome();
+    initPaging(data.sections);
   }
 
   if (document.readyState === "loading") {

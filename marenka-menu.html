@@ -402,8 +402,11 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 }
 
 /* 8 · HEADINGS -------------------------------------------------------------- */
-.menu-section { padding-top: var(--space-8); }
-.menu-section:first-child { padding-top: var(--space-4); }
+/* Paged menu: only the active section is shown, so one page never bleeds into
+   the next. */
+.menu-section { display: none; padding-top: var(--space-6); }
+.menu-section.is-active { display: block; }
+.menu-section:focus { outline: none; }
 
 /* Major banner — FOOD / DRINKS */
 .section-banner {
@@ -444,19 +447,46 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 .section-banner__ornament::after { transform: scaleX(-1); }
 .section-banner__diamond { width: 6px; height: 6px; rotate: 45deg; background: currentColor; }
 
-/* Section header (Breakfast, Lunch, Cocktails…) */
+/* Page header (Breakfast, Lunch, Cocktails…) — consistent on every page */
 .section-head {
   text-align: center;
   margin-bottom: var(--space-5);
 }
+.section-head__eyebrow {
+  display: block;
+  font-size: var(--fs-category);
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--cream-soft);
+  margin-bottom: var(--space-2);
+  padding-left: 0.42em;
+}
 .section-head__title {
-  font-size: var(--fs-section);
-  font-weight: 700;
-  letter-spacing: -0.005em;
+  font-size: var(--fs-display);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
   color: var(--cream);
 }
+.section-head__ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  color: var(--gold);
+}
+.section-head__ornament::before,
+.section-head__ornament::after {
+  content: "";
+  width: clamp(40px, 16vw, 90px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, currentColor);
+}
+.section-head__ornament::after { transform: scaleX(-1); }
+.section-head__diamond { width: 6px; height: 6px; rotate: 45deg; background: currentColor; }
 .section-head__note {
-  margin-top: var(--space-1);
+  margin-top: var(--space-3);
   font-size: var(--fs-allergen);
   font-style: italic;
   color: var(--cream-soft);
@@ -606,9 +636,46 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
   font-variant-numeric: tabular-nums;
 }
 
+/* Page-to-page pager (← previous · next →) */
+.pager {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-top: var(--space-10);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--divider-soft);
+}
+.pager__spacer { flex: 0 1 auto; }
+.pager__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  max-width: 48%;
+  padding: 0.7em 1.1em;
+  border: 1px solid var(--divider);
+  border-radius: 999px;
+  color: var(--cream);
+  font-size: var(--fs-ui);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: border-color var(--dur-fast) var(--ease),
+              background-color var(--dur-fast) var(--ease),
+              transform var(--dur-fast) var(--ease);
+}
+.pager__next { margin-left: auto; }
+.pager__arrow { font-size: 1.2em; line-height: 1; }
+.pager__label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (hover: hover) {
+  .pager__btn:hover { border-color: var(--cream); background: rgba(247, 240, 230, 0.06); }
+  .pager__prev:hover { transform: translateX(-2px); }
+  .pager__next:hover { transform: translateX(2px); }
+}
+.pager__btn:active { transform: scale(0.98); }
+
 /* footer */
 .menu-footer {
-  margin-top: var(--space-12);
+  margin-top: var(--space-10);
   padding-top: var(--space-6);
   border-top: 1px solid var(--divider-soft);
   text-align: center;
@@ -654,28 +721,27 @@ body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
   to   { opacity: 1; transform: none; }
 }
 
-/* Section entrance — a soft, one-time fade-up that plays when the menu opens.
-   Pure CSS, no observer. Content always finishes visible, so anchor jumps from
-   the sub-nav can never land on hidden cards. Disabled for reduced-motion. */
+/* Page entrance — a soft fade-up that replays each time a page is shown
+   (.page-enter is toggled by JS on the active section). Pure CSS keyframes;
+   content always finishes visible. Disabled for reduced-motion. */
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: none; }
 }
 @media (prefers-reduced-motion: no-preference) {
-  body[data-view="menu"] .section-banner,
-  body[data-view="menu"] .section-head,
-  body[data-view="menu"] .category {
-    animation: fade-up 0.6s var(--ease) both;
-  }
-  body[data-view="menu"] .item {
+  .menu-section.page-enter .section-head,
+  .menu-section.page-enter .category {
     animation: fade-up 0.55s var(--ease) both;
   }
+  .menu-section.page-enter .item {
+    animation: fade-up 0.5s var(--ease) both;
+  }
   /* a gentle stagger for the first cards in each list */
-  body[data-view="menu"] .item-list .item:nth-child(1) { animation-delay: 0.02s; }
-  body[data-view="menu"] .item-list .item:nth-child(2) { animation-delay: 0.06s; }
-  body[data-view="menu"] .item-list .item:nth-child(3) { animation-delay: 0.10s; }
-  body[data-view="menu"] .item-list .item:nth-child(4) { animation-delay: 0.14s; }
-  body[data-view="menu"] .item-list .item:nth-child(n+5) { animation-delay: 0.18s; }
+  .menu-section.page-enter .item-list .item:nth-child(1) { animation-delay: 0.03s; }
+  .menu-section.page-enter .item-list .item:nth-child(2) { animation-delay: 0.07s; }
+  .menu-section.page-enter .item-list .item:nth-child(3) { animation-delay: 0.11s; }
+  .menu-section.page-enter .item-list .item:nth-child(4) { animation-delay: 0.15s; }
+  .menu-section.page-enter .item-list .item:nth-child(n+5) { animation-delay: 0.19s; }
 }
 
 /* 12 · ACCESSIBILITY -------------------------------------------------------- */
@@ -721,12 +787,17 @@ body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
   :root { --content-max: 100%; }
   body { background: #fff; color: #2b1a10; }
   body::before, body::after { display: none; }
-  .cover, .site-header, .subnav, .lang-toggle, .back-btn, .menu-footer__mark { display: none !important; }
+  .cover, .site-header, .subnav, .lang-toggle, .back-btn,
+  .pager, .menu-footer__mark { display: none !important; }
   body[data-view="cover"] .menu { display: block !important; }
-  /* print both nothing-hidden? show active language only */
+  /* print every page, each starting on a fresh sheet */
+  .menu-section { display: block !important; padding-top: 0; }
+  .menu-section + .menu-section { break-before: page; }
   .item { break-inside: avoid; border-color: rgba(0,0,0,0.15); }
-  .item__name, .section-banner__title, .section-head__title { color: #2b1a10; }
-  .item__price, .item__price-pair .amount, .category__label, .section-banner__eyebrow { color: #8a5a25; }
+  .item__name, .section-head__title { color: #2b1a10; }
+  .item__price, .item__price-pair .amount, .category__label,
+  .section-head__eyebrow { color: #8a5a25; }
+  .section-head__ornament { color: #b98a4a; }
   .item__desc { color: #4a3525; }
   .item__allergen, .menu-footer__legal { color: #6a4a30; }
   .item:hover { transform: none; background: none; }
@@ -7868,44 +7939,71 @@ window.MENU_DATA = {
     return frag;
   }
 
-  function renderSection(section) {
-    var sec = el("section", "menu-section", { id: "sec-" + section.id, "aria-labelledby": "h-" + section.id });
+  // which sections belong to the "Drinks" macro-group (rest are "Food")
+  var DRINK_IDS = { kokteyl: 1, bira: 1, raki: 1, distile: 1 };
+  function macroGroup(id) {
+    return DRINK_IDS[id] ? { tr: "İçkiler", en: "Drinks" } : { tr: "Yemekler", en: "Food" };
+  }
 
-    // major banner (FOOD / DRINKS)
-    if (section.banner) {
-      var banner = el("div", "section-banner");
-      var eye = el("span", "section-banner__eyebrow");
-      eye.appendChild(bilingual("span", null, section.banner.eyebrow));
-      var btitle = el("h2", "section-banner__title");
-      btitle.appendChild(bilingual("span", null, section.banner.title));
-      var orn = el("div", "section-banner__ornament", { "aria-hidden": "true" });
-      orn.appendChild(el("span", "section-banner__diamond"));
-      banner.appendChild(eye);
-      banner.appendChild(btitle);
-      banner.appendChild(orn);
-      sec.appendChild(banner);
-    }
+  function renderSection(section, index, sections) {
+    var sec = el("section", "menu-section",
+      { id: "sec-" + section.id, "aria-labelledby": "h-" + section.id, role: "tabpanel", tabindex: "-1" });
 
-    // section header
+    // page header — consistent across every page: eyebrow (Food/Drinks) + title
     var head = el("div", "section-head");
+    var eye = el("span", "section-head__eyebrow");
+    eye.appendChild(bilingual("span", null, macroGroup(section.id)));
+    head.appendChild(eye);
     var title = el("h2", "section-head__title", { id: "h-" + section.id });
     title.appendChild(bilingual("span", null, section.label));
     head.appendChild(title);
+    var orn = el("div", "section-head__ornament", { "aria-hidden": "true" });
+    orn.appendChild(el("span", "section-head__diamond"));
+    head.appendChild(orn);
     if (section.note && (section.note.tr || section.note.en)) {
       head.appendChild(bilingual("p", "section-head__note", section.note));
     }
     sec.appendChild(head);
 
     (section.groups || []).forEach(function (g) { sec.appendChild(renderCategory(g)); });
+
+    // page-to-page pager (← previous section · next section →)
+    var prev = sections[index - 1], next = sections[index + 1];
+    if (prev || next) {
+      var pager = el("nav", "pager", { "aria-label": "Sayfalar / Pages" });
+      if (prev) {
+        var pb = el("button", "pager__btn pager__prev", { type: "button", "data-target": "sec-" + prev.id });
+        pb.appendChild(arrowSpan("‹"));
+        var pl = el("span", "pager__label"); pl.appendChild(bilingual("span", null, prev.navLabel || prev.label));
+        pb.appendChild(pl);
+        pager.appendChild(pb);
+      } else { pager.appendChild(el("span", "pager__spacer")); }
+      if (next) {
+        var nb = el("button", "pager__btn pager__next", { type: "button", "data-target": "sec-" + next.id });
+        var nl = el("span", "pager__label"); nl.appendChild(bilingual("span", null, next.navLabel || next.label));
+        nb.appendChild(nl);
+        nb.appendChild(arrowSpan("›"));
+        pager.appendChild(nb);
+      } else { pager.appendChild(el("span", "pager__spacer")); }
+      sec.appendChild(pager);
+    }
     return sec;
   }
 
-  /* ---- sub-nav ----------------------------------------------------------- */
+  function arrowSpan(ch) {
+    var s = el("span", "pager__arrow", { "aria-hidden": "true" });
+    s.textContent = ch;
+    return s;
+  }
+
+  /* ---- sub-nav (page tabs) ----------------------------------------------- */
   function renderNav(sections) {
     var track = document.getElementById("subnav-track");
     if (!track) return;
+    track.setAttribute("role", "tablist");
     sections.forEach(function (s) {
-      var a = el("a", "subnav__link", { href: "#sec-" + s.id, "data-target": "sec-" + s.id });
+      var a = el("a", "subnav__link",
+        { href: "#sec-" + s.id, "data-target": "sec-" + s.id, role: "tab" });
       a.appendChild(bilingual("span", null, s.navLabel || s.label));
       track.appendChild(a);
     });
@@ -7937,14 +8035,18 @@ window.MENU_DATA = {
   /* ---- view (cover ↔ menu) ---------------------------------------------- */
   function setView(view) {
     body.setAttribute("data-view", view);
+    window.scrollTo(0, 0);
     if (view === "menu") {
-      window.scrollTo(0, 0);
-      var first = document.querySelector(".subnav__link");
+      // replay the entrance animation on the active page now that it's visible
+      var active = document.querySelector(".menu-section.is-active");
+      if (active) {
+        active.classList.remove("page-enter");
+        void active.offsetWidth;
+        active.classList.add("page-enter");
+      }
       // move focus into the menu for keyboard/AT users
       var skip = document.getElementById("menu-main");
       if (skip) skip.focus({ preventScroll: true });
-    } else {
-      window.scrollTo(0, 0);
     }
   }
 
@@ -7956,55 +8058,80 @@ window.MENU_DATA = {
     setView("cover");
   }
 
-  /* ---- header compaction + scroll-spy ------------------------------------ */
-  function initScrollChrome(sections) {
+  /* ---- header compaction ------------------------------------------------- */
+  function initScrollChrome() {
     var onScroll = function () {
       body.setAttribute("data-scrolled", String(window.scrollY > 24));
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
+  }
 
-    // scroll-spy for the sub-nav active state
-    if (!("IntersectionObserver" in window)) return;
-    var links = {};
-    var firstId = null;
+  /* ---- paging (one section = one page) ----------------------------------- */
+  // Only the active section is shown; tabs and the prev/next pager switch
+  // pages, so one section never bleeds into the next.
+  var currentSection = null;
+  function initPaging(sections) {
+    var tabs = {};
     document.querySelectorAll(".subnav__link").forEach(function (l) {
-      var id = l.getAttribute("data-target");
-      links[id] = l;
-      if (firstId === null) firstId = id;
+      tabs[l.getAttribute("data-target")] = l;
     });
-    // Prime with the first section active and the strip at its start, so the
-    // first pill (e.g. "Kahvaltı") is never half-clipped on open. The strip is
-    // only auto-scrolled once the guest has actually scrolled the page.
-    var current = firstId;
-    if (firstId) links[firstId].setAttribute("aria-current", "true");
-    var hasScrolled = false;
-    window.addEventListener("scroll", function () { hasScrolled = true; }, { passive: true, once: true });
+    var pageEls = document.querySelectorAll(".menu-section");
 
-    var setCurrent = function (id) {
-      if (id === current) return;
-      current = id;
-      for (var key in links) links[key].setAttribute("aria-current", String(key === id));
-      var active = links[id];
-      if (!hasScrolled || !active || !active.parentNode) return;
-      // keep the active pill fully in view; bias toward its start so the
-      // previous pill is never left visibly cut at the left edge
-      var track = active.parentNode;
-      var pad = 16;
-      var left = active.offsetLeft - pad;
-      var right = active.offsetLeft + active.offsetWidth + pad;
-      if (left < track.scrollLeft) {
-        track.scrollTo({ left: left, behavior: "smooth" });
-      } else if (right > track.scrollLeft + track.clientWidth) {
-        track.scrollTo({ left: right - track.clientWidth, behavior: "smooth" });
+    function showSection(secId, opts) {
+      if (!secId || secId === currentSection) return;
+      currentSection = secId;
+      // pages
+      for (var i = 0; i < pageEls.length; i++) {
+        pageEls[i].classList.toggle("is-active", pageEls[i].id === secId);
       }
-    };
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) setCurrent(e.target.id);
+      // restart the entrance animation on the freshly shown page
+      var active = document.getElementById(secId);
+      if (active) {
+        active.classList.remove("page-enter");
+        // force reflow so the animation re-triggers every switch
+        void active.offsetWidth;
+        active.classList.add("page-enter");
+      }
+      // tabs
+      for (var key in tabs) {
+        var on = key === secId;
+        tabs[key].setAttribute("aria-current", String(on));
+        tabs[key].setAttribute("aria-selected", String(on));
+      }
+      // keep the active tab in view within the strip
+      var tab = tabs[secId];
+      if (tab && tab.parentNode) {
+        var track = tab.parentNode, pad = 16;
+        var l = tab.offsetLeft - pad, r = tab.offsetLeft + tab.offsetWidth + pad;
+        if (l < track.scrollLeft) track.scrollTo({ left: l, behavior: "smooth" });
+        else if (r > track.scrollLeft + track.clientWidth)
+          track.scrollTo({ left: r - track.clientWidth, behavior: "smooth" });
+      }
+      // start each page at the top, under the sticky chrome
+      if (!opts || opts.scroll !== false) window.scrollTo({ top: 0, behavior: "auto" });
+    }
+
+    // tab clicks
+    document.querySelectorAll(".subnav__link").forEach(function (l) {
+      l.addEventListener("click", function (e) {
+        e.preventDefault();
+        showSection(l.getAttribute("data-target"));
       });
-    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
-    document.querySelectorAll(".menu-section").forEach(function (s) { observer.observe(s); });
+    });
+    // pager clicks (event-delegated; buttons are inside the pages)
+    var mainEl = document.getElementById("menu-main");
+    if (mainEl) {
+      mainEl.addEventListener("click", function (e) {
+        var btn = e.target.closest ? e.target.closest(".pager__btn") : null;
+        if (btn) showSection(btn.getAttribute("data-target"));
+      });
+    }
+
+    // expose so the cover→menu entry can (re)assert the first page
+    initPaging.show = showSection;
+    initPaging.first = sections.length ? "sec-" + sections[0].id : null;
+    showSection(initPaging.first, { scroll: false });
   }
 
   /* ---- boot -------------------------------------------------------------- */
@@ -8020,12 +8147,13 @@ window.MENU_DATA = {
 
     renderNav(data.sections);
     var frag = document.createDocumentFragment();
-    data.sections.forEach(function (s) { frag.appendChild(renderSection(s)); });
+    data.sections.forEach(function (s, i) { frag.appendChild(renderSection(s, i, data.sections)); });
     main.appendChild(frag);
 
     initLang();
     initView();
-    initScrollChrome(data.sections);
+    initScrollChrome();
+    initPaging(data.sections);
   }
 
   if (document.readyState === "loading") {

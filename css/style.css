@@ -388,8 +388,11 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 }
 
 /* 8 · HEADINGS -------------------------------------------------------------- */
-.menu-section { padding-top: var(--space-8); }
-.menu-section:first-child { padding-top: var(--space-4); }
+/* Paged menu: only the active section is shown, so one page never bleeds into
+   the next. */
+.menu-section { display: none; padding-top: var(--space-6); }
+.menu-section.is-active { display: block; }
+.menu-section:focus { outline: none; }
 
 /* Major banner — FOOD / DRINKS */
 .section-banner {
@@ -430,19 +433,46 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 .section-banner__ornament::after { transform: scaleX(-1); }
 .section-banner__diamond { width: 6px; height: 6px; rotate: 45deg; background: currentColor; }
 
-/* Section header (Breakfast, Lunch, Cocktails…) */
+/* Page header (Breakfast, Lunch, Cocktails…) — consistent on every page */
 .section-head {
   text-align: center;
   margin-bottom: var(--space-5);
 }
+.section-head__eyebrow {
+  display: block;
+  font-size: var(--fs-category);
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--cream-soft);
+  margin-bottom: var(--space-2);
+  padding-left: 0.42em;
+}
 .section-head__title {
-  font-size: var(--fs-section);
-  font-weight: 700;
-  letter-spacing: -0.005em;
+  font-size: var(--fs-display);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
   color: var(--cream);
 }
+.section-head__ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  color: var(--gold);
+}
+.section-head__ornament::before,
+.section-head__ornament::after {
+  content: "";
+  width: clamp(40px, 16vw, 90px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, currentColor);
+}
+.section-head__ornament::after { transform: scaleX(-1); }
+.section-head__diamond { width: 6px; height: 6px; rotate: 45deg; background: currentColor; }
 .section-head__note {
-  margin-top: var(--space-1);
+  margin-top: var(--space-3);
   font-size: var(--fs-allergen);
   font-style: italic;
   color: var(--cream-soft);
@@ -592,9 +622,46 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
   font-variant-numeric: tabular-nums;
 }
 
+/* Page-to-page pager (← previous · next →) */
+.pager {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-top: var(--space-10);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--divider-soft);
+}
+.pager__spacer { flex: 0 1 auto; }
+.pager__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  max-width: 48%;
+  padding: 0.7em 1.1em;
+  border: 1px solid var(--divider);
+  border-radius: 999px;
+  color: var(--cream);
+  font-size: var(--fs-ui);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: border-color var(--dur-fast) var(--ease),
+              background-color var(--dur-fast) var(--ease),
+              transform var(--dur-fast) var(--ease);
+}
+.pager__next { margin-left: auto; }
+.pager__arrow { font-size: 1.2em; line-height: 1; }
+.pager__label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (hover: hover) {
+  .pager__btn:hover { border-color: var(--cream); background: rgba(247, 240, 230, 0.06); }
+  .pager__prev:hover { transform: translateX(-2px); }
+  .pager__next:hover { transform: translateX(2px); }
+}
+.pager__btn:active { transform: scale(0.98); }
+
 /* footer */
 .menu-footer {
-  margin-top: var(--space-12);
+  margin-top: var(--space-10);
   padding-top: var(--space-6);
   border-top: 1px solid var(--divider-soft);
   text-align: center;
@@ -640,28 +707,27 @@ body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
   to   { opacity: 1; transform: none; }
 }
 
-/* Section entrance — a soft, one-time fade-up that plays when the menu opens.
-   Pure CSS, no observer. Content always finishes visible, so anchor jumps from
-   the sub-nav can never land on hidden cards. Disabled for reduced-motion. */
+/* Page entrance — a soft fade-up that replays each time a page is shown
+   (.page-enter is toggled by JS on the active section). Pure CSS keyframes;
+   content always finishes visible. Disabled for reduced-motion. */
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: none; }
 }
 @media (prefers-reduced-motion: no-preference) {
-  body[data-view="menu"] .section-banner,
-  body[data-view="menu"] .section-head,
-  body[data-view="menu"] .category {
-    animation: fade-up 0.6s var(--ease) both;
-  }
-  body[data-view="menu"] .item {
+  .menu-section.page-enter .section-head,
+  .menu-section.page-enter .category {
     animation: fade-up 0.55s var(--ease) both;
   }
+  .menu-section.page-enter .item {
+    animation: fade-up 0.5s var(--ease) both;
+  }
   /* a gentle stagger for the first cards in each list */
-  body[data-view="menu"] .item-list .item:nth-child(1) { animation-delay: 0.02s; }
-  body[data-view="menu"] .item-list .item:nth-child(2) { animation-delay: 0.06s; }
-  body[data-view="menu"] .item-list .item:nth-child(3) { animation-delay: 0.10s; }
-  body[data-view="menu"] .item-list .item:nth-child(4) { animation-delay: 0.14s; }
-  body[data-view="menu"] .item-list .item:nth-child(n+5) { animation-delay: 0.18s; }
+  .menu-section.page-enter .item-list .item:nth-child(1) { animation-delay: 0.03s; }
+  .menu-section.page-enter .item-list .item:nth-child(2) { animation-delay: 0.07s; }
+  .menu-section.page-enter .item-list .item:nth-child(3) { animation-delay: 0.11s; }
+  .menu-section.page-enter .item-list .item:nth-child(4) { animation-delay: 0.15s; }
+  .menu-section.page-enter .item-list .item:nth-child(n+5) { animation-delay: 0.19s; }
 }
 
 /* 12 · ACCESSIBILITY -------------------------------------------------------- */
@@ -707,12 +773,17 @@ body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
   :root { --content-max: 100%; }
   body { background: #fff; color: #2b1a10; }
   body::before, body::after { display: none; }
-  .cover, .site-header, .subnav, .lang-toggle, .back-btn, .menu-footer__mark { display: none !important; }
+  .cover, .site-header, .subnav, .lang-toggle, .back-btn,
+  .pager, .menu-footer__mark { display: none !important; }
   body[data-view="cover"] .menu { display: block !important; }
-  /* print both nothing-hidden? show active language only */
+  /* print every page, each starting on a fresh sheet */
+  .menu-section { display: block !important; padding-top: 0; }
+  .menu-section + .menu-section { break-before: page; }
   .item { break-inside: avoid; border-color: rgba(0,0,0,0.15); }
-  .item__name, .section-banner__title, .section-head__title { color: #2b1a10; }
-  .item__price, .item__price-pair .amount, .category__label, .section-banner__eyebrow { color: #8a5a25; }
+  .item__name, .section-head__title { color: #2b1a10; }
+  .item__price, .item__price-pair .amount, .category__label,
+  .section-head__eyebrow { color: #8a5a25; }
+  .section-head__ornament { color: #b98a4a; }
   .item__desc { color: #4a3525; }
   .item__allergen, .menu-footer__legal { color: #6a4a30; }
   .item:hover { transform: none; background: none; }

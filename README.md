@@ -8,9 +8,11 @@ straight from a QR code at the table.
 - **Bilingual** (Türkçe / English) from a single data source — no duplicated markup.
 - **Cover screen → menu** flow with a back button that returns to the cover
   (never `history.back()`, since the menu runs standalone).
-- Centered logo, sticky header that compacts on scroll, sticky section sub-nav
-  with scroll-spy, classic dotted-leader product rows, gold accent lines, and a
-  soft one-time fade-up entrance.
+- **Paged navigation** — each main section (Breakfast, Lunch, Dinner, Set Menu,
+  Cocktails, Beers, Rakı, Spirits) is its own page. Sticky tabs and a prev/next
+  pager switch pages, so one section never bleeds into the next.
+- Centered logo, sticky header that compacts on scroll, classic dotted-leader
+  product rows, and a soft fade-up that replays on each page.
 - Accessible: semantic landmarks, `:focus-visible`, `prefers-reduced-motion`,
   `lang` kept in sync, AA-contrast white text on the terracotta canvas.
 - Print stylesheet (white paper, dark ink, UI hidden).
