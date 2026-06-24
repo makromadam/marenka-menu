@@ -3639,7 +3639,8 @@ window.MENU_DATA = {
         {
           "label": {
             "tr": "Negroni",
-            "en": "Negroni"
+            "en": "Negroni",
+            "latin": true
           },
           "items": [
             {
@@ -3722,7 +3723,8 @@ window.MENU_DATA = {
         {
           "label": {
             "tr": "Spritz",
-            "en": "Spritz"
+            "en": "Spritz",
+            "latin": true
           },
           "items": [
             {
@@ -3805,7 +3807,8 @@ window.MENU_DATA = {
         {
           "label": {
             "tr": "Martini",
-            "en": "Martini"
+            "en": "Martini",
+            "latin": true
           },
           "items": [
             {
@@ -5367,7 +5370,7 @@ window.MENU_DATA = {
         },
         {
           "label": {
-            "tr": "Viski · Single Malt Viskiler",
+            "tr": "Viski · Tek Malt Viskiler",
             "en": "Whisky · Single Malts"
           },
           "items": [

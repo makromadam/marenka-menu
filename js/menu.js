@@ -27,7 +27,10 @@
   // Render a bilingual value as two spans; only the active language shows (CSS).
   function bilingual(tag, cls, value) {
     var frag = document.createDocumentFragment();
-    var tr = el(tag, (cls ? cls + " " : "") + "lang tr", { lang: "tr" });
+    // International terms (value.latin) are cased with English rules even on the
+    // Turkish span, so CSS uppercase never produces a dotted "İ" (e.g. Negroni).
+    var trLang = value && value.latin ? "en" : "tr";
+    var tr = el(tag, (cls ? cls + " " : "") + "lang tr", { lang: trLang });
     var en = el(tag, (cls ? cls + " " : "") + "lang en", { lang: "en" });
     tr.textContent = value && value.tr != null ? value.tr : "";
     en.textContent = value && value.en != null ? value.en : value && value.tr != null ? value.tr : "";
