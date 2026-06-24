@@ -696,33 +696,6 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 }
 .pager__btn:active { transform: scale(0.98); }
 
-/* footer */
-.menu-footer {
-  margin-top: var(--space-10);
-  padding-top: var(--space-6);
-  border-top: 1px solid var(--divider-soft);
-  text-align: center;
-  color: var(--cream-soft);
-}
-.menu-footer__mark { color: var(--cream); width: clamp(120px, 30vw, 150px); margin: 0 auto var(--space-3); }
-.menu-footer__mark svg { width: 100%; height: auto; }
-.menu-footer__line {
-  font-size: var(--fs-allergen);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--cream-soft);
-  opacity: 0.7;
-}
-.menu-footer__legal {
-  margin-top: var(--space-2);
-  font-family: var(--font-allergen);
-  font-weight: 300;
-  font-style: italic;
-  font-size: var(--fs-allergen);
-  color: var(--allergen);
-  opacity: 0.8;
-}
-
 /* 10 · LANGUAGE VISIBILITY -------------------------------------------------- */
 /* Both languages are rendered; CSS shows only the active one → zero CLS. */
 .lang { display: inline; }
@@ -804,7 +777,7 @@ body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
   body { background: #fff; color: #2b1a10; }
   body::before, body::after { display: none; }
   .cover, .site-header, .subnav, .lang-toggle, .back-btn,
-  .pager, .menu-footer__mark { display: none !important; }
+  .pager { display: none !important; }
   body[data-view="cover"] .menu { display: block !important; }
   /* print every page, each starting on a fresh sheet */
   .menu-section { display: block !important; padding-top: 0; }
@@ -815,7 +788,7 @@ body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
   .section-head__eyebrow { color: #8a5a25; }
   .section-head__ornament { color: #b98a4a; }
   .item__desc { color: #4a3525; }
-  .item__allergen, .menu-footer__legal { color: #6a4a30; }
+  .item__allergen { color: #6a4a30; }
   .item:hover { transform: none; background: none; }
 }
 
@@ -944,9 +917,6 @@ body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
         <path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.6"
               stroke-linecap="round" stroke-linejoin="round" />
       </svg>
-      <span class="back-btn__label">
-        <span class="lang tr">Kapak</span><span class="lang en">Cover</span>
-      </span>
       <span class="visually-hidden">
         <span class="lang tr">Kapak ekranına dön</span><span class="lang en">Return to cover</span>
       </span>
@@ -978,21 +948,6 @@ body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
   <main class="menu">
     <div class="container">
       <div id="menu-main" tabindex="-1"></div>
-
-      <footer class="menu-footer">
-        <span class="menu-footer__mark" role="img" aria-label="Marenka">
-          <svg class="logo" viewBox="0 0 978.5 309.6" aria-hidden="true">
-            <use href="#marenka-mark"></use>
-          </svg>
-        </span>
-        <p class="menu-footer__line">
-          <span class="lang tr">Afiyet olsun</span><span class="lang en">Bon appétit</span>
-        </p>
-        <p class="menu-footer__legal">
-          <span class="lang tr">Alerjenleriniz için lütfen servis ekibimize danışınız. Fiyatlara KDV dâhildir.</span>
-          <span class="lang en">Please inform our team of any allergies. All prices include VAT.</span>
-        </p>
-      </footer>
     </div>
   </main>
 

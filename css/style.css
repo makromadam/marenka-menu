@@ -682,33 +682,6 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 }
 .pager__btn:active { transform: scale(0.98); }
 
-/* footer */
-.menu-footer {
-  margin-top: var(--space-10);
-  padding-top: var(--space-6);
-  border-top: 1px solid var(--divider-soft);
-  text-align: center;
-  color: var(--cream-soft);
-}
-.menu-footer__mark { color: var(--cream); width: clamp(120px, 30vw, 150px); margin: 0 auto var(--space-3); }
-.menu-footer__mark svg { width: 100%; height: auto; }
-.menu-footer__line {
-  font-size: var(--fs-allergen);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--cream-soft);
-  opacity: 0.7;
-}
-.menu-footer__legal {
-  margin-top: var(--space-2);
-  font-family: var(--font-allergen);
-  font-weight: 300;
-  font-style: italic;
-  font-size: var(--fs-allergen);
-  color: var(--allergen);
-  opacity: 0.8;
-}
-
 /* 10 · LANGUAGE VISIBILITY -------------------------------------------------- */
 /* Both languages are rendered; CSS shows only the active one → zero CLS. */
 .lang { display: inline; }
@@ -790,7 +763,7 @@ body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
   body { background: #fff; color: #2b1a10; }
   body::before, body::after { display: none; }
   .cover, .site-header, .subnav, .lang-toggle, .back-btn,
-  .pager, .menu-footer__mark { display: none !important; }
+  .pager { display: none !important; }
   body[data-view="cover"] .menu { display: block !important; }
   /* print every page, each starting on a fresh sheet */
   .menu-section { display: block !important; padding-top: 0; }
@@ -801,7 +774,7 @@ body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
   .section-head__eyebrow { color: #8a5a25; }
   .section-head__ornament { color: #b98a4a; }
   .item__desc { color: #4a3525; }
-  .item__allergen, .menu-footer__legal { color: #6a4a30; }
+  .item__allergen { color: #6a4a30; }
   .item:hover { transform: none; background: none; }
 }
 
