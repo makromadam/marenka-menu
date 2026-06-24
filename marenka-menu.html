@@ -117,8 +117,8 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
-  /* sub-nav + header height so anchored scrolling clears the sticky chrome */
-  scroll-padding-top: calc(var(--header-h-compact) + 56px);
+  /* header + two-row sub-nav so anchored scrolling clears the sticky chrome */
+  scroll-padding-top: calc(var(--header-h-compact) + 104px);
 }
 
 body {
@@ -377,7 +377,8 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
   overflow-x: auto;
   scrollbar-width: none;
 }
-.subnav__track::-webkit-scrollbar { display: none; }
+.subnav__track::-webkit-scrollbar,
+.pagenav__track::-webkit-scrollbar { display: none; }
 .subnav__link {
   flex: 0 0 auto;
   padding: 0.5em 1.05em;
@@ -399,6 +400,48 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 }
 @media (hover: hover) {
   .subnav__link:hover { color: var(--cream); }
+}
+
+/* Row 2 — in-page quick-jump to the active page's categories */
+.pagenav {
+  border-top: 1px solid var(--divider-soft);
+}
+.pagenav[hidden] { display: none; }
+.pagenav__track {
+  display: flex;
+  gap: var(--space-1);
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding: var(--space-1) clamp(var(--space-3), 6vw, var(--space-6));
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.pagenav__link {
+  flex: 0 0 auto;
+  padding: 0.4em 0.85em;
+  font-size: calc(var(--fs-ui) * 0.94);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream-soft);
+  opacity: 0.78;
+  white-space: nowrap;
+  border-radius: 999px;
+  position: relative;
+  transition: color var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease);
+}
+.pagenav__link[aria-current="true"] {
+  color: var(--cream);
+  opacity: 1;
+}
+.pagenav__link[aria-current="true"]::after {
+  content: "";
+  position: absolute;
+  left: 0.85em; right: 0.85em; bottom: 0.12em;
+  height: 1px;
+  background: var(--cream);
+}
+@media (hover: hover) {
+  .pagenav__link:hover { color: var(--cream); opacity: 1; }
 }
 
 /* 8 · HEADINGS -------------------------------------------------------------- */
@@ -497,6 +540,7 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 .category {
   margin-top: var(--space-6);
   margin-bottom: var(--space-3);
+  scroll-margin-top: calc(var(--header-h-compact) + 104px);
 }
 .category:first-of-type { margin-top: var(--space-2); }
 .category__label {
@@ -721,27 +765,20 @@ body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
   to   { opacity: 1; transform: none; }
 }
 
-/* Page entrance — a soft fade-up that replays each time a page is shown
-   (.page-enter is toggled by JS on the active section). Pure CSS keyframes;
-   content always finishes visible. Disabled for reduced-motion. */
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(20px); }
+/* Page transition — the active page slides + fades in. Direction follows the
+   navigation (forward vs. back), matching tab, pager and swipe gestures.
+   .page-enter / .is-back are toggled by JS; content always finishes visible. */
+@keyframes page-in-fwd {
+  from { opacity: 0; transform: translate3d(28px, 0, 0); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes page-in-back {
+  from { opacity: 0; transform: translate3d(-28px, 0, 0); }
   to   { opacity: 1; transform: none; }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .menu-section.page-enter .section-head,
-  .menu-section.page-enter .category {
-    animation: fade-up 0.55s var(--ease) both;
-  }
-  .menu-section.page-enter .item {
-    animation: fade-up 0.5s var(--ease) both;
-  }
-  /* a gentle stagger for the first cards in each list */
-  .menu-section.page-enter .item-list .item:nth-child(1) { animation-delay: 0.03s; }
-  .menu-section.page-enter .item-list .item:nth-child(2) { animation-delay: 0.07s; }
-  .menu-section.page-enter .item-list .item:nth-child(3) { animation-delay: 0.11s; }
-  .menu-section.page-enter .item-list .item:nth-child(4) { animation-delay: 0.15s; }
-  .menu-section.page-enter .item-list .item:nth-child(n+5) { animation-delay: 0.19s; }
+  .menu-section.page-enter { animation: page-in-fwd 0.4s var(--ease) both; }
+  .menu-section.page-enter.is-back { animation: page-in-back 0.4s var(--ease) both; }
 }
 
 /* 12 · ACCESSIBILITY -------------------------------------------------------- */
@@ -953,8 +990,13 @@ body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
   </header>
 
   <!-- =========================== SUB-NAV ========================== -->
+  <!-- Row 1: section tabs (switch pages). Row 2: in-page quick-jump to the
+       active page's categories (populated per page by the script). -->
   <nav class="subnav" aria-label="Menü bölümleri / Menu sections">
     <div class="subnav__track" id="subnav-track"></div>
+    <div class="pagenav" id="pagenav" hidden aria-label="Bölüm içi / Within section">
+      <div class="pagenav__track" id="pagenav-track"></div>
+    </div>
   </nav>
 
   <!-- ============================ MENU ============================ -->
@@ -1025,8 +1067,8 @@ window.MENU_DATA = {
               },
               "price": "750",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt",
-                "en": "Gluten, Egg, Milk"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
+                "en": "Gluten, Egg, Milk and Dairy Products"
               }
             },
             {
@@ -1040,8 +1082,8 @@ window.MENU_DATA = {
               },
               "price": "800",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt, Sert Kabuklu Yemişler, Acı",
-                "en": "Gluten, Egg, Milk, Tree Nuts, Spicy"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Kabuklu Kuruyemişler, Acı",
+                "en": "Gluten, Egg, Milk and Dairy Products, Tree Nuts, Spicy"
               }
             },
             {
@@ -1055,8 +1097,8 @@ window.MENU_DATA = {
               },
               "price": "950",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt, Soya",
-                "en": "Gluten, Egg, Milk, Soy"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Soya",
+                "en": "Gluten, Egg, Milk and Dairy Products, Soy"
               }
             },
             {
@@ -1070,8 +1112,8 @@ window.MENU_DATA = {
               },
               "price": "975",
               "allergens": {
-                "tr": "Yumurta, Süt, Soya, Gluten",
-                "en": "Egg, Milk, Soy, Gluten"
+                "tr": "Yumurta, Süt ve Süt Ürünleri, Soya, Gluten",
+                "en": "Egg, Milk and Dairy Products, Soy, Gluten"
               }
             }
           ]
@@ -1093,8 +1135,8 @@ window.MENU_DATA = {
               },
               "price": "350",
               "allergens": {
-                "tr": "Yumurta, Süt",
-                "en": "Egg, Milk"
+                "tr": "Yumurta, Süt ve Süt Ürünleri",
+                "en": "Egg, Milk and Dairy Products"
               }
             },
             {
@@ -1108,8 +1150,8 @@ window.MENU_DATA = {
               },
               "price": "375",
               "allergens": {
-                "tr": "Yumurta, Süt",
-                "en": "Egg, Milk"
+                "tr": "Yumurta, Süt ve Süt Ürünleri",
+                "en": "Egg, Milk and Dairy Products"
               }
             },
             {
@@ -1123,8 +1165,8 @@ window.MENU_DATA = {
               },
               "price": "375",
               "allergens": {
-                "tr": "Yumurta, Süt",
-                "en": "Egg, Milk"
+                "tr": "Yumurta, Süt ve Süt Ürünleri",
+                "en": "Egg, Milk and Dairy Products"
               }
             },
             {
@@ -1138,8 +1180,8 @@ window.MENU_DATA = {
               },
               "price": "390",
               "allergens": {
-                "tr": "Yumurta, Süt",
-                "en": "Egg, Milk"
+                "tr": "Yumurta, Süt ve Süt Ürünleri",
+                "en": "Egg, Milk and Dairy Products"
               }
             },
             {
@@ -1153,8 +1195,8 @@ window.MENU_DATA = {
               },
               "price": "450",
               "allergens": {
-                "tr": "Yumurta, Süt, Soya",
-                "en": "Egg, Milk, Soy"
+                "tr": "Yumurta, Süt ve Süt Ürünleri, Soya",
+                "en": "Egg, Milk and Dairy Products, Soy"
               }
             }
           ]
@@ -1176,8 +1218,8 @@ window.MENU_DATA = {
               },
               "price": "375",
               "allergens": {
-                "tr": "Yumurta, Süt",
-                "en": "Egg, Milk"
+                "tr": "Yumurta, Süt ve Süt Ürünleri",
+                "en": "Egg, Milk and Dairy Products"
               }
             },
             {
@@ -1191,8 +1233,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Yumurta, Süt",
-                "en": "Egg, Milk"
+                "tr": "Yumurta, Süt ve Süt Ürünleri",
+                "en": "Egg, Milk and Dairy Products"
               }
             },
             {
@@ -1206,8 +1248,8 @@ window.MENU_DATA = {
               },
               "price": "450",
               "allergens": {
-                "tr": "Yumurta, Süt",
-                "en": "Egg, Milk"
+                "tr": "Yumurta, Süt ve Süt Ürünleri",
+                "en": "Egg, Milk and Dairy Products"
               }
             }
           ]
@@ -1229,8 +1271,8 @@ window.MENU_DATA = {
               },
               "price": "250",
               "allergens": {
-                "tr": "Yumurta, Süt",
-                "en": "Egg, Milk"
+                "tr": "Yumurta, Süt ve Süt Ürünleri",
+                "en": "Egg, Milk and Dairy Products"
               }
             },
             {
@@ -1259,8 +1301,8 @@ window.MENU_DATA = {
               },
               "price": "275",
               "allergens": {
-                "tr": "Yumurta, Süt",
-                "en": "Egg, Milk"
+                "tr": "Yumurta, Süt ve Süt Ürünleri",
+                "en": "Egg, Milk and Dairy Products"
               }
             },
             {
@@ -1274,8 +1316,8 @@ window.MENU_DATA = {
               },
               "price": "350",
               "allergens": {
-                "tr": "Yumurta, Süt",
-                "en": "Egg, Milk"
+                "tr": "Yumurta, Süt ve Süt Ürünleri",
+                "en": "Egg, Milk and Dairy Products"
               }
             },
             {
@@ -1289,8 +1331,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Yumurta, Süt, Soya",
-                "en": "Egg, Milk, Soy"
+                "tr": "Yumurta, Süt ve Süt Ürünleri, Soya",
+                "en": "Egg, Milk and Dairy Products, Soy"
               }
             }
           ]
@@ -1312,8 +1354,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Gluten, Süt",
-                "en": "Gluten, Milk"
+                "tr": "Gluten, Süt ve Süt Ürünleri",
+                "en": "Gluten, Milk and Dairy Products"
               }
             },
             {
@@ -1327,8 +1369,8 @@ window.MENU_DATA = {
               },
               "price": "450",
               "allergens": {
-                "tr": "Gluten, Süt, Soya",
-                "en": "Gluten, Milk, Soy"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Soya",
+                "en": "Gluten, Milk and Dairy Products, Soy"
               }
             },
             {
@@ -1342,8 +1384,8 @@ window.MENU_DATA = {
               },
               "price": "500",
               "allergens": {
-                "tr": "Gluten, Süt, Soya, Hardal",
-                "en": "Gluten, Milk, Soy, Mustard"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Soya, Hardal",
+                "en": "Gluten, Milk and Dairy Products, Soy, Mustard"
               }
             },
             {
@@ -1357,8 +1399,8 @@ window.MENU_DATA = {
               },
               "price": "600",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt, Sert Kabuklu Yemişler, Hardal",
-                "en": "Gluten, Egg, Milk, Tree Nuts, Mustard"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Kabuklu Kuruyemişler, Hardal",
+                "en": "Gluten, Egg, Milk and Dairy Products, Tree Nuts, Mustard"
               }
             },
             {
@@ -1372,8 +1414,8 @@ window.MENU_DATA = {
               },
               "price": "600",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt, Sert Kabuklu Yemişler",
-                "en": "Gluten, Egg, Milk, Tree Nuts"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Kabuklu Kuruyemişler",
+                "en": "Gluten, Egg, Milk and Dairy Products, Tree Nuts"
               }
             },
             {
@@ -1387,8 +1429,8 @@ window.MENU_DATA = {
               },
               "price": "650",
               "allergens": {
-                "tr": "Gluten, Yumurta, Balık, Süt",
-                "en": "Gluten, Egg, Fish, Milk"
+                "tr": "Gluten, Yumurta, Balık, Süt ve Süt Ürünleri",
+                "en": "Gluten, Egg, Fish, Milk and Dairy Products"
               }
             }
           ]
@@ -1425,8 +1467,8 @@ window.MENU_DATA = {
               },
               "price": "125",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt",
-                "en": "Gluten, Egg, Milk"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
+                "en": "Gluten, Egg, Milk and Dairy Products"
               }
             },
             {
@@ -1440,8 +1482,8 @@ window.MENU_DATA = {
               },
               "price": "250",
               "allergens": {
-                "tr": "Süt",
-                "en": "Milk"
+                "tr": "Süt ve Süt Ürünleri",
+                "en": "Milk and Dairy Products"
               }
             },
             {
@@ -1470,8 +1512,8 @@ window.MENU_DATA = {
               },
               "price": "250",
               "allergens": {
-                "tr": "Gluten, Süt, Yumurta",
-                "en": "Gluten, Milk, Egg"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta",
+                "en": "Gluten, Milk and Dairy Products, Egg"
               }
             },
             {
@@ -1500,8 +1542,8 @@ window.MENU_DATA = {
               },
               "price": "250",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt",
-                "en": "Gluten, Egg, Milk"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
+                "en": "Gluten, Egg, Milk and Dairy Products"
               }
             },
             {
@@ -1515,8 +1557,8 @@ window.MENU_DATA = {
               },
               "price": "250",
               "allergens": {
-                "tr": "Soya, Süt, Sert Kabuklu Yemişler",
-                "en": "Soy, Milk, Tree Nuts"
+                "tr": "Soya, Süt ve Süt Ürünleri, Kabuklu Kuruyemişler",
+                "en": "Soy, Milk and Dairy Products, Tree Nuts"
               }
             },
             {
@@ -1530,8 +1572,8 @@ window.MENU_DATA = {
               },
               "price": "300",
               "allergens": {
-                "tr": "Soya, Süt",
-                "en": "Soy, Milk"
+                "tr": "Soya, Süt ve Süt Ürünleri",
+                "en": "Soy, Milk and Dairy Products"
               }
             }
           ]
@@ -1576,8 +1618,8 @@ window.MENU_DATA = {
               },
               "price": "500",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt, Hardal, Susam",
-                "en": "Gluten, Egg, Milk, Mustard, Sesame"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Hardal, Susam",
+                "en": "Gluten, Egg, Milk and Dairy Products, Mustard, Sesame"
               }
             },
             {
@@ -1591,8 +1633,8 @@ window.MENU_DATA = {
               },
               "price": "550",
               "allergens": {
-                "tr": "Gluten, Yumurta, Hardal, Susam, Süt",
-                "en": "Gluten, Egg, Mustard, Sesame, Milk"
+                "tr": "Gluten, Yumurta, Hardal, Susam, Süt ve Süt Ürünleri",
+                "en": "Gluten, Egg, Mustard, Sesame, Milk and Dairy Products"
               }
             },
             {
@@ -1606,8 +1648,8 @@ window.MENU_DATA = {
               },
               "price": "600",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt, Hardal, Susam",
-                "en": "Gluten, Egg, Milk, Mustard, Sesame"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Hardal, Susam",
+                "en": "Gluten, Egg, Milk and Dairy Products, Mustard, Sesame"
               }
             },
             {
@@ -1621,8 +1663,8 @@ window.MENU_DATA = {
               },
               "price": "675",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt, Hardal, Susam",
-                "en": "Gluten, Egg, Milk, Mustard, Sesame"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Hardal, Susam",
+                "en": "Gluten, Egg, Milk and Dairy Products, Mustard, Sesame"
               }
             }
           ]
@@ -1644,8 +1686,8 @@ window.MENU_DATA = {
               },
               "price": "500",
               "allergens": {
-                "tr": "Gluten, Yumurta, Balık, Hardal, Susam, Süt",
-                "en": "Gluten, Egg, Fish, Mustard, Sesame, Milk"
+                "tr": "Gluten, Yumurta, Balık, Hardal, Susam, Süt ve Süt Ürünleri",
+                "en": "Gluten, Egg, Fish, Mustard, Sesame, Milk and Dairy Products"
               }
             },
             {
@@ -1659,8 +1701,8 @@ window.MENU_DATA = {
               },
               "price": "550",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt, Hardal, Susam",
-                "en": "Gluten, Egg, Milk, Mustard, Sesame"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Hardal, Susam",
+                "en": "Gluten, Egg, Milk and Dairy Products, Mustard, Sesame"
               }
             },
             {
@@ -1674,8 +1716,8 @@ window.MENU_DATA = {
               },
               "price": "750",
               "allergens": {
-                "tr": "Gluten, Yumurta, Hardal, Susam, Süt, Acı",
-                "en": "Gluten, Egg, Mustard, Sesame, Milk, Spicy"
+                "tr": "Gluten, Yumurta, Hardal, Susam, Süt ve Süt Ürünleri, Acı",
+                "en": "Gluten, Egg, Mustard, Sesame, Milk and Dairy Products, Spicy"
               }
             },
             {
@@ -1689,8 +1731,8 @@ window.MENU_DATA = {
               },
               "price": "750",
               "allergens": {
-                "tr": "Gluten, Yumurta, Balık, Süt, Hardal, Susam",
-                "en": "Gluten, Egg, Fish, Milk, Mustard, Sesame"
+                "tr": "Gluten, Yumurta, Balık, Süt ve Süt Ürünleri, Hardal, Susam",
+                "en": "Gluten, Egg, Fish, Milk and Dairy Products, Mustard, Sesame"
               }
             },
             {
@@ -1704,8 +1746,8 @@ window.MENU_DATA = {
               },
               "price": "750",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt, Hardal, Susam, Soya",
-                "en": "Gluten, Egg, Milk, Mustard, Sesame, Soy"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Hardal, Susam, Soya",
+                "en": "Gluten, Egg, Milk and Dairy Products, Mustard, Sesame, Soy"
               }
             }
           ]
@@ -1727,8 +1769,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt",
-                "en": "Gluten, Egg, Milk"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
+                "en": "Gluten, Egg, Milk and Dairy Products"
               }
             },
             {
@@ -1742,8 +1784,8 @@ window.MENU_DATA = {
               },
               "price": "500",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt",
-                "en": "Gluten, Egg, Milk"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
+                "en": "Gluten, Egg, Milk and Dairy Products"
               }
             },
             {
@@ -1757,8 +1799,8 @@ window.MENU_DATA = {
               },
               "price": "650",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt, Soya",
-                "en": "Gluten, Egg, Milk, Soy"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Soya",
+                "en": "Gluten, Egg, Milk and Dairy Products, Soy"
               }
             }
           ]
@@ -1780,8 +1822,8 @@ window.MENU_DATA = {
               },
               "price": "550",
               "allergens": {
-                "tr": "Gluten, Süt, Yumurta",
-                "en": "Gluten, Milk, Egg"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta",
+                "en": "Gluten, Milk and Dairy Products, Egg"
               }
             },
             {
@@ -1795,8 +1837,8 @@ window.MENU_DATA = {
               },
               "price": "550",
               "allergens": {
-                "tr": "Gluten, Süt, Sert Kabuklu Yemişler, Yumurta",
-                "en": "Gluten, Milk, Tree Nuts, Egg"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Kabuklu Kuruyemişler, Yumurta",
+                "en": "Gluten, Milk and Dairy Products, Tree Nuts, Egg"
               }
             },
             {
@@ -1810,8 +1852,8 @@ window.MENU_DATA = {
               },
               "price": "575",
               "allergens": {
-                "tr": "Gluten, Süt, Yumurta, Hardal",
-                "en": "Gluten, Milk, Egg, Mustard"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta, Hardal",
+                "en": "Gluten, Milk and Dairy Products, Egg, Mustard"
               }
             },
             {
@@ -1825,8 +1867,8 @@ window.MENU_DATA = {
               },
               "price": "600",
               "allergens": {
-                "tr": "Gluten, Balık, Süt, Yumurta",
-                "en": "Gluten, Fish, Milk, Egg"
+                "tr": "Gluten, Balık, Süt ve Süt Ürünleri, Yumurta",
+                "en": "Gluten, Fish, Milk and Dairy Products, Egg"
               }
             },
             {
@@ -1840,8 +1882,8 @@ window.MENU_DATA = {
               },
               "price": "650",
               "allergens": {
-                "tr": "Gluten, Süt, Soya, Yumurta",
-                "en": "Gluten, Milk, Soy, Egg"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Soya, Yumurta",
+                "en": "Gluten, Milk and Dairy Products, Soy, Egg"
               }
             },
             {
@@ -1855,8 +1897,8 @@ window.MENU_DATA = {
               },
               "price": "675",
               "allergens": {
-                "tr": "Gluten, Süt, Soya, Yumurta, Hardal",
-                "en": "Gluten, Milk, Soy, Egg, Mustard"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Soya, Yumurta, Hardal",
+                "en": "Gluten, Milk and Dairy Products, Soy, Egg, Mustard"
               }
             },
             {
@@ -1870,8 +1912,8 @@ window.MENU_DATA = {
               },
               "price": "675",
               "allergens": {
-                "tr": "Gluten, Süt, Yumurta",
-                "en": "Gluten, Milk, Egg"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta",
+                "en": "Gluten, Milk and Dairy Products, Egg"
               }
             },
             {
@@ -1885,8 +1927,8 @@ window.MENU_DATA = {
               },
               "price": "750",
               "allergens": {
-                "tr": "Gluten, Süt, Yumurta, Hardal",
-                "en": "Gluten, Milk, Egg, Mustard"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta, Hardal",
+                "en": "Gluten, Milk and Dairy Products, Egg, Mustard"
               }
             },
             {
@@ -1900,8 +1942,8 @@ window.MENU_DATA = {
               },
               "price": "875",
               "allergens": {
-                "tr": "Gluten, Süt, Yumurta, Acı",
-                "en": "Gluten, Milk, Egg, Spicy"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta, Acı",
+                "en": "Gluten, Milk and Dairy Products, Egg, Spicy"
               }
             },
             {
@@ -1915,8 +1957,8 @@ window.MENU_DATA = {
               },
               "price": "950",
               "allergens": {
-                "tr": "Gluten, Süt, Yumurta, Kabuklular, Yumuşakçalar, Balık",
-                "en": "Gluten, Milk, Egg, Crustaceans, Molluscs, Fish"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta, Kabuklular, Yumuşakçalar, Balık",
+                "en": "Gluten, Milk and Dairy Products, Egg, Crustaceans, Molluscs, Fish"
               }
             }
           ]
@@ -1938,8 +1980,8 @@ window.MENU_DATA = {
               },
               "price": "550",
               "allergens": {
-                "tr": "Gluten, Süt, Acı",
-                "en": "Gluten, Milk, Spicy"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Acı",
+                "en": "Gluten, Milk and Dairy Products, Spicy"
               }
             },
             {
@@ -1953,8 +1995,8 @@ window.MENU_DATA = {
               },
               "price": "600",
               "allergens": {
-                "tr": "Gluten, Süt, Soya, Kereviz",
-                "en": "Gluten, Milk, Soy, Celery"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Soya, Kereviz",
+                "en": "Gluten, Milk and Dairy Products, Soy, Celery"
               }
             },
             {
@@ -1968,8 +2010,8 @@ window.MENU_DATA = {
               },
               "price": "750",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt, Sert Kabuklu Yemişler",
-                "en": "Gluten, Egg, Milk, Tree Nuts"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Kabuklu Kuruyemişler",
+                "en": "Gluten, Egg, Milk and Dairy Products, Tree Nuts"
               }
             },
             {
@@ -1983,8 +2025,8 @@ window.MENU_DATA = {
               },
               "price": "875",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt, Kereviz, Acı",
-                "en": "Gluten, Egg, Milk, Celery, Spicy"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Kereviz, Acı",
+                "en": "Gluten, Egg, Milk and Dairy Products, Celery, Spicy"
               }
             },
             {
@@ -1998,8 +2040,8 @@ window.MENU_DATA = {
               },
               "price": "900",
               "allergens": {
-                "tr": "Gluten, Yumurta, Balık, Süt, Sülfitler",
-                "en": "Gluten, Egg, Fish, Milk, Sulphites"
+                "tr": "Gluten, Yumurta, Balık, Süt ve Süt Ürünleri, Sülfit",
+                "en": "Gluten, Egg, Fish, Milk and Dairy Products, Sulphites"
               }
             },
             {
@@ -2013,8 +2055,8 @@ window.MENU_DATA = {
               },
               "price": "950",
               "allergens": {
-                "tr": "Gluten, Kabuklular, Balık, Süt, Sülfitler, Yumuşakçalar",
-                "en": "Gluten, Crustaceans, Fish, Milk, Sulphites, Molluscs"
+                "tr": "Gluten, Kabuklular, Balık, Süt ve Süt Ürünleri, Sülfit, Yumuşakçalar",
+                "en": "Gluten, Crustaceans, Fish, Milk and Dairy Products, Sulphites, Molluscs"
               }
             }
           ]
@@ -2081,8 +2123,8 @@ window.MENU_DATA = {
               },
               "price": "950",
               "allergens": {
-                "tr": "Gluten, Kabuklular, Yumurta, Soya, Süt, Susam",
-                "en": "Gluten, Crustaceans, Egg, Soy, Milk, Sesame"
+                "tr": "Gluten, Kabuklular, Yumurta, Soya, Süt ve Süt Ürünleri, Susam",
+                "en": "Gluten, Crustaceans, Egg, Soy, Milk and Dairy Products, Sesame"
               }
             }
           ]
@@ -2104,8 +2146,8 @@ window.MENU_DATA = {
               },
               "price": "450",
               "allergens": {
-                "tr": "Süt, Sülfitler, Sert Kabuklu Yemişler",
-                "en": "Milk, Sulphites, Tree Nuts"
+                "tr": "Süt ve Süt Ürünleri, Sülfit, Kabuklu Kuruyemişler",
+                "en": "Milk and Dairy Products, Sulphites, Tree Nuts"
               }
             },
             {
@@ -2119,7 +2161,7 @@ window.MENU_DATA = {
               },
               "price": "450",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -2134,7 +2176,7 @@ window.MENU_DATA = {
               },
               "price": "450",
               "allergens": {
-                "tr": "Sert Kabuklu Yemişler, Sülfitler",
+                "tr": "Kabuklu Kuruyemişler, Sülfit",
                 "en": "Tree Nuts, Sulphites"
               }
             },
@@ -2149,8 +2191,8 @@ window.MENU_DATA = {
               },
               "price": "500",
               "allergens": {
-                "tr": "Süt, Sülfitler",
-                "en": "Milk, Sulphites"
+                "tr": "Süt ve Süt Ürünleri, Sülfit",
+                "en": "Milk and Dairy Products, Sulphites"
               }
             },
             {
@@ -2164,7 +2206,7 @@ window.MENU_DATA = {
               },
               "price": "500",
               "allergens": {
-                "tr": "Sert Kabuklu Yemişler, Sülfitler, Hardal",
+                "tr": "Kabuklu Kuruyemişler, Sülfit, Hardal",
                 "en": "Tree Nuts, Sulphites, Mustard"
               }
             },
@@ -2179,8 +2221,8 @@ window.MENU_DATA = {
               },
               "price": "600",
               "allergens": {
-                "tr": "Gluten, Yumurta, Balık, Süt, Hardal",
-                "en": "Gluten, Egg, Fish, Milk, Mustard"
+                "tr": "Gluten, Yumurta, Balık, Süt ve Süt Ürünleri, Hardal",
+                "en": "Gluten, Egg, Fish, Milk and Dairy Products, Mustard"
               }
             },
             {
@@ -2239,8 +2281,8 @@ window.MENU_DATA = {
               },
               "price": "750",
               "allergens": {
-                "tr": "Süt, Yumuşakçalar, Gluten",
-                "en": "Milk, Molluscs, Gluten"
+                "tr": "Süt ve Süt Ürünleri, Yumuşakçalar, Gluten",
+                "en": "Milk and Dairy Products, Molluscs, Gluten"
               }
             },
             {
@@ -2337,8 +2379,8 @@ window.MENU_DATA = {
               },
               "price": "300",
               "allergens": {
-                "tr": "Süt, Gluten",
-                "en": "Milk, Gluten"
+                "tr": "Süt ve Süt Ürünleri, Gluten",
+                "en": "Milk and Dairy Products, Gluten"
               }
             },
             {
@@ -2367,8 +2409,8 @@ window.MENU_DATA = {
               },
               "price": "375",
               "allergens": {
-                "tr": "Süt, Sert Kabuklu Yemişler, Sülfitler",
-                "en": "Milk, Tree Nuts, Sulphites"
+                "tr": "Süt ve Süt Ürünleri, Kabuklu Kuruyemişler, Sülfit",
+                "en": "Milk and Dairy Products, Tree Nuts, Sulphites"
               }
             },
             {
@@ -2382,8 +2424,8 @@ window.MENU_DATA = {
               },
               "price": "550",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt",
-                "en": "Gluten, Egg, Milk"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
+                "en": "Gluten, Egg, Milk and Dairy Products"
               }
             },
             {
@@ -2397,8 +2439,8 @@ window.MENU_DATA = {
               },
               "price": "650",
               "allergens": {
-                "tr": "Gluten, Balık, Süt, Sülfitler",
-                "en": "Gluten, Fish, Milk, Sulphites"
+                "tr": "Gluten, Balık, Süt ve Süt Ürünleri, Sülfit",
+                "en": "Gluten, Fish, Milk and Dairy Products, Sulphites"
               }
             },
             {
@@ -2412,8 +2454,8 @@ window.MENU_DATA = {
               },
               "price": "900",
               "allergens": {
-                "tr": "Gluten, Yumurta, Soya, Süt, Hardal, Susam",
-                "en": "Gluten, Egg, Soy, Milk, Mustard, Sesame"
+                "tr": "Gluten, Yumurta, Soya, Süt ve Süt Ürünleri, Hardal, Susam",
+                "en": "Gluten, Egg, Soy, Milk and Dairy Products, Mustard, Sesame"
               }
             },
             {
@@ -2427,8 +2469,8 @@ window.MENU_DATA = {
               },
               "price": "975",
               "allergens": {
-                "tr": "Gluten, Süt, Hardal, Yumurta, Yumuşakçalar",
-                "en": "Gluten, Milk, Mustard, Egg, Molluscs"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Hardal, Yumurta, Yumuşakçalar",
+                "en": "Gluten, Milk and Dairy Products, Mustard, Egg, Molluscs"
               }
             }
           ]
@@ -2450,8 +2492,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Gluten, Süt, Soya, Yumurta",
-                "en": "Gluten, Milk, Soy, Egg"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Soya, Yumurta",
+                "en": "Gluten, Milk and Dairy Products, Soy, Egg"
               }
             },
             {
@@ -2465,8 +2507,8 @@ window.MENU_DATA = {
               },
               "price": "450",
               "allergens": {
-                "tr": "Gluten, Yumurta, Hardal, Süt, Susam, Soya",
-                "en": "Gluten, Egg, Mustard, Milk, Sesame, Soy"
+                "tr": "Gluten, Yumurta, Hardal, Süt ve Süt Ürünleri, Susam, Soya",
+                "en": "Gluten, Egg, Mustard, Milk and Dairy Products, Sesame, Soy"
               }
             },
             {
@@ -2480,8 +2522,8 @@ window.MENU_DATA = {
               },
               "price": "475",
               "allergens": {
-                "tr": "Gluten, Kereviz, Süt",
-                "en": "Gluten, Celery, Milk"
+                "tr": "Gluten, Kereviz, Süt ve Süt Ürünleri",
+                "en": "Gluten, Celery, Milk and Dairy Products"
               }
             },
             {
@@ -2495,8 +2537,8 @@ window.MENU_DATA = {
               },
               "price": "525",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt",
-                "en": "Gluten, Egg, Milk"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
+                "en": "Gluten, Egg, Milk and Dairy Products"
               }
             }
           ]
@@ -2533,8 +2575,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Yumurta, Süt",
-                "en": "Egg, Milk"
+                "tr": "Yumurta, Süt ve Süt Ürünleri",
+                "en": "Egg, Milk and Dairy Products"
               }
             },
             {
@@ -2548,8 +2590,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Yumurta, Süt, Gluten, Sert Kabuklu Yemişler",
-                "en": "Egg, Milk, Gluten, Tree Nuts"
+                "tr": "Yumurta, Süt ve Süt Ürünleri, Gluten, Kabuklu Kuruyemişler",
+                "en": "Egg, Milk and Dairy Products, Gluten, Tree Nuts"
               }
             },
             {
@@ -2563,8 +2605,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Yumurta, Süt, Gluten",
-                "en": "Egg, Milk, Gluten"
+                "tr": "Yumurta, Süt ve Süt Ürünleri, Gluten",
+                "en": "Egg, Milk and Dairy Products, Gluten"
               }
             },
             {
@@ -2578,8 +2620,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Yumurta, Süt, Gluten",
-                "en": "Egg, Milk, Gluten"
+                "tr": "Yumurta, Süt ve Süt Ürünleri, Gluten",
+                "en": "Egg, Milk and Dairy Products, Gluten"
               }
             },
             {
@@ -2623,8 +2665,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Yumurta, Süt",
-                "en": "Egg, Milk"
+                "tr": "Yumurta, Süt ve Süt Ürünleri",
+                "en": "Egg, Milk and Dairy Products"
               }
             }
           ]
@@ -2659,8 +2701,8 @@ window.MENU_DATA = {
               },
               "price": "350",
               "allergens": {
-                "tr": "Gluten, Süt",
-                "en": "Gluten, Milk"
+                "tr": "Gluten, Süt ve Süt Ürünleri",
+                "en": "Gluten, Milk and Dairy Products"
               }
             },
             {
@@ -2674,8 +2716,8 @@ window.MENU_DATA = {
               },
               "price": "350",
               "allergens": {
-                "tr": "Gluten, Süt",
-                "en": "Gluten, Milk"
+                "tr": "Gluten, Süt ve Süt Ürünleri",
+                "en": "Gluten, Milk and Dairy Products"
               }
             },
             {
@@ -2727,8 +2769,8 @@ window.MENU_DATA = {
               },
               "price": "300",
               "allergens": {
-                "tr": "Süt, Gluten",
-                "en": "Milk, Gluten"
+                "tr": "Süt ve Süt Ürünleri, Gluten",
+                "en": "Milk and Dairy Products, Gluten"
               }
             },
             {
@@ -2757,8 +2799,8 @@ window.MENU_DATA = {
               },
               "price": "325",
               "allergens": {
-                "tr": "Süt, Gluten",
-                "en": "Milk, Gluten"
+                "tr": "Süt ve Süt Ürünleri, Gluten",
+                "en": "Milk and Dairy Products, Gluten"
               }
             },
             {
@@ -2772,8 +2814,8 @@ window.MENU_DATA = {
               },
               "price": "375",
               "allergens": {
-                "tr": "Süt, Sert Kabuklu Yemişler, Sülfitler",
-                "en": "Milk, Tree Nuts, Sulphites"
+                "tr": "Süt ve Süt Ürünleri, Kabuklu Kuruyemişler, Sülfit",
+                "en": "Milk and Dairy Products, Tree Nuts, Sulphites"
               }
             },
             {
@@ -2787,8 +2829,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Gluten, Soya, Hardal, Sülfitler, Süt, Acı",
-                "en": "Gluten, Soy, Mustard, Sulphites, Milk, Spicy"
+                "tr": "Gluten, Soya, Hardal, Sülfit, Süt ve Süt Ürünleri, Acı",
+                "en": "Gluten, Soy, Mustard, Sulphites, Milk and Dairy Products, Spicy"
               }
             },
             {
@@ -2802,8 +2844,8 @@ window.MENU_DATA = {
               },
               "price": "525",
               "allergens": {
-                "tr": "Gluten, Süt, Sert Kabuklu Yemişler, Susam",
-                "en": "Gluten, Milk, Tree Nuts, Sesame"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Kabuklu Kuruyemişler, Susam",
+                "en": "Gluten, Milk and Dairy Products, Tree Nuts, Sesame"
               }
             },
             {
@@ -2847,8 +2889,8 @@ window.MENU_DATA = {
               },
               "price": "650",
               "allergens": {
-                "tr": "Gluten, Balık, Süt, Sülfitler",
-                "en": "Gluten, Fish, Milk, Sulphites"
+                "tr": "Gluten, Balık, Süt ve Süt Ürünleri, Sülfit",
+                "en": "Gluten, Fish, Milk and Dairy Products, Sulphites"
               }
             },
             {
@@ -2862,8 +2904,8 @@ window.MENU_DATA = {
               },
               "price": "725",
               "allergens": {
-                "tr": "Kabuklular, Süt, Sülfitler, Gluten",
-                "en": "Crustaceans, Milk, Sulphites, Gluten"
+                "tr": "Kabuklular, Süt ve Süt Ürünleri, Sülfit, Gluten",
+                "en": "Crustaceans, Milk and Dairy Products, Sulphites, Gluten"
               }
             },
             {
@@ -2877,8 +2919,8 @@ window.MENU_DATA = {
               },
               "price": "825",
               "allergens": {
-                "tr": "Gluten, Süt, Sert Kabuklu Yemişler, Hardal",
-                "en": "Gluten, Milk, Tree Nuts, Mustard"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Kabuklu Kuruyemişler, Hardal",
+                "en": "Gluten, Milk and Dairy Products, Tree Nuts, Mustard"
               }
             },
             {
@@ -2892,8 +2934,8 @@ window.MENU_DATA = {
               },
               "price": "825",
               "allergens": {
-                "tr": "Hardal, Susam, Sülfitler, Süt",
-                "en": "Mustard, Sesame, Sulphites, Milk"
+                "tr": "Hardal, Susam, Sülfit, Süt ve Süt Ürünleri",
+                "en": "Mustard, Sesame, Sulphites, Milk and Dairy Products"
               }
             },
             {
@@ -2907,7 +2949,7 @@ window.MENU_DATA = {
               },
               "price": "875",
               "allergens": {
-                "tr": "Sülfitler, Yumuşakçalar, Soya",
+                "tr": "Sülfit, Yumuşakçalar, Soya",
                 "en": "Sulphites, Molluscs, Soy"
               }
             },
@@ -2922,8 +2964,8 @@ window.MENU_DATA = {
               },
               "price": "900",
               "allergens": {
-                "tr": "Gluten, Yumurta, Soya, Süt, Hardal, Susam",
-                "en": "Gluten, Egg, Soy, Milk, Mustard, Sesame"
+                "tr": "Gluten, Yumurta, Soya, Süt ve Süt Ürünleri, Hardal, Susam",
+                "en": "Gluten, Egg, Soy, Milk and Dairy Products, Mustard, Sesame"
               }
             },
             {
@@ -2937,8 +2979,8 @@ window.MENU_DATA = {
               },
               "price": "975",
               "allergens": {
-                "tr": "Gluten, Süt, Hardal, Yumurta, Yumuşakçalar",
-                "en": "Gluten, Milk, Mustard, Egg, Molluscs"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Hardal, Yumurta, Yumuşakçalar",
+                "en": "Gluten, Milk and Dairy Products, Mustard, Egg, Molluscs"
               }
             }
           ]
@@ -2960,7 +3002,7 @@ window.MENU_DATA = {
               },
               "price": "450",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -2975,7 +3017,7 @@ window.MENU_DATA = {
               },
               "price": "450",
               "allergens": {
-                "tr": "Sert Kabuklu Yemişler, Sülfitler",
+                "tr": "Kabuklu Kuruyemişler, Sülfit",
                 "en": "Tree Nuts, Sulphites"
               }
             },
@@ -2990,8 +3032,8 @@ window.MENU_DATA = {
               },
               "price": "500",
               "allergens": {
-                "tr": "Süt, Sülfitler",
-                "en": "Milk, Sulphites"
+                "tr": "Süt ve Süt Ürünleri, Sülfit",
+                "en": "Milk and Dairy Products, Sulphites"
               }
             },
             {
@@ -3005,7 +3047,7 @@ window.MENU_DATA = {
               },
               "price": "500",
               "allergens": {
-                "tr": "Sert Kabuklu Yemişler, Sülfitler, Hardal",
+                "tr": "Kabuklu Kuruyemişler, Sülfit, Hardal",
                 "en": "Tree Nuts, Sulphites, Mustard"
               }
             }
@@ -3028,8 +3070,8 @@ window.MENU_DATA = {
               },
               "price": "650",
               "allergens": {
-                "tr": "Süt",
-                "en": "Milk"
+                "tr": "Süt ve Süt Ürünleri",
+                "en": "Milk and Dairy Products"
               }
             },
             {
@@ -3058,8 +3100,8 @@ window.MENU_DATA = {
               },
               "price": "750",
               "allergens": {
-                "tr": "Süt, Kereviz, Gluten, Soya, Acı",
-                "en": "Milk, Celery, Gluten, Soy, Spicy"
+                "tr": "Süt ve Süt Ürünleri, Kereviz, Gluten, Soya, Acı",
+                "en": "Milk and Dairy Products, Celery, Gluten, Soy, Spicy"
               }
             },
             {
@@ -3073,8 +3115,8 @@ window.MENU_DATA = {
               },
               "price": "750",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt, Sert Kabuklu Yemişler",
-                "en": "Gluten, Egg, Milk, Tree Nuts"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Kabuklu Kuruyemişler",
+                "en": "Gluten, Egg, Milk and Dairy Products, Tree Nuts"
               }
             },
             {
@@ -3088,8 +3130,8 @@ window.MENU_DATA = {
               },
               "price": "750",
               "allergens": {
-                "tr": "Hardal, Gluten, Süt",
-                "en": "Mustard, Gluten, Milk"
+                "tr": "Hardal, Gluten, Süt ve Süt Ürünleri",
+                "en": "Mustard, Gluten, Milk and Dairy Products"
               }
             },
             {
@@ -3103,8 +3145,8 @@ window.MENU_DATA = {
               },
               "price": "750",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt, Hardal",
-                "en": "Gluten, Egg, Milk, Mustard"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Hardal",
+                "en": "Gluten, Egg, Milk and Dairy Products, Mustard"
               }
             },
             {
@@ -3118,8 +3160,8 @@ window.MENU_DATA = {
               },
               "price": "750",
               "allergens": {
-                "tr": "Süt, Gluten, Hardal",
-                "en": "Milk, Gluten, Mustard"
+                "tr": "Süt ve Süt Ürünleri, Gluten, Hardal",
+                "en": "Milk and Dairy Products, Gluten, Mustard"
               }
             },
             {
@@ -3156,8 +3198,8 @@ window.MENU_DATA = {
               },
               "price": "825",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt",
-                "en": "Gluten, Egg, Milk"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
+                "en": "Gluten, Egg, Milk and Dairy Products"
               }
             },
             {
@@ -3171,8 +3213,8 @@ window.MENU_DATA = {
               },
               "price": "875",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt, Kereviz, Acı",
-                "en": "Gluten, Egg, Milk, Celery, Spicy"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Kereviz, Acı",
+                "en": "Gluten, Egg, Milk and Dairy Products, Celery, Spicy"
               }
             },
             {
@@ -3186,8 +3228,8 @@ window.MENU_DATA = {
               },
               "price": "1050",
               "allergens": {
-                "tr": "Süt, Gluten",
-                "en": "Milk, Gluten"
+                "tr": "Süt ve Süt Ürünleri, Gluten",
+                "en": "Milk and Dairy Products, Gluten"
               }
             },
             {
@@ -3201,8 +3243,8 @@ window.MENU_DATA = {
               },
               "price": "1550",
               "allergens": {
-                "tr": "Süt, Gluten",
-                "en": "Milk, Gluten"
+                "tr": "Süt ve Süt Ürünleri, Gluten",
+                "en": "Milk and Dairy Products, Gluten"
               }
             },
             {
@@ -3216,8 +3258,8 @@ window.MENU_DATA = {
               },
               "price": "1650",
               "allergens": {
-                "tr": "Süt, Kereviz, Acı, Gluten",
-                "en": "Milk, Celery, Spicy, Gluten"
+                "tr": "Süt ve Süt Ürünleri, Kereviz, Acı, Gluten",
+                "en": "Milk and Dairy Products, Celery, Spicy, Gluten"
               }
             },
             {
@@ -3231,8 +3273,8 @@ window.MENU_DATA = {
               },
               "price": "1700",
               "allergens": {
-                "tr": "Süt, Gluten",
-                "en": "Milk, Gluten"
+                "tr": "Süt ve Süt Ürünleri, Gluten",
+                "en": "Milk and Dairy Products, Gluten"
               }
             },
             {
@@ -3246,8 +3288,8 @@ window.MENU_DATA = {
               },
               "price": "1800",
               "allergens": {
-                "tr": "Süt, Gluten",
-                "en": "Milk, Gluten"
+                "tr": "Süt ve Süt Ürünleri, Gluten",
+                "en": "Milk and Dairy Products, Gluten"
               }
             },
             {
@@ -3261,8 +3303,8 @@ window.MENU_DATA = {
               },
               "price": "1800",
               "allergens": {
-                "tr": "Sülfitler, Süt",
-                "en": "Sulphites, Milk"
+                "tr": "Sülfit, Süt ve Süt Ürünleri",
+                "en": "Sulphites, Milk and Dairy Products"
               }
             },
             {
@@ -3276,8 +3318,8 @@ window.MENU_DATA = {
               },
               "price": "1850",
               "allergens": {
-                "tr": "Kabuklular, Süt, Gluten",
-                "en": "Crustaceans, Milk, Gluten"
+                "tr": "Kabuklular, Süt ve Süt Ürünleri, Gluten",
+                "en": "Crustaceans, Milk and Dairy Products, Gluten"
               }
             },
             {
@@ -3291,8 +3333,8 @@ window.MENU_DATA = {
               },
               "price": "1950",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt",
-                "en": "Gluten, Egg, Milk"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
+                "en": "Gluten, Egg, Milk and Dairy Products"
               }
             }
           ]
@@ -3329,7 +3371,7 @@ window.MENU_DATA = {
               },
               "price": "750",
               "allergens": {
-                "tr": "Balık, Sülfitler, Hardal, Acı",
+                "tr": "Balık, Sülfit, Hardal, Acı",
                 "en": "Fish, Sulphites, Mustard, Spicy"
               }
             },
@@ -3344,8 +3386,8 @@ window.MENU_DATA = {
               },
               "price": "1050",
               "allergens": {
-                "tr": "Balık, Süt, Hardal",
-                "en": "Fish, Milk, Mustard"
+                "tr": "Balık, Süt ve Süt Ürünleri, Hardal",
+                "en": "Fish, Milk and Dairy Products, Mustard"
               }
             },
             {
@@ -3359,8 +3401,8 @@ window.MENU_DATA = {
               },
               "price": "1050",
               "allergens": {
-                "tr": "Balık, Süt, Gluten",
-                "en": "Fish, Milk, Gluten"
+                "tr": "Balık, Süt ve Süt Ürünleri, Gluten",
+                "en": "Fish, Milk and Dairy Products, Gluten"
               }
             },
             {
@@ -3374,8 +3416,8 @@ window.MENU_DATA = {
               },
               "price": "950",
               "allergens": {
-                "tr": "Gluten, Kabuklular, Balık, Süt, Sülfitler, Yumuşakçalar",
-                "en": "Gluten, Crustaceans, Fish, Milk, Sulphites, Molluscs"
+                "tr": "Gluten, Kabuklular, Balık, Süt ve Süt Ürünleri, Sülfit, Yumuşakçalar",
+                "en": "Gluten, Crustaceans, Fish, Milk and Dairy Products, Sulphites, Molluscs"
               }
             },
             {
@@ -3389,8 +3431,8 @@ window.MENU_DATA = {
               },
               "price": "1300",
               "allergens": {
-                "tr": "Kabuklular, Balık, Yumuşakçalar, Süt, Sülfitler",
-                "en": "Crustaceans, Fish, Molluscs, Milk, Sulphites"
+                "tr": "Kabuklular, Balık, Yumuşakçalar, Süt ve Süt Ürünleri, Sülfit",
+                "en": "Crustaceans, Fish, Molluscs, Milk and Dairy Products, Sulphites"
               }
             },
             {
@@ -3404,8 +3446,8 @@ window.MENU_DATA = {
               },
               "price": "1350",
               "allergens": {
-                "tr": "Kabuklular, Süt, Acı, Balık, Sülfitler",
-                "en": "Crustaceans, Milk, Spicy, Fish, Sulphites"
+                "tr": "Kabuklular, Süt ve Süt Ürünleri, Acı, Balık, Sülfit",
+                "en": "Crustaceans, Milk and Dairy Products, Spicy, Fish, Sulphites"
               }
             },
             {
@@ -3419,8 +3461,8 @@ window.MENU_DATA = {
               },
               "price": "1600",
               "allergens": {
-                "tr": "Soya, Süt, Yumuşakçalar, Sülfitler, Bakla",
-                "en": "Soy, Milk, Molluscs, Sulphites, Broad Beans"
+                "tr": "Soya, Süt ve Süt Ürünleri, Yumuşakçalar, Sülfit, Bakla",
+                "en": "Soy, Milk and Dairy Products, Molluscs, Sulphites, Broad Beans"
               }
             },
             {
@@ -3434,8 +3476,8 @@ window.MENU_DATA = {
               },
               "price": "1950",
               "allergens": {
-                "tr": "Kabuklular, Balık, Yumuşakçalar, Süt, Gluten, Soya",
-                "en": "Crustaceans, Fish, Molluscs, Milk, Gluten, Soy"
+                "tr": "Kabuklular, Balık, Yumuşakçalar, Süt ve Süt Ürünleri, Gluten, Soya",
+                "en": "Crustaceans, Fish, Molluscs, Milk and Dairy Products, Gluten, Soy"
               }
             },
             {
@@ -3449,8 +3491,8 @@ window.MENU_DATA = {
               },
               "price": "1950",
               "allergens": {
-                "tr": "Kabuklular, Süt, Yumuşakçalar, Gluten",
-                "en": "Crustaceans, Milk, Molluscs, Gluten"
+                "tr": "Kabuklular, Süt ve Süt Ürünleri, Yumuşakçalar, Gluten",
+                "en": "Crustaceans, Milk and Dairy Products, Molluscs, Gluten"
               }
             }
           ]
@@ -3472,8 +3514,8 @@ window.MENU_DATA = {
               },
               "price": "550",
               "allergens": {
-                "tr": "Gluten, Süt, Yumurta",
-                "en": "Gluten, Milk, Egg"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta",
+                "en": "Gluten, Milk and Dairy Products, Egg"
               }
             },
             {
@@ -3487,8 +3529,8 @@ window.MENU_DATA = {
               },
               "price": "575",
               "allergens": {
-                "tr": "Gluten, Süt, Yumurta, Hardal",
-                "en": "Gluten, Milk, Egg, Mustard"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta, Hardal",
+                "en": "Gluten, Milk and Dairy Products, Egg, Mustard"
               }
             },
             {
@@ -3502,8 +3544,8 @@ window.MENU_DATA = {
               },
               "price": "650",
               "allergens": {
-                "tr": "Gluten, Süt, Soya, Yumurta",
-                "en": "Gluten, Milk, Soy, Egg"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Soya, Yumurta",
+                "en": "Gluten, Milk and Dairy Products, Soy, Egg"
               }
             },
             {
@@ -3517,8 +3559,8 @@ window.MENU_DATA = {
               },
               "price": "675",
               "allergens": {
-                "tr": "Gluten, Süt, Soya, Yumurta, Hardal",
-                "en": "Gluten, Milk, Soy, Egg, Mustard"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Soya, Yumurta, Hardal",
+                "en": "Gluten, Milk and Dairy Products, Soy, Egg, Mustard"
               }
             },
             {
@@ -3532,8 +3574,8 @@ window.MENU_DATA = {
               },
               "price": "675",
               "allergens": {
-                "tr": "Gluten, Süt, Yumurta",
-                "en": "Gluten, Milk, Egg"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta",
+                "en": "Gluten, Milk and Dairy Products, Egg"
               }
             },
             {
@@ -3547,8 +3589,8 @@ window.MENU_DATA = {
               },
               "price": "875",
               "allergens": {
-                "tr": "Gluten, Süt, Yumurta, Acı",
-                "en": "Gluten, Milk, Egg, Spicy"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta, Acı",
+                "en": "Gluten, Milk and Dairy Products, Egg, Spicy"
               }
             },
             {
@@ -3562,8 +3604,8 @@ window.MENU_DATA = {
               },
               "price": "950",
               "allergens": {
-                "tr": "Gluten, Süt, Yumurta, Kabuklular, Yumuşakçalar, Balık",
-                "en": "Gluten, Milk, Egg, Crustaceans, Molluscs, Fish"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta, Kabuklular, Yumuşakçalar, Balık",
+                "en": "Gluten, Milk and Dairy Products, Egg, Crustaceans, Molluscs, Fish"
               }
             }
           ]
@@ -3585,8 +3627,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Gluten, Süt, Soya, Yumurta",
-                "en": "Gluten, Milk, Soy, Egg"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Soya, Yumurta",
+                "en": "Gluten, Milk and Dairy Products, Soy, Egg"
               }
             },
             {
@@ -3600,8 +3642,8 @@ window.MENU_DATA = {
               },
               "price": "450",
               "allergens": {
-                "tr": "Gluten, Yumurta, Hardal, Süt, Susam, Soya",
-                "en": "Gluten, Egg, Mustard, Milk, Sesame, Soy"
+                "tr": "Gluten, Yumurta, Hardal, Süt ve Süt Ürünleri, Susam, Soya",
+                "en": "Gluten, Egg, Mustard, Milk and Dairy Products, Sesame, Soy"
               }
             },
             {
@@ -3615,8 +3657,8 @@ window.MENU_DATA = {
               },
               "price": "475",
               "allergens": {
-                "tr": "Gluten, Kereviz, Süt",
-                "en": "Gluten, Celery, Milk"
+                "tr": "Gluten, Kereviz, Süt ve Süt Ürünleri",
+                "en": "Gluten, Celery, Milk and Dairy Products"
               }
             },
             {
@@ -3630,8 +3672,8 @@ window.MENU_DATA = {
               },
               "price": "525",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt",
-                "en": "Gluten, Egg, Milk"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
+                "en": "Gluten, Egg, Milk and Dairy Products"
               }
             }
           ]
@@ -3668,8 +3710,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Yumurta, Süt, Gluten, Sert Kabuklu Yemişler",
-                "en": "Egg, Milk, Gluten, Tree Nuts"
+                "tr": "Yumurta, Süt ve Süt Ürünleri, Gluten, Kabuklu Kuruyemişler",
+                "en": "Egg, Milk and Dairy Products, Gluten, Tree Nuts"
               }
             },
             {
@@ -3683,8 +3725,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Yumurta, Süt, Gluten",
-                "en": "Egg, Milk, Gluten"
+                "tr": "Yumurta, Süt ve Süt Ürünleri, Gluten",
+                "en": "Egg, Milk and Dairy Products, Gluten"
               }
             },
             {
@@ -3698,8 +3740,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Yumurta, Süt, Gluten",
-                "en": "Egg, Milk, Gluten"
+                "tr": "Yumurta, Süt ve Süt Ürünleri, Gluten",
+                "en": "Egg, Milk and Dairy Products, Gluten"
               }
             },
             {
@@ -3743,8 +3785,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Yumurta, Süt",
-                "en": "Egg, Milk"
+                "tr": "Yumurta, Süt ve Süt Ürünleri",
+                "en": "Egg, Milk and Dairy Products"
               }
             },
             {
@@ -3758,8 +3800,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Yumurta, Süt",
-                "en": "Egg, Milk"
+                "tr": "Yumurta, Süt ve Süt Ürünleri",
+                "en": "Egg, Milk and Dairy Products"
               }
             }
           ]
@@ -3809,8 +3851,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Yumurta, Süt",
-                "en": "Egg, Milk"
+                "tr": "Yumurta, Süt ve Süt Ürünleri",
+                "en": "Egg, Milk and Dairy Products"
               }
             },
             {
@@ -3824,8 +3866,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Yumurta, Süt",
-                "en": "Egg, Milk"
+                "tr": "Yumurta, Süt ve Süt Ürünleri",
+                "en": "Egg, Milk and Dairy Products"
               }
             },
             {
@@ -3839,8 +3881,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Yumurta, Süt, Gluten, Sert Kabuklu Yemişler",
-                "en": "Egg, Milk, Gluten, Tree Nuts"
+                "tr": "Yumurta, Süt ve Süt Ürünleri, Gluten, Kabuklu Kuruyemişler",
+                "en": "Egg, Milk and Dairy Products, Gluten, Tree Nuts"
               }
             },
             {
@@ -3854,8 +3896,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Yumurta, Süt, Gluten",
-                "en": "Egg, Milk, Gluten"
+                "tr": "Yumurta, Süt ve Süt Ürünleri, Gluten",
+                "en": "Egg, Milk and Dairy Products, Gluten"
               }
             },
             {
@@ -3869,8 +3911,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Yumurta, Süt, Gluten",
-                "en": "Egg, Milk, Gluten"
+                "tr": "Yumurta, Süt ve Süt Ürünleri, Gluten",
+                "en": "Egg, Milk and Dairy Products, Gluten"
               }
             }
           ]
@@ -3907,8 +3949,8 @@ window.MENU_DATA = {
               },
               "price": "350",
               "allergens": {
-                "tr": "Gluten, Süt",
-                "en": "Gluten, Milk"
+                "tr": "Gluten, Süt ve Süt Ürünleri",
+                "en": "Gluten, Milk and Dairy Products"
               }
             },
             {
@@ -3922,8 +3964,8 @@ window.MENU_DATA = {
               },
               "price": "375",
               "allergens": {
-                "tr": "Süt, Sert Kabuklu Yemişler, Sülfitler",
-                "en": "Milk, Tree Nuts, Sulphites"
+                "tr": "Süt ve Süt Ürünleri, Kabuklu Kuruyemişler, Sülfit",
+                "en": "Milk and Dairy Products, Tree Nuts, Sulphites"
               }
             },
             {
@@ -3937,8 +3979,8 @@ window.MENU_DATA = {
               },
               "price": "400",
               "allergens": {
-                "tr": "Gluten, Soya, Hardal, Sülfitler, Süt, Acı",
-                "en": "Gluten, Soy, Mustard, Sulphites, Milk, Spicy"
+                "tr": "Gluten, Soya, Hardal, Sülfit, Süt ve Süt Ürünleri, Acı",
+                "en": "Gluten, Soy, Mustard, Sulphites, Milk and Dairy Products, Spicy"
               }
             },
             {
@@ -3952,7 +3994,7 @@ window.MENU_DATA = {
               },
               "price": "450",
               "allergens": {
-                "tr": "Sert Kabuklu Yemişler, Sülfitler",
+                "tr": "Kabuklu Kuruyemişler, Sülfit",
                 "en": "Tree Nuts, Sulphites"
               }
             },
@@ -3981,8 +4023,8 @@ window.MENU_DATA = {
               },
               "price": "325",
               "allergens": {
-                "tr": "Süt, Gluten",
-                "en": "Milk, Gluten"
+                "tr": "Süt ve Süt Ürünleri, Gluten",
+                "en": "Milk and Dairy Products, Gluten"
               }
             }
           ]
@@ -4004,8 +4046,8 @@ window.MENU_DATA = {
               },
               "price": "550",
               "allergens": {
-                "tr": "Gluten, Süt, Yumurta",
-                "en": "Gluten, Milk, Egg"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta",
+                "en": "Gluten, Milk and Dairy Products, Egg"
               }
             },
             {
@@ -4019,8 +4061,8 @@ window.MENU_DATA = {
               },
               "price": "675",
               "allergens": {
-                "tr": "Gluten, Süt, Yumurta",
-                "en": "Gluten, Milk, Egg"
+                "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta",
+                "en": "Gluten, Milk and Dairy Products, Egg"
               }
             },
             {
@@ -4049,8 +4091,8 @@ window.MENU_DATA = {
               },
               "price": "750",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt, Sert Kabuklu Yemişler",
-                "en": "Gluten, Egg, Milk, Tree Nuts"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Kabuklu Kuruyemişler",
+                "en": "Gluten, Egg, Milk and Dairy Products, Tree Nuts"
               }
             },
             {
@@ -4064,8 +4106,8 @@ window.MENU_DATA = {
               },
               "price": "750",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt, Hardal",
-                "en": "Gluten, Egg, Milk, Mustard"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Hardal",
+                "en": "Gluten, Egg, Milk and Dairy Products, Mustard"
               }
             },
             {
@@ -4079,8 +4121,8 @@ window.MENU_DATA = {
               },
               "price": "750",
               "allergens": {
-                "tr": "Hardal, Gluten, Süt",
-                "en": "Mustard, Gluten, Milk"
+                "tr": "Hardal, Gluten, Süt ve Süt Ürünleri",
+                "en": "Mustard, Gluten, Milk and Dairy Products"
               }
             },
             {
@@ -4094,8 +4136,8 @@ window.MENU_DATA = {
               },
               "price": "825",
               "allergens": {
-                "tr": "Gluten, Yumurta, Süt",
-                "en": "Gluten, Egg, Milk"
+                "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
+                "en": "Gluten, Egg, Milk and Dairy Products"
               }
             },
             {
@@ -4109,8 +4151,8 @@ window.MENU_DATA = {
               },
               "price": "900",
               "allergens": {
-                "tr": "Gluten, Yumurta, Balık, Süt, Sülfitler",
-                "en": "Gluten, Egg, Fish, Milk, Sulphites"
+                "tr": "Gluten, Yumurta, Balık, Süt ve Süt Ürünleri, Sülfit",
+                "en": "Gluten, Egg, Fish, Milk and Dairy Products, Sulphites"
               }
             },
             {
@@ -4124,8 +4166,8 @@ window.MENU_DATA = {
               },
               "price": "1050",
               "allergens": {
-                "tr": "Süt, Gluten",
-                "en": "Milk, Gluten"
+                "tr": "Süt ve Süt Ürünleri, Gluten",
+                "en": "Milk and Dairy Products, Gluten"
               }
             },
             {
@@ -4139,8 +4181,8 @@ window.MENU_DATA = {
               },
               "price": "1050",
               "allergens": {
-                "tr": "Balık, Süt, Hardal",
-                "en": "Fish, Milk, Mustard"
+                "tr": "Balık, Süt ve Süt Ürünleri, Hardal",
+                "en": "Fish, Milk and Dairy Products, Mustard"
               }
             },
             {
@@ -4153,8 +4195,8 @@ window.MENU_DATA = {
                 "en": "Sautéed vegetables, mashed potatoes."
               },
               "allergens": {
-                "tr": "Süt",
-                "en": "Milk"
+                "tr": "Süt ve Süt Ürünleri",
+                "en": "Milk and Dairy Products"
               }
             }
           ]
@@ -4354,7 +4396,7 @@ window.MENU_DATA = {
               },
               "price": "780",
               "allergens": {
-                "tr": "Sülfitler, Gluten",
+                "tr": "Sülfit, Gluten",
                 "en": "Sulphites, Gluten"
               }
             },
@@ -4369,7 +4411,7 @@ window.MENU_DATA = {
               },
               "price": "680",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4384,7 +4426,7 @@ window.MENU_DATA = {
               },
               "price": "680",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4399,7 +4441,7 @@ window.MENU_DATA = {
               },
               "price": "680",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4414,7 +4456,7 @@ window.MENU_DATA = {
               },
               "price": "680",
               "allergens": {
-                "tr": "Gluten, Sülfitler",
+                "tr": "Gluten, Sülfit",
                 "en": "Gluten, Sulphites"
               }
             },
@@ -4429,7 +4471,7 @@ window.MENU_DATA = {
               },
               "price": "680",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4444,8 +4486,8 @@ window.MENU_DATA = {
               },
               "price": "680",
               "allergens": {
-                "tr": "Sülfitler, Süt",
-                "en": "Sulphites, Milk"
+                "tr": "Sülfit, Süt ve Süt Ürünleri",
+                "en": "Sulphites, Milk and Dairy Products"
               }
             },
             {
@@ -4459,7 +4501,7 @@ window.MENU_DATA = {
               },
               "price": "680",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4474,7 +4516,7 @@ window.MENU_DATA = {
               },
               "price": "680",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4489,7 +4531,7 @@ window.MENU_DATA = {
               },
               "price": "680",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4504,7 +4546,7 @@ window.MENU_DATA = {
               },
               "price": "680",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4519,7 +4561,7 @@ window.MENU_DATA = {
               },
               "price": "680",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4534,7 +4576,7 @@ window.MENU_DATA = {
               },
               "price": "680",
               "allergens": {
-                "tr": "Sülfitler, Gluten, Soya",
+                "tr": "Sülfit, Gluten, Soya",
                 "en": "Sulphites, Gluten, Soy"
               }
             }
@@ -4557,7 +4599,7 @@ window.MENU_DATA = {
               },
               "price": "700",
               "allergens": {
-                "tr": "Sülfitler, Gluten",
+                "tr": "Sülfit, Gluten",
                 "en": "Sulphites, Gluten"
               }
             },
@@ -4572,7 +4614,7 @@ window.MENU_DATA = {
               },
               "price": "700",
               "allergens": {
-                "tr": "Sülfitler, Sert Kabuklu Yemişler",
+                "tr": "Sülfit, Kabuklu Kuruyemişler",
                 "en": "Sulphites, Tree Nuts"
               }
             },
@@ -4587,7 +4629,7 @@ window.MENU_DATA = {
               },
               "price": "700",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4602,7 +4644,7 @@ window.MENU_DATA = {
               },
               "price": "700",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4617,7 +4659,7 @@ window.MENU_DATA = {
               },
               "price": "700",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             }
@@ -4640,7 +4682,7 @@ window.MENU_DATA = {
               },
               "price": "700",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4655,7 +4697,7 @@ window.MENU_DATA = {
               },
               "price": "700",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4670,7 +4712,7 @@ window.MENU_DATA = {
               },
               "price": "700",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4685,7 +4727,7 @@ window.MENU_DATA = {
               },
               "price": "700",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4700,7 +4742,7 @@ window.MENU_DATA = {
               },
               "price": "700",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             }
@@ -4723,7 +4765,7 @@ window.MENU_DATA = {
               },
               "price": "700",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4738,7 +4780,7 @@ window.MENU_DATA = {
               },
               "price": "700",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4753,7 +4795,7 @@ window.MENU_DATA = {
               },
               "price": "700",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4768,7 +4810,7 @@ window.MENU_DATA = {
               },
               "price": "700",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4783,7 +4825,7 @@ window.MENU_DATA = {
               },
               "price": "700",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             }
@@ -4806,7 +4848,7 @@ window.MENU_DATA = {
               },
               "price": "700",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4821,7 +4863,7 @@ window.MENU_DATA = {
               },
               "price": "700",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4836,7 +4878,7 @@ window.MENU_DATA = {
               },
               "price": "700",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4851,7 +4893,7 @@ window.MENU_DATA = {
               },
               "price": "700",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -4866,7 +4908,7 @@ window.MENU_DATA = {
               },
               "price": "700",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             }
@@ -5015,7 +5057,7 @@ window.MENU_DATA = {
               },
               "price": "495",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             }
@@ -5162,7 +5204,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -5202,7 +5244,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -5228,7 +5270,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -5254,7 +5296,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -5273,7 +5315,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             }
@@ -5602,7 +5644,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -5628,7 +5670,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -5654,7 +5696,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -5680,7 +5722,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -5706,7 +5748,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -5732,7 +5774,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -5758,7 +5800,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -5784,7 +5826,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -5810,7 +5852,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -5836,7 +5878,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -5862,7 +5904,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -5888,7 +5930,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             }
@@ -6794,7 +6836,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -6820,7 +6862,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -6846,7 +6888,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -6872,7 +6914,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -6898,7 +6940,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -6924,7 +6966,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -6950,7 +6992,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -6976,7 +7018,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7002,7 +7044,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7028,7 +7070,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             }
@@ -7062,7 +7104,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7088,7 +7130,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7114,7 +7156,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7140,7 +7182,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7166,7 +7208,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7192,7 +7234,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             }
@@ -7226,7 +7268,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7252,7 +7294,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7278,7 +7320,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7304,7 +7346,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             }
@@ -7331,7 +7373,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7350,7 +7392,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7367,7 +7409,11 @@ window.MENU_DATA = {
                   },
                   "value": "550"
                 }
-              ]
+              ],
+              "allergens": {
+                "tr": "Süt ve Süt Ürünleri",
+                "en": "Milk and Dairy Products"
+              }
             },
             {
               "name": {
@@ -7384,7 +7430,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7418,7 +7464,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7437,7 +7483,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7456,7 +7502,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7475,7 +7521,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7494,7 +7540,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sert Kabuklu Yemişler",
+                "tr": "Kabuklu Kuruyemişler",
                 "en": "Tree Nuts"
               }
             },
@@ -7513,7 +7559,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Gluten, Sert Kabuklu Yemişler, Sülfitler",
+                "tr": "Gluten, Kabuklu Kuruyemişler, Sülfit",
                 "en": "Gluten, Tree Nuts, Sulphites"
               }
             },
@@ -7532,7 +7578,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7551,7 +7597,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7570,7 +7616,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7589,7 +7635,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7608,7 +7654,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7627,7 +7673,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             }
@@ -7654,7 +7700,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7673,7 +7719,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7692,7 +7738,7 @@ window.MENU_DATA = {
                 }
               ],
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             }
@@ -7729,7 +7775,7 @@ window.MENU_DATA = {
               },
               "price": "300",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7740,7 +7786,7 @@ window.MENU_DATA = {
               },
               "price": "300",
               "allergens": {
-                "tr": "Sülfitler",
+                "tr": "Sülfit",
                 "en": "Sulphites"
               }
             },
@@ -7751,8 +7797,8 @@ window.MENU_DATA = {
               },
               "price": "300",
               "allergens": {
-                "tr": "Laktoz",
-                "en": "Lactose"
+                "tr": "Süt ve Süt Ürünleri",
+                "en": "Milk and Dairy Products"
               }
             },
             {
@@ -7773,8 +7819,8 @@ window.MENU_DATA = {
               },
               "price": "300",
               "allergens": {
-                "tr": "Gluten, Laktoz",
-                "en": "Gluten, Lactose"
+                "tr": "Gluten, Süt ve Süt Ürünleri",
+                "en": "Gluten, Milk and Dairy Products"
               }
             },
             {
@@ -7784,7 +7830,7 @@ window.MENU_DATA = {
               },
               "price": "750",
               "allergens": {
-                "tr": "Sülfitler, Kafein",
+                "tr": "Sülfit, Kafein",
                 "en": "Sulphites, Caffeine"
               }
             },
@@ -7921,9 +7967,9 @@ window.MENU_DATA = {
   }
 
   /* ---- category + section ------------------------------------------------ */
-  function renderCategory(group) {
+  function renderCategory(group, sectionId, gi) {
     var frag = document.createDocumentFragment();
-    var cat = el("div", "category");
+    var cat = el("div", "category", { id: "cat-" + sectionId + "-" + gi });
     var label = el("h3", "category__label");
     label.appendChild(bilingual("span", null, group.label));
     cat.appendChild(label);
@@ -7965,7 +8011,9 @@ window.MENU_DATA = {
     }
     sec.appendChild(head);
 
-    (section.groups || []).forEach(function (g) { sec.appendChild(renderCategory(g)); });
+    (section.groups || []).forEach(function (g, gi) {
+      sec.appendChild(renderCategory(g, section.id, gi));
+    });
 
     // page-to-page pager (← previous section · next section →)
     var prev = sections[index - 1], next = sections[index + 1];
@@ -8068,70 +8116,164 @@ window.MENU_DATA = {
   }
 
   /* ---- paging (one section = one page) ----------------------------------- */
-  // Only the active section is shown; tabs and the prev/next pager switch
-  // pages, so one section never bleeds into the next.
+  // Only the active section is shown. Pages are switched by: the section tabs,
+  // the prev/next pager, or a horizontal swipe. Each page also carries an
+  // in-page quick-jump strip for its categories.
   var currentSection = null;
+  function tabInView(tab) {
+    if (!tab || !tab.parentNode) return;
+    var track = tab.parentNode, pad = 16;
+    var l = tab.offsetLeft - pad, r = tab.offsetLeft + tab.offsetWidth + pad;
+    if (l < track.scrollLeft) track.scrollTo({ left: l, behavior: "smooth" });
+    else if (r > track.scrollLeft + track.clientWidth)
+      track.scrollTo({ left: r - track.clientWidth, behavior: "smooth" });
+  }
+  // pixels of sticky chrome above the content (compact header + the sub-nav)
+  function stickyOffset() {
+    var sub = document.querySelector(".subnav");
+    var hc = parseInt(getComputedStyle(root).getPropertyValue("--header-h-compact"), 10) || 64;
+    return hc + (sub ? sub.offsetHeight : 0) + 10;
+  }
+
   function initPaging(sections) {
+    var sectionById = {};
+    sections.forEach(function (s) { sectionById["sec-" + s.id] = s; });
+    var indexOf = function (secId) {
+      for (var i = 0; i < sections.length; i++) if ("sec-" + sections[i].id === secId) return i;
+      return -1;
+    };
     var tabs = {};
     document.querySelectorAll(".subnav__link").forEach(function (l) {
       tabs[l.getAttribute("data-target")] = l;
     });
     var pageEls = document.querySelectorAll(".menu-section");
+    var pagenav = document.getElementById("pagenav");
+    var pagenavTrack = document.getElementById("pagenav-track");
+    var catObserver = null;
+
+    // Build the in-page quick-jump strip for the active section's categories.
+    function buildPageNav(section) {
+      pagenavTrack.innerHTML = "";
+      var groups = section.groups || [];
+      if (groups.length <= 1) { pagenav.hidden = true; return; }
+      pagenav.hidden = false;
+      groups.forEach(function (g, gi) {
+        var id = "cat-" + section.id + "-" + gi;
+        var a = el("a", "pagenav__link", { href: "#" + id, "data-cat": id });
+        a.appendChild(bilingual("span", null, g.label));
+        pagenavTrack.appendChild(a);
+      });
+      pagenavTrack.scrollTo({ left: 0 });
+      observeCategories(section);
+    }
+
+    // Highlight the quick-jump pill for whichever category is in view.
+    function observeCategories(section) {
+      if (catObserver) catObserver.disconnect();
+      if (!("IntersectionObserver" in window) || pagenav.hidden) return;
+      var links = {};
+      pagenavTrack.querySelectorAll(".pagenav__link").forEach(function (l) {
+        links[l.getAttribute("data-cat")] = l;
+      });
+      var cur = null;
+      catObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          var id = e.target.id;
+          if (id === cur) return;
+          cur = id;
+          for (var k in links) links[k].setAttribute("aria-current", String(k === id));
+          tabInView(links[id]);
+        });
+      }, { rootMargin: "-" + (stickyOffset() + 4) + "px 0px -55% 0px", threshold: 0 });
+      (section.groups || []).forEach(function (g, gi) {
+        var elc = document.getElementById("cat-" + section.id + "-" + gi);
+        if (elc) catObserver.observe(elc);
+      });
+    }
 
     function showSection(secId, opts) {
       if (!secId || secId === currentSection) return;
+      var dirBack = indexOf(secId) < indexOf(currentSection);
       currentSection = secId;
-      // pages
       for (var i = 0; i < pageEls.length; i++) {
         pageEls[i].classList.toggle("is-active", pageEls[i].id === secId);
       }
-      // restart the entrance animation on the freshly shown page
       var active = document.getElementById(secId);
       if (active) {
-        active.classList.remove("page-enter");
-        // force reflow so the animation re-triggers every switch
-        void active.offsetWidth;
+        active.classList.remove("page-enter", "is-back");
+        void active.offsetWidth; // reflow → re-trigger the entrance animation
         active.classList.add("page-enter");
+        if (dirBack) active.classList.add("is-back");
       }
-      // tabs
       for (var key in tabs) {
         var on = key === secId;
         tabs[key].setAttribute("aria-current", String(on));
         tabs[key].setAttribute("aria-selected", String(on));
       }
-      // keep the active tab in view within the strip
-      var tab = tabs[secId];
-      if (tab && tab.parentNode) {
-        var track = tab.parentNode, pad = 16;
-        var l = tab.offsetLeft - pad, r = tab.offsetLeft + tab.offsetWidth + pad;
-        if (l < track.scrollLeft) track.scrollTo({ left: l, behavior: "smooth" });
-        else if (r > track.scrollLeft + track.clientWidth)
-          track.scrollTo({ left: r - track.clientWidth, behavior: "smooth" });
-      }
-      // start each page at the top, under the sticky chrome
+      tabInView(tabs[secId]);
+      if (sectionById[secId]) buildPageNav(sectionById[secId]);
       if (!opts || opts.scroll !== false) window.scrollTo({ top: 0, behavior: "auto" });
     }
 
-    // tab clicks
+    // section tabs
     document.querySelectorAll(".subnav__link").forEach(function (l) {
       l.addEventListener("click", function (e) {
         e.preventDefault();
         showSection(l.getAttribute("data-target"));
       });
     });
-    // pager clicks (event-delegated; buttons are inside the pages)
+    // pager + in-page quick-jump (event-delegated)
     var mainEl = document.getElementById("menu-main");
     if (mainEl) {
       mainEl.addEventListener("click", function (e) {
         var btn = e.target.closest ? e.target.closest(".pager__btn") : null;
-        if (btn) showSection(btn.getAttribute("data-target"));
+        if (btn) { showSection(btn.getAttribute("data-target")); }
       });
     }
+    pagenavTrack.addEventListener("click", function (e) {
+      var a = e.target.closest ? e.target.closest(".pagenav__link") : null;
+      if (!a) return;
+      e.preventDefault();
+      var target = document.getElementById(a.getAttribute("data-cat"));
+      if (target) {
+        var y = target.getBoundingClientRect().top + window.scrollY - stickyOffset();
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    });
 
-    // expose so the cover→menu entry can (re)assert the first page
+    // swipe between pages (touch) — ignores gestures that start on a nav strip
+    initSwipe(sections, indexOf, showSection);
+
     initPaging.show = showSection;
     initPaging.first = sections.length ? "sec-" + sections[0].id : null;
     showSection(initPaging.first, { scroll: false });
+  }
+
+  /* ---- swipe ------------------------------------------------------------- */
+  function initSwipe(sections, indexOf, showSection) {
+    var menuEl = document.querySelector(".menu");
+    if (!menuEl) return;
+    var x0 = null, y0 = null, t0 = 0, ok = false;
+    menuEl.addEventListener("touchstart", function (e) {
+      if (e.touches.length !== 1) { ok = false; return; }
+      var tgt = e.target;
+      // let the horizontally-scrollable nav strips scroll themselves
+      if (tgt.closest && tgt.closest(".subnav")) { ok = false; return; }
+      var t = e.touches[0];
+      x0 = t.clientX; y0 = t.clientY; t0 = Date.now(); ok = true;
+    }, { passive: true });
+    menuEl.addEventListener("touchend", function (e) {
+      if (!ok || x0 === null) return;
+      ok = false;
+      var t = e.changedTouches[0];
+      var dx = t.clientX - x0, dy = t.clientY - y0, dt = Date.now() - t0;
+      x0 = null;
+      if (dt > 700 || Math.abs(dx) < 64 || Math.abs(dx) < Math.abs(dy) * 1.6) return;
+      var cur = indexOf(currentSection);
+      var target = dx < 0 ? sections[cur + 1] : sections[cur - 1];
+      if (target) showSection("sec-" + target.id);
+    }, { passive: true });
   }
 
   /* ---- boot -------------------------------------------------------------- */

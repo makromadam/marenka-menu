@@ -115,9 +115,9 @@
   }
 
   /* ---- category + section ------------------------------------------------ */
-  function renderCategory(group) {
+  function renderCategory(group, sectionId, gi) {
     var frag = document.createDocumentFragment();
-    var cat = el("div", "category");
+    var cat = el("div", "category", { id: "cat-" + sectionId + "-" + gi });
     var label = el("h3", "category__label");
     label.appendChild(bilingual("span", null, group.label));
     cat.appendChild(label);
@@ -159,7 +159,9 @@
     }
     sec.appendChild(head);
 
-    (section.groups || []).forEach(function (g) { sec.appendChild(renderCategory(g)); });
+    (section.groups || []).forEach(function (g, gi) {
+      sec.appendChild(renderCategory(g, section.id, gi));
+    });
 
     // page-to-page pager (← previous section · next section →)
     var prev = sections[index - 1], next = sections[index + 1];
@@ -262,70 +264,164 @@
   }
 
   /* ---- paging (one section = one page) ----------------------------------- */
-  // Only the active section is shown; tabs and the prev/next pager switch
-  // pages, so one section never bleeds into the next.
+  // Only the active section is shown. Pages are switched by: the section tabs,
+  // the prev/next pager, or a horizontal swipe. Each page also carries an
+  // in-page quick-jump strip for its categories.
   var currentSection = null;
+  function tabInView(tab) {
+    if (!tab || !tab.parentNode) return;
+    var track = tab.parentNode, pad = 16;
+    var l = tab.offsetLeft - pad, r = tab.offsetLeft + tab.offsetWidth + pad;
+    if (l < track.scrollLeft) track.scrollTo({ left: l, behavior: "smooth" });
+    else if (r > track.scrollLeft + track.clientWidth)
+      track.scrollTo({ left: r - track.clientWidth, behavior: "smooth" });
+  }
+  // pixels of sticky chrome above the content (compact header + the sub-nav)
+  function stickyOffset() {
+    var sub = document.querySelector(".subnav");
+    var hc = parseInt(getComputedStyle(root).getPropertyValue("--header-h-compact"), 10) || 64;
+    return hc + (sub ? sub.offsetHeight : 0) + 10;
+  }
+
   function initPaging(sections) {
+    var sectionById = {};
+    sections.forEach(function (s) { sectionById["sec-" + s.id] = s; });
+    var indexOf = function (secId) {
+      for (var i = 0; i < sections.length; i++) if ("sec-" + sections[i].id === secId) return i;
+      return -1;
+    };
     var tabs = {};
     document.querySelectorAll(".subnav__link").forEach(function (l) {
       tabs[l.getAttribute("data-target")] = l;
     });
     var pageEls = document.querySelectorAll(".menu-section");
+    var pagenav = document.getElementById("pagenav");
+    var pagenavTrack = document.getElementById("pagenav-track");
+    var catObserver = null;
+
+    // Build the in-page quick-jump strip for the active section's categories.
+    function buildPageNav(section) {
+      pagenavTrack.innerHTML = "";
+      var groups = section.groups || [];
+      if (groups.length <= 1) { pagenav.hidden = true; return; }
+      pagenav.hidden = false;
+      groups.forEach(function (g, gi) {
+        var id = "cat-" + section.id + "-" + gi;
+        var a = el("a", "pagenav__link", { href: "#" + id, "data-cat": id });
+        a.appendChild(bilingual("span", null, g.label));
+        pagenavTrack.appendChild(a);
+      });
+      pagenavTrack.scrollTo({ left: 0 });
+      observeCategories(section);
+    }
+
+    // Highlight the quick-jump pill for whichever category is in view.
+    function observeCategories(section) {
+      if (catObserver) catObserver.disconnect();
+      if (!("IntersectionObserver" in window) || pagenav.hidden) return;
+      var links = {};
+      pagenavTrack.querySelectorAll(".pagenav__link").forEach(function (l) {
+        links[l.getAttribute("data-cat")] = l;
+      });
+      var cur = null;
+      catObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          var id = e.target.id;
+          if (id === cur) return;
+          cur = id;
+          for (var k in links) links[k].setAttribute("aria-current", String(k === id));
+          tabInView(links[id]);
+        });
+      }, { rootMargin: "-" + (stickyOffset() + 4) + "px 0px -55% 0px", threshold: 0 });
+      (section.groups || []).forEach(function (g, gi) {
+        var elc = document.getElementById("cat-" + section.id + "-" + gi);
+        if (elc) catObserver.observe(elc);
+      });
+    }
 
     function showSection(secId, opts) {
       if (!secId || secId === currentSection) return;
+      var dirBack = indexOf(secId) < indexOf(currentSection);
       currentSection = secId;
-      // pages
       for (var i = 0; i < pageEls.length; i++) {
         pageEls[i].classList.toggle("is-active", pageEls[i].id === secId);
       }
-      // restart the entrance animation on the freshly shown page
       var active = document.getElementById(secId);
       if (active) {
-        active.classList.remove("page-enter");
-        // force reflow so the animation re-triggers every switch
-        void active.offsetWidth;
+        active.classList.remove("page-enter", "is-back");
+        void active.offsetWidth; // reflow → re-trigger the entrance animation
         active.classList.add("page-enter");
+        if (dirBack) active.classList.add("is-back");
       }
-      // tabs
       for (var key in tabs) {
         var on = key === secId;
         tabs[key].setAttribute("aria-current", String(on));
         tabs[key].setAttribute("aria-selected", String(on));
       }
-      // keep the active tab in view within the strip
-      var tab = tabs[secId];
-      if (tab && tab.parentNode) {
-        var track = tab.parentNode, pad = 16;
-        var l = tab.offsetLeft - pad, r = tab.offsetLeft + tab.offsetWidth + pad;
-        if (l < track.scrollLeft) track.scrollTo({ left: l, behavior: "smooth" });
-        else if (r > track.scrollLeft + track.clientWidth)
-          track.scrollTo({ left: r - track.clientWidth, behavior: "smooth" });
-      }
-      // start each page at the top, under the sticky chrome
+      tabInView(tabs[secId]);
+      if (sectionById[secId]) buildPageNav(sectionById[secId]);
       if (!opts || opts.scroll !== false) window.scrollTo({ top: 0, behavior: "auto" });
     }
 
-    // tab clicks
+    // section tabs
     document.querySelectorAll(".subnav__link").forEach(function (l) {
       l.addEventListener("click", function (e) {
         e.preventDefault();
         showSection(l.getAttribute("data-target"));
       });
     });
-    // pager clicks (event-delegated; buttons are inside the pages)
+    // pager + in-page quick-jump (event-delegated)
     var mainEl = document.getElementById("menu-main");
     if (mainEl) {
       mainEl.addEventListener("click", function (e) {
         var btn = e.target.closest ? e.target.closest(".pager__btn") : null;
-        if (btn) showSection(btn.getAttribute("data-target"));
+        if (btn) { showSection(btn.getAttribute("data-target")); }
       });
     }
+    pagenavTrack.addEventListener("click", function (e) {
+      var a = e.target.closest ? e.target.closest(".pagenav__link") : null;
+      if (!a) return;
+      e.preventDefault();
+      var target = document.getElementById(a.getAttribute("data-cat"));
+      if (target) {
+        var y = target.getBoundingClientRect().top + window.scrollY - stickyOffset();
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    });
 
-    // expose so the cover→menu entry can (re)assert the first page
+    // swipe between pages (touch) — ignores gestures that start on a nav strip
+    initSwipe(sections, indexOf, showSection);
+
     initPaging.show = showSection;
     initPaging.first = sections.length ? "sec-" + sections[0].id : null;
     showSection(initPaging.first, { scroll: false });
+  }
+
+  /* ---- swipe ------------------------------------------------------------- */
+  function initSwipe(sections, indexOf, showSection) {
+    var menuEl = document.querySelector(".menu");
+    if (!menuEl) return;
+    var x0 = null, y0 = null, t0 = 0, ok = false;
+    menuEl.addEventListener("touchstart", function (e) {
+      if (e.touches.length !== 1) { ok = false; return; }
+      var tgt = e.target;
+      // let the horizontally-scrollable nav strips scroll themselves
+      if (tgt.closest && tgt.closest(".subnav")) { ok = false; return; }
+      var t = e.touches[0];
+      x0 = t.clientX; y0 = t.clientY; t0 = Date.now(); ok = true;
+    }, { passive: true });
+    menuEl.addEventListener("touchend", function (e) {
+      if (!ok || x0 === null) return;
+      ok = false;
+      var t = e.changedTouches[0];
+      var dx = t.clientX - x0, dy = t.clientY - y0, dt = Date.now() - t0;
+      x0 = null;
+      if (dt > 700 || Math.abs(dx) < 64 || Math.abs(dx) < Math.abs(dy) * 1.6) return;
+      var cur = indexOf(currentSection);
+      var target = dx < 0 ? sections[cur + 1] : sections[cur - 1];
+      if (target) showSection("sec-" + target.id);
+    }, { passive: true });
   }
 
   /* ---- boot -------------------------------------------------------------- */

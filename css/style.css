@@ -103,8 +103,8 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
-  /* sub-nav + header height so anchored scrolling clears the sticky chrome */
-  scroll-padding-top: calc(var(--header-h-compact) + 56px);
+  /* header + two-row sub-nav so anchored scrolling clears the sticky chrome */
+  scroll-padding-top: calc(var(--header-h-compact) + 104px);
 }
 
 body {
@@ -363,7 +363,8 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
   overflow-x: auto;
   scrollbar-width: none;
 }
-.subnav__track::-webkit-scrollbar { display: none; }
+.subnav__track::-webkit-scrollbar,
+.pagenav__track::-webkit-scrollbar { display: none; }
 .subnav__link {
   flex: 0 0 auto;
   padding: 0.5em 1.05em;
@@ -385,6 +386,48 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 }
 @media (hover: hover) {
   .subnav__link:hover { color: var(--cream); }
+}
+
+/* Row 2 — in-page quick-jump to the active page's categories */
+.pagenav {
+  border-top: 1px solid var(--divider-soft);
+}
+.pagenav[hidden] { display: none; }
+.pagenav__track {
+  display: flex;
+  gap: var(--space-1);
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding: var(--space-1) clamp(var(--space-3), 6vw, var(--space-6));
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.pagenav__link {
+  flex: 0 0 auto;
+  padding: 0.4em 0.85em;
+  font-size: calc(var(--fs-ui) * 0.94);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream-soft);
+  opacity: 0.78;
+  white-space: nowrap;
+  border-radius: 999px;
+  position: relative;
+  transition: color var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease);
+}
+.pagenav__link[aria-current="true"] {
+  color: var(--cream);
+  opacity: 1;
+}
+.pagenav__link[aria-current="true"]::after {
+  content: "";
+  position: absolute;
+  left: 0.85em; right: 0.85em; bottom: 0.12em;
+  height: 1px;
+  background: var(--cream);
+}
+@media (hover: hover) {
+  .pagenav__link:hover { color: var(--cream); opacity: 1; }
 }
 
 /* 8 · HEADINGS -------------------------------------------------------------- */
@@ -483,6 +526,7 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 .category {
   margin-top: var(--space-6);
   margin-bottom: var(--space-3);
+  scroll-margin-top: calc(var(--header-h-compact) + 104px);
 }
 .category:first-of-type { margin-top: var(--space-2); }
 .category__label {
@@ -707,27 +751,20 @@ body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
   to   { opacity: 1; transform: none; }
 }
 
-/* Page entrance — a soft fade-up that replays each time a page is shown
-   (.page-enter is toggled by JS on the active section). Pure CSS keyframes;
-   content always finishes visible. Disabled for reduced-motion. */
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(20px); }
+/* Page transition — the active page slides + fades in. Direction follows the
+   navigation (forward vs. back), matching tab, pager and swipe gestures.
+   .page-enter / .is-back are toggled by JS; content always finishes visible. */
+@keyframes page-in-fwd {
+  from { opacity: 0; transform: translate3d(28px, 0, 0); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes page-in-back {
+  from { opacity: 0; transform: translate3d(-28px, 0, 0); }
   to   { opacity: 1; transform: none; }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .menu-section.page-enter .section-head,
-  .menu-section.page-enter .category {
-    animation: fade-up 0.55s var(--ease) both;
-  }
-  .menu-section.page-enter .item {
-    animation: fade-up 0.5s var(--ease) both;
-  }
-  /* a gentle stagger for the first cards in each list */
-  .menu-section.page-enter .item-list .item:nth-child(1) { animation-delay: 0.03s; }
-  .menu-section.page-enter .item-list .item:nth-child(2) { animation-delay: 0.07s; }
-  .menu-section.page-enter .item-list .item:nth-child(3) { animation-delay: 0.11s; }
-  .menu-section.page-enter .item-list .item:nth-child(4) { animation-delay: 0.15s; }
-  .menu-section.page-enter .item-list .item:nth-child(n+5) { animation-delay: 0.19s; }
+  .menu-section.page-enter { animation: page-in-fwd 0.4s var(--ease) both; }
+  .menu-section.page-enter.is-back { animation: page-in-back 0.4s var(--ease) both; }
 }
 
 /* 12 · ACCESSIBILITY -------------------------------------------------------- */

@@ -157,8 +157,13 @@
   </header>
 
   <!-- =========================== SUB-NAV ========================== -->
+  <!-- Row 1: section tabs (switch pages). Row 2: in-page quick-jump to the
+       active page's categories (populated per page by the script). -->
   <nav class="subnav" aria-label="Menü bölümleri / Menu sections">
     <div class="subnav__track" id="subnav-track"></div>
+    <div class="pagenav" id="pagenav" hidden aria-label="Bölüm içi / Within section">
+      <div class="pagenav__track" id="pagenav-track"></div>
+    </div>
   </nav>
 
   <!-- ============================ MENU ============================ -->
