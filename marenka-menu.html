@@ -181,8 +181,11 @@ body::after {
   padding-bottom: var(--space-12);
 }
 
-/* The menu is hidden until the guest leaves the cover screen. */
+/* On the cover screen, ONLY the cover shows (logo · TR/EN toggle · button).
+   The header, the section/category nav, and the menu are all hidden until the
+   guest taps "View Menu". */
 body[data-view="cover"] .site-header,
+body[data-view="cover"] .subnav,
 body[data-view="cover"] .menu { display: none; }
 body[data-view="menu"]  .cover { display: none; }
 
