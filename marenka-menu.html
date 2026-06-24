@@ -207,6 +207,15 @@ body[data-view="menu"]  .cover { display: none; }
 }
 .cover__logo svg { width: 100%; height: auto; }
 
+/* Language is chosen here on the cover, then the guest enters the menu. */
+.cover__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+.cover__lang { justify-self: center; }
+
 .cover__noscript {
   max-width: 32ch;
   font-size: var(--fs-allergen);
@@ -898,10 +907,16 @@ body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
           <use href="#marenka-mark"></use>
         </svg>
       </div>
-      <button class="btn" id="enter-menu" type="button">
-        <span class="lang tr">Menüyü Gör</span><span class="lang en">View Menu</span>
-        <span class="btn__arrow" aria-hidden="true">&#8594;</span>
-      </button>
+      <div class="cover__actions">
+        <div class="lang-toggle cover__lang" role="group" aria-label="Dil / Language">
+          <button class="lang-toggle__btn" type="button" data-lang="tr" aria-pressed="true">TR</button>
+          <button class="lang-toggle__btn" type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <button class="btn" id="enter-menu" type="button">
+          <span class="lang tr">Menüyü Gör</span><span class="lang en">View Menu</span>
+          <span class="btn__arrow" aria-hidden="true">&#8594;</span>
+        </button>
+      </div>
       <noscript>
         <p class="cover__noscript">
           Menüyü görüntülemek için lütfen JavaScript&#39;i etkinleştirin.<br />
@@ -928,11 +943,6 @@ body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
         <use href="#marenka-mark"></use>
       </svg>
     </span>
-
-    <div class="lang-toggle" role="group" aria-label="Dil / Language">
-      <button class="lang-toggle__btn" type="button" data-lang="tr" aria-pressed="true">TR</button>
-      <button class="lang-toggle__btn" type="button" data-lang="en" aria-pressed="false">EN</button>
-    </div>
   </header>
 
   <!-- =========================== SUB-NAV ========================== -->

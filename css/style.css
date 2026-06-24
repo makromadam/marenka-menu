@@ -193,6 +193,15 @@ body[data-view="menu"]  .cover { display: none; }
 }
 .cover__logo svg { width: 100%; height: auto; }
 
+/* Language is chosen here on the cover, then the guest enters the menu. */
+.cover__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+.cover__lang { justify-self: center; }
+
 .cover__noscript {
   max-width: 32ch;
   font-size: var(--fs-allergen);

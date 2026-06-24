@@ -112,10 +112,16 @@
           <use href="#marenka-mark"></use>
         </svg>
       </div>
-      <button class="btn" id="enter-menu" type="button">
-        <span class="lang tr">Menüyü Gör</span><span class="lang en">View Menu</span>
-        <span class="btn__arrow" aria-hidden="true">&#8594;</span>
-      </button>
+      <div class="cover__actions">
+        <div class="lang-toggle cover__lang" role="group" aria-label="Dil / Language">
+          <button class="lang-toggle__btn" type="button" data-lang="tr" aria-pressed="true">TR</button>
+          <button class="lang-toggle__btn" type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <button class="btn" id="enter-menu" type="button">
+          <span class="lang tr">Menüyü Gör</span><span class="lang en">View Menu</span>
+          <span class="btn__arrow" aria-hidden="true">&#8594;</span>
+        </button>
+      </div>
       <noscript>
         <p class="cover__noscript">
           Menüyü görüntülemek için lütfen JavaScript&#39;i etkinleştirin.<br />
@@ -142,11 +148,6 @@
         <use href="#marenka-mark"></use>
       </svg>
     </span>
-
-    <div class="lang-toggle" role="group" aria-label="Dil / Language">
-      <button class="lang-toggle__btn" type="button" data-lang="tr" aria-pressed="true">TR</button>
-      <button class="lang-toggle__btn" type="button" data-lang="en" aria-pressed="false">EN</button>
-    </div>
   </header>
 
   <!-- =========================== SUB-NAV ========================== -->
