@@ -430,7 +430,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Pişi",
-                "en": "Pişi"
+                "en": "Pişi",
+                "latin": true
               },
               "desc": {
                 "tr": "Un,yağ,süt,maya,yumurta,su.",
@@ -520,7 +521,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Nutella",
-                "en": "Nutella"
+                "en": "Nutella",
+                "latin": true
               },
               "desc": {
                 "tr": "Fındık,kakao,süt,soya",
@@ -596,7 +598,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Classic Burger",
-                "en": "Classic Burger"
+                "en": "Classic Burger",
+                "latin": true
               },
               "desc": {
                 "tr": "Domates, marul, turşu, kırmızı şarap, karamelize soğan, patates kızartması ve mayonez dip sos ile servis edilir.",
@@ -611,7 +614,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Cheeseburger",
-                "en": "Cheeseburger"
+                "en": "Cheeseburger",
+                "latin": true
               },
               "desc": {
                 "tr": "Domates, cheddar, marul, turşu, karamelize soğan, kırmızı şarap, patates kızartması ve mayonez dip sos ile servis edilir.",
@@ -626,7 +630,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Marenka Burger",
-                "en": "Marenka Burger"
+                "en": "Marenka Burger",
+                "latin": true
               },
               "desc": {
                 "tr": "Karamelize soğan, blue cheese sos, füme dana eti, sos, kırmızı şarap, patates kızartması ve mayonez dip sos ile servis edilir.",
@@ -785,7 +790,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Margherita Pizza",
-                "en": "Margherita Pizza"
+                "en": "Margherita Pizza",
+                "latin": true
               },
               "desc": {
                 "tr": "Domates sos, mozzarella peyniri.",
@@ -860,7 +866,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Alaturca Pizza",
-                "en": "Alaturca Pizza"
+                "en": "Alaturca Pizza",
+                "latin": true
               },
               "desc": {
                 "tr": "Domates sos, mozzarella peyniri, füme dana eti, Türk sucuğu, zeytin, biber.",
@@ -875,7 +882,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Quattro Formaggi",
-                "en": "Quattro Formaggi"
+                "en": "Quattro Formaggi",
+                "latin": true
               },
               "desc": {
                 "tr": "Crème fraîche sos, parmesan, mozzarella peyniri, Kars gravyeri, gorgonzola peyniri.",
@@ -905,7 +913,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Marenka Buffalo Pizza",
-                "en": "Marenka Buffalo Pizza"
+                "en": "Marenka Buffalo Pizza",
+                "latin": true
               },
               "desc": {
                 "tr": "Domates sos, mozzarella peyniri, dana bonfile, roka, parmesan, karamelize soğan, jalapeño biberi.",
@@ -943,7 +952,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Penne Arrabbiata",
-                "en": "Penne Arrabbiata"
+                "en": "Penne Arrabbiata",
+                "latin": true
               },
               "desc": {
                 "tr": "Zeytin, zeytinyağı, hafif acılı domates sos.",
@@ -958,7 +968,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Spaghetti Bolognese",
-                "en": "Spaghetti Bolognese"
+                "en": "Spaghetti Bolognese",
+                "latin": true
               },
               "desc": {
                 "tr": "Dana kıyma, soğan, karabiber, havuç, kereviz, domates sos.",
@@ -988,7 +999,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Ragù Fettuccine",
-                "en": "Ragù Fettuccine"
+                "en": "Ragù Fettuccine",
+                "latin": true
               },
               "desc": {
                 "tr": "Dana bonfile, pembe sos, kırmızı şarap, kapya biber az acı",
@@ -1086,7 +1098,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Singapore Noodle",
-                "en": "Singapore Noodle"
+                "en": "Singapore Noodle",
+                "latin": true
               },
               "desc": {
                 "tr": "Karides, tavuk, sebzeler, safran sos.",
@@ -1259,7 +1272,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Köfte Bowl",
-                "en": "Köfte Bowl"
+                "en": "Köfte Bowl",
+                "latin": true
               },
               "desc": {
                 "tr": "Dana Kıyma, Sote ıspanak, avokado, pancar, biber, kinoa, havuç, kuskus, soya fasulyesi, nohut.",
@@ -1538,7 +1552,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Panna Cotta",
-                "en": "Panna Cotta"
+                "en": "Panna Cotta",
+                "latin": true
               },
               "desc": {
                 "tr": "Süt,şeker,krema",
@@ -1553,7 +1568,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Brownie",
-                "en": "Brownie"
+                "en": "Brownie",
+                "latin": true
               },
               "desc": {
                 "tr": "Tereyağı, yumurta,şeker,çikolata,un,kakao,kabartma tozu.",
@@ -1568,7 +1584,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Tiramisu",
-                "en": "Tiramisu"
+                "en": "Tiramisu",
+                "latin": true
               },
               "desc": {
                 "tr": "Labne,şanti,yumurta,toz jelatin,kahve,kedi dili,kakao,şeker.",
@@ -1628,7 +1645,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "San Sebastian Cheesecake",
-                "en": "San Sebastian Cheesecake"
+                "en": "San Sebastian Cheesecake",
+                "latin": true
               },
               "desc": {
                 "tr": "Sos seçimi: vişne sos veya çikolata sos.",
@@ -2176,7 +2194,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Ragù Fettuccine",
-                "en": "Ragù Fettuccine"
+                "en": "Ragù Fettuccine",
+                "latin": true
               },
               "desc": {
                 "tr": "Dana bonfile, pembe sos, kırmızı şarap, kapya biber az acı",
@@ -2251,7 +2270,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Gorgonzola Steak",
-                "en": "Gorgonzola Steak"
+                "en": "Gorgonzola Steak",
+                "latin": true
               },
               "desc": {
                 "tr": "Sote sebzeler, gorgonzola sos, beyaz şarap, pavé patates.",
@@ -2296,7 +2316,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Cordon Bleu",
-                "en": "Cordon Bleu"
+                "en": "Cordon Bleu",
+                "latin": true
               },
               "desc": {
                 "tr": "Füme hindi ve dana eti, sarımsaklı tereyağı, kremalı mantar sos.",
@@ -2477,7 +2498,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Margherita Pizza",
-                "en": "Margherita Pizza"
+                "en": "Margherita Pizza",
+                "latin": true
               },
               "desc": {
                 "tr": "Domates sos, mozzarella peyniri.",
@@ -2522,7 +2544,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Alaturca Pizza",
-                "en": "Alaturca Pizza"
+                "en": "Alaturca Pizza",
+                "latin": true
               },
               "desc": {
                 "tr": "Domates sos, mozzarella peyniri, füme dana eti, Türk sucuğu, zeytin, biber.",
@@ -2537,7 +2560,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Quattro Formaggi",
-                "en": "Quattro Formaggi"
+                "en": "Quattro Formaggi",
+                "latin": true
               },
               "desc": {
                 "tr": "Crème fraîche sos, parmesan, mozzarella peyniri, Kars gravyeri, gorgonzola peyniri.",
@@ -2552,7 +2576,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Marenka Buffalo Pizza",
-                "en": "Marenka Buffalo Pizza"
+                "en": "Marenka Buffalo Pizza",
+                "latin": true
               },
               "desc": {
                 "tr": "Domates sos, mozzarella peyniri, dana bonfile, roka, parmesan, karamelize soğan, jalapeño biberi.",
@@ -2673,7 +2698,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Brownie",
-                "en": "Brownie"
+                "en": "Brownie",
+                "latin": true
               },
               "desc": {
                 "tr": "Tereyağı, yumurta,şeker,çikolata,un,kakao,kabartma tozu.",
@@ -2688,7 +2714,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Tiramisu",
-                "en": "Tiramisu"
+                "en": "Tiramisu",
+                "latin": true
               },
               "desc": {
                 "tr": "Labne,şanti,yumurta,toz jelatin,kahve,kedi dili,kakao,şeker.",
@@ -2748,7 +2775,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "San Sebastian Cheesecake",
-                "en": "San Sebastian Cheesecake"
+                "en": "San Sebastian Cheesecake",
+                "latin": true
               },
               "desc": {
                 "tr": "Sos seçimi: vişne sos veya çikolata sos.",
@@ -2763,7 +2791,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Panna Cotta",
-                "en": "Panna Cotta"
+                "en": "Panna Cotta",
+                "latin": true
               },
               "desc": {
                 "tr": "Süt,şeker,krema",
@@ -2814,7 +2843,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "San Sebastian Cheesecake",
-                "en": "San Sebastian Cheesecake"
+                "en": "San Sebastian Cheesecake",
+                "latin": true
               },
               "desc": {
                 "tr": "Sos seçimi: vişne sos veya çikolata sos.",
@@ -2829,7 +2859,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Panna Cotta",
-                "en": "Panna Cotta"
+                "en": "Panna Cotta",
+                "latin": true
               },
               "desc": {
                 "tr": "Süt,şeker,krema",
@@ -2844,7 +2875,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Brownie",
-                "en": "Brownie"
+                "en": "Brownie",
+                "latin": true
               },
               "desc": {
                 "tr": "Tereyağı, yumurta,şeker,çikolata,un,kakao,kabartma tozu.",
@@ -2859,7 +2891,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Tiramisu",
-                "en": "Tiramisu"
+                "en": "Tiramisu",
+                "latin": true
               },
               "desc": {
                 "tr": "Labne,şanti,yumurta,toz jelatin,kahve,kedi dili,kakao,şeker.",
@@ -3009,7 +3042,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Margherita Pizza",
-                "en": "Margherita Pizza"
+                "en": "Margherita Pizza",
+                "latin": true
               },
               "desc": {
                 "tr": "Domates sos, mozzarella peyniri.",
@@ -3024,7 +3058,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Quattro Formaggi",
-                "en": "Quattro Formaggi"
+                "en": "Quattro Formaggi",
+                "latin": true
               },
               "desc": {
                 "tr": "Crème fraîche sos, parmesan, mozzarella peyniri, Kars gravyeri, gorgonzola peyniri.",
@@ -3159,7 +3194,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Chicken Diana",
-                "en": "Chicken Diana"
+                "en": "Chicken Diana",
+                "latin": true
               },
               "desc": {
                 "tr": "Sote sebzeler, patates püresi",
@@ -3208,7 +3244,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "4 Queens",
-                "en": "4 Queens"
+                "en": "4 Queens",
+                "latin": true
               },
               "desc": {
                 "tr": "Beefeater Gin, sorrel, oleo saccharum, coriander, basil, mint oil, lemon, foamer",
@@ -3219,7 +3256,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Pika Nehirita",
-                "en": "Pika Nehirita"
+                "en": "Pika Nehirita",
+                "latin": true
               },
               "desc": {
                 "tr": "Chili-infused Olmeca Tequila, Cointreau, mango, lime, simple syrup, foamer",
@@ -3230,7 +3268,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Sloe Whisper",
-                "en": "Sloe Whisper"
+                "en": "Sloe Whisper",
+                "latin": true
               },
               "desc": {
                 "tr": "Monkey 47 Sloe Gin, limoncello, foamer, cranberry-hibiscus cordial, lemongrass, lemon",
@@ -3241,7 +3280,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Love Actually",
-                "en": "Love Actually"
+                "en": "Love Actually",
+                "latin": true
               },
               "desc": {
                 "tr": "Malfy Gin Rosa, Aperol, fresh grapefruit, lemongrass-elderflower cordial, lime, foamer",
@@ -3252,7 +3292,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Golden Passion",
-                "en": "Golden Passion"
+                "en": "Golden Passion",
+                "latin": true
               },
               "desc": {
                 "tr": "Havana Club 3 Años Rum, passion fruit, citrus blend, simple syrup, lime",
@@ -3263,7 +3304,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Madam Ruj",
-                "en": "Madam Ruj"
+                "en": "Madam Ruj",
+                "latin": true
               },
               "desc": {
                 "tr": "Beefeater Gin, Campari, beetroot-blackberry cordial, celery, citrus blend",
@@ -3274,7 +3316,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Pomegranate Ritual",
-                "en": "Pomegranate Ritual"
+                "en": "Pomegranate Ritual",
+                "latin": true
               },
               "desc": {
                 "tr": "Havana Club 3 Años Rum, St-Germain, fresh pomegranate juice, citrus blend",
@@ -3285,7 +3328,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Luna",
-                "en": "Luna"
+                "en": "Luna",
+                "latin": true
               },
               "desc": {
                 "tr": "Butterfly pea tea-infused Absolut Vodka, St-Germain, purple basil, lime, foamer",
@@ -3296,7 +3340,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "AA No:3",
-                "en": "AA No:3"
+                "en": "AA No:3",
+                "latin": true
               },
               "desc": {
                 "tr": "Jameson Black Barrel, orange liqueur, yuzu, honey, ginger, lime",
@@ -3307,7 +3352,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Pachamama",
-                "en": "Pachamama"
+                "en": "Pachamama",
+                "latin": true
               },
               "desc": {
                 "tr": "Pisco Lapostolle, ginger liqueur, turmeric-mango cordial, citrus blend",
@@ -3318,7 +3364,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Livberry",
-                "en": "Livberry"
+                "en": "Livberry",
+                "latin": true
               },
               "desc": {
                 "tr": "Fresh strawberry-infused Beefeater Pink Gin, Aperol, lemongrass, saline solution, citrus blend",
@@ -3329,7 +3376,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Lila Breeze",
-                "en": "Lila Breeze"
+                "en": "Lila Breeze",
+                "latin": true
               },
               "desc": {
                 "tr": "Absolut Vodka, hibiscus cordial, pumpkin spice, citrus blend",
@@ -3340,7 +3388,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Libre Libra",
-                "en": "Libre Libra"
+                "en": "Libre Libra",
+                "latin": true
               },
               "desc": {
                 "tr": "Jameson, peach, bergamot, vanilla, lemon",
@@ -3359,7 +3408,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Long Island Iced Tea",
-                "en": "Long Island Iced Tea"
+                "en": "Long Island Iced Tea",
+                "latin": true
               },
               "desc": {
                 "tr": "Absolut Vodka, Beefeater Gin, Havana Club 3 Rum, Olmeca Tequila, Cointreau, cola, sour mix",
@@ -3374,7 +3424,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Moscow Mule",
-                "en": "Moscow Mule"
+                "en": "Moscow Mule",
+                "latin": true
               },
               "desc": {
                 "tr": "Absolut Vodka, ginger ale, mint, lime",
@@ -3389,7 +3440,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "London Mule",
-                "en": "London Mule"
+                "en": "London Mule",
+                "latin": true
               },
               "desc": {
                 "tr": "Beefeater Gin, ginger ale, mint, lime",
@@ -3404,7 +3456,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Margarita",
-                "en": "Margarita"
+                "en": "Margarita",
+                "latin": true
               },
               "desc": {
                 "tr": "Olmeca Tequila, Cointreau, lime juice",
@@ -3419,7 +3472,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Lynchburg Lemonade",
-                "en": "Lynchburg Lemonade"
+                "en": "Lynchburg Lemonade",
+                "latin": true
               },
               "desc": {
                 "tr": "Jack Daniel's, Cointreau, lemon juice, Sprite",
@@ -3434,7 +3488,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Mojito",
-                "en": "Mojito"
+                "en": "Mojito",
+                "latin": true
               },
               "desc": {
                 "tr": "Havana Club 3 Rum, fresh lime, mint leaves, lemon, simple syrup, soda",
@@ -3449,7 +3504,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Piña Colada",
-                "en": "Piña Colada"
+                "en": "Piña Colada",
+                "latin": true
               },
               "desc": {
                 "tr": "Havana Club 3 Rum, Malibu, cream, pineapple juice, pineapple",
@@ -3464,7 +3520,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Bellini",
-                "en": "Bellini"
+                "en": "Bellini",
+                "latin": true
               },
               "desc": {
                 "tr": "Peach, Prosecco — Prosecco, stoğa göre şampanya ile değiştirilebilir.",
@@ -3479,7 +3536,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Cosmopolitan",
-                "en": "Cosmopolitan"
+                "en": "Cosmopolitan",
+                "latin": true
               },
               "desc": {
                 "tr": "Absolut Vodka, Cointreau, lemon juice, cranberry juice",
@@ -3494,7 +3552,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Caipirinha",
-                "en": "Caipirinha"
+                "en": "Caipirinha",
+                "latin": true
               },
               "desc": {
                 "tr": "Canario Cachaça, fresh lime, brown sugar",
@@ -3509,7 +3568,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Paloma",
-                "en": "Paloma"
+                "en": "Paloma",
+                "latin": true
               },
               "desc": {
                 "tr": "Olmeca Tequila, fresh grapefruit juice, lime juice, soda",
@@ -3524,7 +3584,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Frozen Daiquiri",
-                "en": "Frozen Daiquiri"
+                "en": "Frozen Daiquiri",
+                "latin": true
               },
               "desc": {
                 "tr": "Mango, strawberry, watermelon, passion fruit, Havana Club 3 Años Rum",
@@ -3539,7 +3600,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Bloody Mary",
-                "en": "Bloody Mary"
+                "en": "Bloody Mary",
+                "latin": true
               },
               "desc": {
                 "tr": "Absolut Vodka, Worcestershire sauce, tomato juice, lemon juice, Tabasco, salt & black pepper",
@@ -3562,7 +3624,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Whisky Sour",
-                "en": "Whisky Sour"
+                "en": "Whisky Sour",
+                "latin": true
               },
               "desc": {
                 "tr": "Woodford Reserve, lemon juice, simple syrup, foamer",
@@ -3577,7 +3640,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Amaretto Sour",
-                "en": "Amaretto Sour"
+                "en": "Amaretto Sour",
+                "latin": true
               },
               "desc": {
                 "tr": "Disaronno, lemon juice, simple syrup, foamer",
@@ -3592,7 +3656,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Pisco Sour",
-                "en": "Pisco Sour"
+                "en": "Pisco Sour",
+                "latin": true
               },
               "desc": {
                 "tr": "Lapostolle, lemon juice, simple syrup, foamer",
@@ -3607,7 +3672,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Bumbu Sour",
-                "en": "Bumbu Sour"
+                "en": "Bumbu Sour",
+                "latin": true
               },
               "desc": {
                 "tr": "Bumbu Rum, lemon juice, simple syrup, foamer",
@@ -3622,7 +3688,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Campari Sour",
-                "en": "Campari Sour"
+                "en": "Campari Sour",
+                "latin": true
               },
               "desc": {
                 "tr": "Campari, lemon juice, simple syrup, foamer",
@@ -3646,7 +3713,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Classic Negroni",
-                "en": "Classic Negroni"
+                "en": "Classic Negroni",
+                "latin": true
               },
               "desc": {
                 "tr": "Beefeater Gin, Campari, Martini Rosso",
@@ -3661,7 +3729,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Barrel-Aged Negroni",
-                "en": "Barrel-Aged Negroni"
+                "en": "Barrel-Aged Negroni",
+                "latin": true
               },
               "desc": {
                 "tr": "Beefeater Gin, Campari, Martini Rosso — Fıçıda 30 gün dinlendirilmiştir.",
@@ -3676,7 +3745,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Nergisroni",
-                "en": "Nergisroni"
+                "en": "Nergisroni",
+                "latin": true
               },
               "desc": {
                 "tr": "Beefeater Gin, Suze, Lillet Blanc",
@@ -3691,7 +3761,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Hibiscus Negroni",
-                "en": "Hibiscus Negroni"
+                "en": "Hibiscus Negroni",
+                "latin": true
               },
               "desc": {
                 "tr": "Beefeater Gin, Campari, hibiscus, Martini Rosso",
@@ -3706,7 +3777,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Espresso Negroni",
-                "en": "Espresso Negroni"
+                "en": "Espresso Negroni",
+                "latin": true
               },
               "desc": {
                 "tr": "Beefeater Gin, coffee-infused Campari, Martini Rosso",
@@ -3730,7 +3802,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Aperol Spritz",
-                "en": "Aperol Spritz"
+                "en": "Aperol Spritz",
+                "latin": true
               },
               "desc": {
                 "tr": "Aperol, Prosecco, sparkling water",
@@ -3745,7 +3818,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Campari Spritz",
-                "en": "Campari Spritz"
+                "en": "Campari Spritz",
+                "latin": true
               },
               "desc": {
                 "tr": "Campari, Prosecco, grapefruit, sparkling water",
@@ -3760,7 +3834,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Hugo Spritz",
-                "en": "Hugo Spritz"
+                "en": "Hugo Spritz",
+                "latin": true
               },
               "desc": {
                 "tr": "St-Germain, Prosecco, sparkling water",
@@ -3775,7 +3850,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Chambord Spritz",
-                "en": "Chambord Spritz"
+                "en": "Chambord Spritz",
+                "latin": true
               },
               "desc": {
                 "tr": "Chambord, Prosecco, sparkling water",
@@ -3790,7 +3866,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Limoncello Spritz",
-                "en": "Limoncello Spritz"
+                "en": "Limoncello Spritz",
+                "latin": true
               },
               "desc": {
                 "tr": "Homemade limoncello, Prosecco, sparkling water",
@@ -3814,7 +3891,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Dry Martini",
-                "en": "Dry Martini"
+                "en": "Dry Martini",
+                "latin": true
               },
               "desc": {
                 "tr": "Tanqueray Gin, dry vermouth",
@@ -3829,7 +3907,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Espresso Martini",
-                "en": "Espresso Martini"
+                "en": "Espresso Martini",
+                "latin": true
               },
               "desc": {
                 "tr": "Absolut Vodka, Kahlúa, espresso",
@@ -3844,7 +3923,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Porn Star Martini",
-                "en": "Porn Star Martini"
+                "en": "Porn Star Martini",
+                "latin": true
               },
               "desc": {
                 "tr": "Absolut Vanilia, Passoã, passion fruit, lime juice, Prosecco — Prosecco yanında servis edilir.",
@@ -3859,7 +3939,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "James Bond Martini",
-                "en": "James Bond Martini"
+                "en": "James Bond Martini",
+                "latin": true
               },
               "desc": {
                 "tr": "Beefeater Gin, Absolut Vodka, Lillet Blanc — Çalkalanmış, karıştırılmamış.",
@@ -3874,7 +3955,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "French Martini",
-                "en": "French Martini"
+                "en": "French Martini",
+                "latin": true
               },
               "desc": {
                 "tr": "Raspberry Absolut Vodka, Chambord, pineapple juice, mixed berries, lime",
@@ -3910,7 +3992,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Efes Pilsen Malt / 50 cl",
-                "en": "Efes Pilsen Malt / 50 cl"
+                "en": "Efes Pilsen Malt / 50 cl",
+                "latin": true
               },
               "price": "295",
               "allergens": {
@@ -3921,7 +4004,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Efes Pilsen Özel Seri / 50 cl",
-                "en": "Efes Pilsen Özel Seri / 50 cl"
+                "en": "Efes Pilsen Özel Seri / 50 cl",
+                "latin": true
               },
               "price": "295",
               "allergens": {
@@ -3939,7 +4023,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Bomonti Filtresiz / 50 cl",
-                "en": "Bomonti Filtresiz / 50 cl"
+                "en": "Bomonti Filtresiz / 50 cl",
+                "latin": true
               },
               "price": "325",
               "allergens": {
@@ -3950,7 +4035,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Miller / 33 cl",
-                "en": "Miller / 33 cl"
+                "en": "Miller / 33 cl",
+                "latin": true
               },
               "price": "345",
               "allergens": {
@@ -3961,7 +4047,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Corona / 35,5 cl",
-                "en": "Corona / 35,5 cl"
+                "en": "Corona / 35,5 cl",
+                "latin": true
               },
               "price": "395",
               "allergens": {
@@ -3972,7 +4059,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Leffe Blonde / 33 cl",
-                "en": "Leffe Blonde / 33 cl"
+                "en": "Leffe Blonde / 33 cl",
+                "latin": true
               },
               "price": "445",
               "allergens": {
@@ -3983,7 +4071,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Stella Artois / 44 cl",
-                "en": "Stella Artois / 44 cl"
+                "en": "Stella Artois / 44 cl",
+                "latin": true
               },
               "price": "375",
               "allergens": {
@@ -3994,7 +4083,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "1664 Blanc / 33 cl",
-                "en": "1664 Blanc / 33 cl"
+                "en": "1664 Blanc / 33 cl",
+                "latin": true
               },
               "price": "385",
               "allergens": {
@@ -4005,7 +4095,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Weihenstephaner / 33 cl",
-                "en": "Weihenstephaner / 33 cl"
+                "en": "Weihenstephaner / 33 cl",
+                "latin": true
               },
               "price": "445",
               "allergens": {
@@ -4046,7 +4137,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Efes Pilsen",
-                "en": "Efes Pilsen"
+                "en": "Efes Pilsen",
+                "latin": true
               },
               "prices": [
                 {
@@ -4072,7 +4164,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Beck’s",
-                "en": "Beck’s"
+                "en": "Beck’s",
+                "latin": true
               },
               "prices": [
                 {
@@ -4098,7 +4191,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Bud",
-                "en": "Bud"
+                "en": "Bud",
+                "latin": true
               },
               "prices": [
                 {
@@ -4317,7 +4411,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Absolut Blue / Sweden",
-                "en": "Absolut Blue / Sweden"
+                "en": "Absolut Blue / Sweden",
+                "latin": true
               },
               "prices": [
                 {
@@ -4350,7 +4445,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Absolut Elyx / Sweden",
-                "en": "Absolut Elyx / Sweden"
+                "en": "Absolut Elyx / Sweden",
+                "latin": true
               },
               "prices": [
                 {
@@ -4376,7 +4472,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Absolut Vanilia /Sweden",
-                "en": "Absolut Vanilia /Sweden"
+                "en": "Absolut Vanilia /Sweden",
+                "latin": true
               },
               "prices": [
                 {
@@ -4402,7 +4499,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Absolut Raspberri /Sweden",
-                "en": "Absolut Raspberri /Sweden"
+                "en": "Absolut Raspberri /Sweden",
+                "latin": true
               },
               "prices": [
                 {
@@ -4428,7 +4526,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Smirnoff North / Russia",
-                "en": "Smirnoff North / Russia"
+                "en": "Smirnoff North / Russia",
+                "latin": true
               },
               "prices": [
                 {
@@ -4454,7 +4553,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Belvedere Organic / Poland",
-                "en": "Belvedere Organic / Poland"
+                "en": "Belvedere Organic / Poland",
+                "latin": true
               },
               "prices": [
                 {
@@ -4480,7 +4580,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Grey Goose / France",
-                "en": "Grey Goose / France"
+                "en": "Grey Goose / France",
+                "latin": true
               },
               "prices": [
                 {
@@ -4506,7 +4607,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Ketel One / Netherlands",
-                "en": "Ketel One / Netherlands"
+                "en": "Ketel One / Netherlands",
+                "latin": true
               },
               "prices": [
                 {
@@ -4532,7 +4634,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Beluga Noble / Russia",
-                "en": "Beluga Noble / Russia"
+                "en": "Beluga Noble / Russia",
+                "latin": true
               },
               "prices": [
                 {
@@ -4558,7 +4661,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Haku / Japan",
-                "en": "Haku / Japan"
+                "en": "Haku / Japan",
+                "latin": true
               },
               "prices": [
                 {
@@ -4592,7 +4696,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Beefeater",
-                "en": "Beefeater"
+                "en": "Beefeater",
+                "latin": true
               },
               "prices": [
                 {
@@ -4625,7 +4730,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Beefeater Pink",
-                "en": "Beefeater Pink"
+                "en": "Beefeater Pink",
+                "latin": true
               },
               "prices": [
                 {
@@ -4651,7 +4757,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Malfy Gin Rosa",
-                "en": "Malfy Gin Rosa"
+                "en": "Malfy Gin Rosa",
+                "latin": true
               },
               "prices": [
                 {
@@ -4677,7 +4784,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Malfy Originale",
-                "en": "Malfy Originale"
+                "en": "Malfy Originale",
+                "latin": true
               },
               "prices": [
                 {
@@ -4703,7 +4811,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Tanqueray London Dry",
-                "en": "Tanqueray London Dry"
+                "en": "Tanqueray London Dry",
+                "latin": true
               },
               "prices": [
                 {
@@ -4729,7 +4838,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Tanqueray No. 10",
-                "en": "Tanqueray No. 10"
+                "en": "Tanqueray No. 10",
+                "latin": true
               },
               "prices": [
                 {
@@ -4755,7 +4865,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Bombay Sapphire",
-                "en": "Bombay Sapphire"
+                "en": "Bombay Sapphire",
+                "latin": true
               },
               "prices": [
                 {
@@ -4781,7 +4892,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Gin Mare",
-                "en": "Gin Mare"
+                "en": "Gin Mare",
+                "latin": true
               },
               "prices": [
                 {
@@ -4807,7 +4919,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Monkey 47 Dry Gin",
-                "en": "Monkey 47 Dry Gin"
+                "en": "Monkey 47 Dry Gin",
+                "latin": true
               },
               "prices": [
                 {
@@ -4833,7 +4946,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Monkey 47 Sloe Gin",
-                "en": "Monkey 47 Sloe Gin"
+                "en": "Monkey 47 Sloe Gin",
+                "latin": true
               },
               "prices": [
                 {
@@ -4859,7 +4973,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Hendrick's",
-                "en": "Hendrick's"
+                "en": "Hendrick's",
+                "latin": true
               },
               "prices": [
                 {
@@ -4885,7 +5000,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Roku",
-                "en": "Roku"
+                "en": "Roku",
+                "latin": true
               },
               "prices": [
                 {
@@ -4919,7 +5035,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Jack Daniel’s",
-                "en": "Jack Daniel’s"
+                "en": "Jack Daniel’s",
+                "latin": true
               },
               "prices": [
                 {
@@ -4952,7 +5069,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Jim Beam",
-                "en": "Jim Beam"
+                "en": "Jim Beam",
+                "latin": true
               },
               "prices": [
                 {
@@ -4978,7 +5096,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Bulleit Bourbon",
-                "en": "Bulleit Bourbon"
+                "en": "Bulleit Bourbon",
+                "latin": true
               },
               "prices": [
                 {
@@ -5004,7 +5123,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Gentleman Jack",
-                "en": "Gentleman Jack"
+                "en": "Gentleman Jack",
+                "latin": true
               },
               "prices": [
                 {
@@ -5030,7 +5150,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Woodford Reserve",
-                "en": "Woodford Reserve"
+                "en": "Woodford Reserve",
+                "latin": true
               },
               "prices": [
                 {
@@ -5064,7 +5185,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Ballantine’s 10 YO",
-                "en": "Ballantine’s 10 YO"
+                "en": "Ballantine’s 10 YO",
+                "latin": true
               },
               "prices": [
                 {
@@ -5090,7 +5212,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Chivas Regal 12 YO",
-                "en": "Chivas Regal 12 YO"
+                "en": "Chivas Regal 12 YO",
+                "latin": true
               },
               "prices": [
                 {
@@ -5123,7 +5246,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Chivas Regal 18 YO",
-                "en": "Chivas Regal 18 YO"
+                "en": "Chivas Regal 18 YO",
+                "latin": true
               },
               "prices": [
                 {
@@ -5149,7 +5273,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Monkey Shoulder",
-                "en": "Monkey Shoulder"
+                "en": "Monkey Shoulder",
+                "latin": true
               },
               "prices": [
                 {
@@ -5175,7 +5300,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Johnnie Walker Red Label",
-                "en": "Johnnie Walker Red Label"
+                "en": "Johnnie Walker Red Label",
+                "latin": true
               },
               "prices": [
                 {
@@ -5201,7 +5327,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Johnnie Walker Black Label",
-                "en": "Johnnie Walker Black Label"
+                "en": "Johnnie Walker Black Label",
+                "latin": true
               },
               "prices": [
                 {
@@ -5234,7 +5361,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Johnnie Walker Double Black Label",
-                "en": "Johnnie Walker Double Black Label"
+                "en": "Johnnie Walker Double Black Label",
+                "latin": true
               },
               "prices": [
                 {
@@ -5260,7 +5388,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Johnnie Walker Blue Label",
-                "en": "Johnnie Walker Blue Label"
+                "en": "Johnnie Walker Blue Label",
+                "latin": true
               },
               "prices": [
                 {
@@ -5286,7 +5415,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Royal Salute 21 YO",
-                "en": "Royal Salute 21 YO"
+                "en": "Royal Salute 21 YO",
+                "latin": true
               },
               "prices": [
                 {
@@ -5305,7 +5435,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "The Macallan 12 YO",
-                "en": "The Macallan 12 YO"
+                "en": "The Macallan 12 YO",
+                "latin": true
               },
               "prices": [
                 {
@@ -5331,7 +5462,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "The Macallan 18 YO",
-                "en": "The Macallan 18 YO"
+                "en": "The Macallan 18 YO",
+                "latin": true
               },
               "prices": [
                 {
@@ -5350,7 +5482,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Chivas Regal 25 YO",
-                "en": "Chivas Regal 25 YO"
+                "en": "Chivas Regal 25 YO",
+                "latin": true
               },
               "prices": [
                 {
@@ -5377,7 +5510,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Aberlour 12 YO",
-                "en": "Aberlour 12 YO"
+                "en": "Aberlour 12 YO",
+                "latin": true
               },
               "prices": [
                 {
@@ -5403,7 +5537,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Glenlivet 12 YO",
-                "en": "Glenlivet 12 YO"
+                "en": "Glenlivet 12 YO",
+                "latin": true
               },
               "prices": [
                 {
@@ -5429,7 +5564,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Glenfiddich 12 YO",
-                "en": "Glenfiddich 12 YO"
+                "en": "Glenfiddich 12 YO",
+                "latin": true
               },
               "prices": [
                 {
@@ -5455,7 +5591,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Singleton 12 YO",
-                "en": "Singleton 12 YO"
+                "en": "Singleton 12 YO",
+                "latin": true
               },
               "prices": [
                 {
@@ -5481,7 +5618,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Ardberg 10 YO",
-                "en": "Ardberg 10 YO"
+                "en": "Ardberg 10 YO",
+                "latin": true
               },
               "prices": [
                 {
@@ -5507,7 +5645,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Lagavulin 8 YO",
-                "en": "Lagavulin 8 YO"
+                "en": "Lagavulin 8 YO",
+                "latin": true
               },
               "prices": [
                 {
@@ -5533,7 +5672,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Glenkinchie 12 YO",
-                "en": "Glenkinchie 12 YO"
+                "en": "Glenkinchie 12 YO",
+                "latin": true
               },
               "prices": [
                 {
@@ -5559,7 +5699,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Glenmorangie Original 12 YO",
-                "en": "Glenmorangie Original 12 YO"
+                "en": "Glenmorangie Original 12 YO",
+                "latin": true
               },
               "prices": [
                 {
@@ -5585,7 +5726,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Oban 14 YO",
-                "en": "Oban 14 YO"
+                "en": "Oban 14 YO",
+                "latin": true
               },
               "prices": [
                 {
@@ -5611,7 +5753,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Dalmore 12 YO",
-                "en": "Dalmore 12 YO"
+                "en": "Dalmore 12 YO",
+                "latin": true
               },
               "prices": [
                 {
@@ -5637,7 +5780,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Talisker 10 YO",
-                "en": "Talisker 10 YO"
+                "en": "Talisker 10 YO",
+                "latin": true
               },
               "prices": [
                 {
@@ -5671,7 +5815,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Jameson",
-                "en": "Jameson"
+                "en": "Jameson",
+                "latin": true
               },
               "prices": [
                 {
@@ -5697,7 +5842,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Jameson Black Barrel",
-                "en": "Jameson Black Barrel"
+                "en": "Jameson Black Barrel",
+                "latin": true
               },
               "prices": [
                 {
@@ -5731,7 +5877,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Hibiki",
-                "en": "Hibiki"
+                "en": "Hibiki",
+                "latin": true
               },
               "prices": [
                 {
@@ -5757,7 +5904,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Fuyu",
-                "en": "Fuyu"
+                "en": "Fuyu",
+                "latin": true
               },
               "prices": [
                 {
@@ -5791,7 +5939,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Olmeca Silver",
-                "en": "Olmeca Silver"
+                "en": "Olmeca Silver",
+                "latin": true
               },
               "prices": [
                 {
@@ -5817,7 +5966,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Olmeca Gold",
-                "en": "Olmeca Gold"
+                "en": "Olmeca Gold",
+                "latin": true
               },
               "prices": [
                 {
@@ -5843,7 +5993,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Casamigos Blanco",
-                "en": "Casamigos Blanco"
+                "en": "Casamigos Blanco",
+                "latin": true
               },
               "prices": [
                 {
@@ -5869,7 +6020,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Casamigos Reposado",
-                "en": "Casamigos Reposado"
+                "en": "Casamigos Reposado",
+                "latin": true
               },
               "prices": [
                 {
@@ -5895,7 +6047,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Casamigos Mezcal",
-                "en": "Casamigos Mezcal"
+                "en": "Casamigos Mezcal",
+                "latin": true
               },
               "prices": [
                 {
@@ -5921,7 +6074,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Ojo De Tigre Joven Mezcal",
-                "en": "Ojo De Tigre Joven Mezcal"
+                "en": "Ojo De Tigre Joven Mezcal",
+                "latin": true
               },
               "prices": [
                 {
@@ -5947,7 +6101,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Don Julio Silver",
-                "en": "Don Julio Silver"
+                "en": "Don Julio Silver",
+                "latin": true
               },
               "prices": [
                 {
@@ -5973,7 +6128,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Don Julio 1942 Añejo",
-                "en": "Don Julio 1942 Añejo"
+                "en": "Don Julio 1942 Añejo",
+                "latin": true
               },
               "prices": [
                 {
@@ -5999,7 +6155,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Patrón Silver",
-                "en": "Patrón Silver"
+                "en": "Patrón Silver",
+                "latin": true
               },
               "prices": [
                 {
@@ -6025,7 +6182,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Patrón XO Café",
-                "en": "Patrón XO Café"
+                "en": "Patrón XO Café",
+                "latin": true
               },
               "prices": [
                 {
@@ -6059,7 +6217,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Havana Club 3 Años",
-                "en": "Havana Club 3 Años"
+                "en": "Havana Club 3 Años",
+                "latin": true
               },
               "prices": [
                 {
@@ -6085,7 +6244,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Havana Club 7 Años",
-                "en": "Havana Club 7 Años"
+                "en": "Havana Club 7 Años",
+                "latin": true
               },
               "prices": [
                 {
@@ -6111,7 +6271,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Bumbu Original",
-                "en": "Bumbu Original"
+                "en": "Bumbu Original",
+                "latin": true
               },
               "prices": [
                 {
@@ -6137,7 +6298,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Captain Morgan Spiced Gold",
-                "en": "Captain Morgan Spiced Gold"
+                "en": "Captain Morgan Spiced Gold",
+                "latin": true
               },
               "prices": [
                 {
@@ -6163,7 +6325,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Zacapa 23",
-                "en": "Zacapa 23"
+                "en": "Zacapa 23",
+                "latin": true
               },
               "prices": [
                 {
@@ -6189,7 +6352,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Diplomático Reserva Exclusiva",
-                "en": "Diplomático Reserva Exclusiva"
+                "en": "Diplomático Reserva Exclusiva",
+                "latin": true
               },
               "prices": [
                 {
@@ -6223,7 +6387,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Rémy Martin VSOP",
-                "en": "Rémy Martin VSOP"
+                "en": "Rémy Martin VSOP",
+                "latin": true
               },
               "prices": [
                 {
@@ -6249,7 +6414,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Hennessy VS",
-                "en": "Hennessy VS"
+                "en": "Hennessy VS",
+                "latin": true
               },
               "prices": [
                 {
@@ -6275,7 +6441,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Hennessy VSOP",
-                "en": "Hennessy VSOP"
+                "en": "Hennessy VSOP",
+                "latin": true
               },
               "prices": [
                 {
@@ -6301,7 +6468,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Courvoisier VSOP",
-                "en": "Courvoisier VSOP"
+                "en": "Courvoisier VSOP",
+                "latin": true
               },
               "prices": [
                 {
@@ -6335,7 +6503,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Aperol",
-                "en": "Aperol"
+                "en": "Aperol",
+                "latin": true
               },
               "prices": [
                 {
@@ -6354,7 +6523,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Archers",
-                "en": "Archers"
+                "en": "Archers",
+                "latin": true
               },
               "prices": [
                 {
@@ -6373,7 +6543,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Baileys",
-                "en": "Baileys"
+                "en": "Baileys",
+                "latin": true
               },
               "prices": [
                 {
@@ -6392,7 +6563,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Malibu",
-                "en": "Malibu"
+                "en": "Malibu",
+                "latin": true
               },
               "prices": [
                 {
@@ -6411,7 +6583,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Kahlúa",
-                "en": "Kahlúa"
+                "en": "Kahlúa",
+                "latin": true
               },
               "prices": [
                 {
@@ -6426,7 +6599,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Campari",
-                "en": "Campari"
+                "en": "Campari",
+                "latin": true
               },
               "prices": [
                 {
@@ -6445,7 +6619,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Cardinal Melon",
-                "en": "Cardinal Melon"
+                "en": "Cardinal Melon",
+                "latin": true
               },
               "prices": [
                 {
@@ -6464,7 +6639,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Chambord",
-                "en": "Chambord"
+                "en": "Chambord",
+                "latin": true
               },
               "prices": [
                 {
@@ -6483,7 +6659,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Cachaça",
-                "en": "Cachaça"
+                "en": "Cachaça",
+                "latin": true
               },
               "prices": [
                 {
@@ -6502,7 +6679,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Amaretto Disaronno",
-                "en": "Amaretto Disaronno"
+                "en": "Amaretto Disaronno",
+                "latin": true
               },
               "prices": [
                 {
@@ -6521,7 +6699,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Southern Comfort",
-                "en": "Southern Comfort"
+                "en": "Southern Comfort",
+                "latin": true
               },
               "prices": [
                 {
@@ -6540,7 +6719,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Skinos",
-                "en": "Skinos"
+                "en": "Skinos",
+                "latin": true
               },
               "prices": [
                 {
@@ -6559,7 +6739,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Safari",
-                "en": "Safari"
+                "en": "Safari",
+                "latin": true
               },
               "prices": [
                 {
@@ -6578,7 +6759,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Passoã",
-                "en": "Passoã"
+                "en": "Passoã",
+                "latin": true
               },
               "prices": [
                 {
@@ -6597,7 +6779,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Lillet Blanc",
-                "en": "Lillet Blanc"
+                "en": "Lillet Blanc",
+                "latin": true
               },
               "prices": [
                 {
@@ -6616,7 +6799,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Cointreau",
-                "en": "Cointreau"
+                "en": "Cointreau",
+                "latin": true
               },
               "prices": [
                 {
@@ -6635,7 +6819,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "St-Germain",
-                "en": "St-Germain"
+                "en": "St-Germain",
+                "latin": true
               },
               "prices": [
                 {
@@ -6662,7 +6847,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Martini Bianco",
-                "en": "Martini Bianco"
+                "en": "Martini Bianco",
+                "latin": true
               },
               "prices": [
                 {
@@ -6681,7 +6867,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Martini Rosso",
-                "en": "Martini Rosso"
+                "en": "Martini Rosso",
+                "latin": true
               },
               "prices": [
                 {
@@ -6700,7 +6887,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Martini Extra Dry",
-                "en": "Martini Extra Dry"
+                "en": "Martini Extra Dry",
+                "latin": true
               },
               "prices": [
                 {
@@ -6727,7 +6915,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Jägermeister",
-                "en": "Jägermeister"
+                "en": "Jägermeister",
+                "latin": true
               },
               "price": "300",
               "allergens": {
@@ -6738,14 +6927,16 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Jägermeister Orange",
-                "en": "Jägermeister Orange"
+                "en": "Jägermeister Orange",
+                "latin": true
               },
               "price": "300"
             },
             {
               "name": {
                 "tr": "Limoncello",
-                "en": "Limoncello"
+                "en": "Limoncello",
+                "latin": true
               },
               "price": "300",
               "allergens": {
@@ -6756,7 +6947,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Sambuca",
-                "en": "Sambuca"
+                "en": "Sambuca",
+                "latin": true
               },
               "price": "300",
               "allergens": {
@@ -6767,7 +6959,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Fernet-Branca",
-                "en": "Fernet-Branca"
+                "en": "Fernet-Branca",
+                "latin": true
               },
               "price": "300",
               "allergens": {
@@ -6778,7 +6971,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Grappa",
-                "en": "Grappa"
+                "en": "Grappa",
+                "latin": true
               },
               "price": "300",
               "allergens": {
@@ -6789,7 +6983,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "B52",
-                "en": "B52"
+                "en": "B52",
+                "latin": true
               },
               "price": "300",
               "allergens": {
@@ -6800,7 +6995,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "5 Espresso Martini Shots",
-                "en": "5 Espresso Martini Shots"
+                "en": "5 Espresso Martini Shots",
+                "latin": true
               },
               "price": "750",
               "allergens": {
@@ -6811,7 +7007,8 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "5 Jägermeister Shots",
-                "en": "5 Jägermeister Shots"
+                "en": "5 Jägermeister Shots",
+                "latin": true
               },
               "price": "1250"
             }

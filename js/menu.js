@@ -56,6 +56,39 @@
     return p;
   }
 
+  /* International food terms kept in English casing (plain "I") even inside a
+     Turkish dish name, so "Pizza" never renders dotted as "PİZZA" in one place
+     and "PIZZA" in another. */
+  var LATIN_WORD_RE = /(Pizza|Spaghetti|Fettuccine|Profiterol|Tiramisu|Margherita|Arrabbiata|Linguine|Risotto|Ravioli|Panini|Bruschetta|Calzone|Penne)/gi;
+
+  // Name node: EN span (always English casing) + TR span (Turkish casing, but
+  // international words wrapped lang="en"; whole span English when value.latin).
+  function nameNode(value) {
+    var frag = document.createDocumentFragment();
+    var tr = el("span", "lang tr", { lang: value && value.latin ? "en" : "tr" });
+    var trText = value && value.tr != null ? value.tr : "";
+    if (value && value.latin) {
+      tr.textContent = trText;
+    } else {
+      var parts = trText.split(LATIN_WORD_RE);
+      parts.forEach(function (part, i) {
+        if (!part) return;
+        if (i % 2 === 1) {
+          var w = el("span", null, { lang: "en" });
+          w.textContent = part;
+          tr.appendChild(w);
+        } else {
+          tr.appendChild(document.createTextNode(part));
+        }
+      });
+    }
+    var en = el("span", "lang en", { lang: "en" });
+    en.textContent = value && value.en != null ? value.en : trText;
+    frag.appendChild(tr);
+    frag.appendChild(en);
+    return frag;
+  }
+
   /* ---- card ------------------------------------------------------------- */
   function renderItem(item) {
     var multi = Array.isArray(item.prices) && item.prices.length;
@@ -63,7 +96,7 @@
 
     var head = el("div", "item__head");
     var name = el("h4", "item__name");
-    name.appendChild(bilingual("span", null, item.name));
+    name.appendChild(nameNode(item.name));
     head.appendChild(name);
 
     if (!multi) {
