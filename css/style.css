@@ -119,6 +119,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;  /* fallback for Safari without svh */
   min-height: 100svh;
   overflow-x: hidden;
 }
@@ -134,7 +135,7 @@ ul { list-style: none; padding: 0; }
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
+  top: 0; right: 0; bottom: 0; left: 0;
   z-index: -2;
   background:
     radial-gradient(120% 90% at 50% 0%, rgba(247, 240, 230, 0.05), transparent 55%),
@@ -144,7 +145,7 @@ body::before {
 body::after {
   content: "";
   position: fixed;
-  inset: 0;
+  top: 0; right: 0; bottom: 0; left: 0;
   z-index: -1;
   opacity: 0.05;
   pointer-events: none;
@@ -155,8 +156,10 @@ body::after {
 .container {
   width: 100%;
   max-width: var(--content-max);
-  margin-inline: auto;
-  padding-inline: clamp(var(--space-3), 6vw, var(--space-6));
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(var(--space-3), 6vw, var(--space-6));
+  padding-right: clamp(var(--space-3), 6vw, var(--space-6));
 }
 
 .menu {
@@ -172,6 +175,7 @@ body[data-view="menu"]  .cover { display: none; }
 /* 5 · COVER / ENTRY SCREEN -------------------------------------------------- */
 .cover {
   position: relative;
+  min-height: 100vh;  /* fallback for Safari without svh */
   min-height: 100svh;
   display: grid;
   place-items: center;
@@ -249,7 +253,8 @@ body[data-view="menu"]  .cover { display: none; }
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: var(--space-2);
-  padding-inline: clamp(var(--space-2), 4vw, var(--space-5));
+  padding-left: clamp(var(--space-2), 4vw, var(--space-5));
+  padding-right: clamp(var(--space-2), 4vw, var(--space-5));
   transition: height var(--dur) var(--ease),
               background-color var(--dur) var(--ease),
               box-shadow var(--dur) var(--ease),
@@ -258,7 +263,7 @@ body[data-view="menu"]  .cover { display: none; }
 /* compacts + gains a faint backing once the guest scrolls */
 body[data-scrolled="true"] .site-header {
   height: var(--header-h-compact);
-  background: color-mix(in srgb, var(--bg-rich) 86%, transparent);
+  background: rgba(125, 63, 29, 0.86); /* = bg-rich @86% (Safari-safe, no color-mix) */
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   box-shadow: 0 1px 0 var(--divider-soft), 0 12px 30px -24px rgba(0, 0, 0, 0.6);
@@ -339,7 +344,7 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
   top: var(--header-h-compact);
   z-index: 40;
   margin-top: calc(-1 * var(--space-1));
-  background: color-mix(in srgb, var(--bg-rich) 82%, transparent);
+  background: rgba(125, 63, 29, 0.82); /* = bg-rich @82% (Safari-safe, no color-mix) */
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--divider-soft);
@@ -347,14 +352,17 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 .subnav__track {
   display: flex;
   gap: var(--space-1);
-  /* wide enough for all tabs on desktop; `safe center` centers them when they
-     fit and falls back to start (no clipped first tab) when they overflow. */
-  max-width: min(100%, 1180px);
-  margin-inline: auto;
+  /* fit-content + margin auto centers the strip when it fits and scrolls from
+     the start (no clipped first tab) when it overflows — works in Safari too,
+     unlike `justify-content: safe center`. */
+  width: -webkit-fit-content;
+  width: fit-content;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   padding: var(--space-2) clamp(var(--space-3), 6vw, var(--space-6));
   overflow-x: auto;
   scrollbar-width: none;
-  justify-content: safe center;
 }
 .subnav__track::-webkit-scrollbar,
 .pagenav__track::-webkit-scrollbar { display: none; }
@@ -389,12 +397,14 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 .pagenav__track {
   display: flex;
   gap: var(--space-1);
-  max-width: min(100%, 1180px);
-  margin-inline: auto;
+  width: -webkit-fit-content;
+  width: fit-content;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   padding: var(--space-1) clamp(var(--space-3), 6vw, var(--space-6));
   overflow-x: auto;
   scrollbar-width: none;
-  justify-content: safe center;
 }
 .pagenav__link {
   flex: 0 0 auto;
@@ -792,7 +802,8 @@ body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
 /* 14 · RESPONSIVE ----------------------------------------------------------- */
 @media (max-width: 420px) {
   .back-btn__label { display: none; } /* keep the touch target, drop the word */
-  .item { padding-inline: var(--space-1); }
+  .item { padding-left: var(--space-1);
+  padding-right: var(--space-1); }
 }
 @media (min-width: 900px) {
   :root { --header-h: 100px; }

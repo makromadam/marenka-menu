@@ -24,6 +24,22 @@
     return n;
   }
 
+  // Scroll helpers — older Safari/WebKit ignores the object form of scrollTo,
+  // so fall back to the legacy positional form / scrollLeft assignment.
+  var CAN_SMOOTH = "scrollBehavior" in document.documentElement.style;
+  function winScroll(y, smooth) {
+    if (CAN_SMOOTH) {
+      try { window.scrollTo({ top: y, behavior: smooth ? "smooth" : "auto" }); return; } catch (e) {}
+    }
+    window.scrollTo(0, y);
+  }
+  function elScrollX(node, x, smooth) {
+    if (CAN_SMOOTH && node.scrollTo) {
+      try { node.scrollTo({ left: x, behavior: smooth ? "smooth" : "auto" }); return; } catch (e) {}
+    }
+    node.scrollLeft = x;
+  }
+
   // Render a bilingual value as two spans; only the active language shows (CSS).
   function bilingual(tag, cls, value) {
     var frag = document.createDocumentFragment();
@@ -277,7 +293,7 @@
       }
       // move focus into the menu for keyboard/AT users
       var skip = document.getElementById("menu-main");
-      if (skip) skip.focus({ preventScroll: true });
+      if (skip) { try { skip.focus({ preventScroll: true }); } catch (e) { skip.focus(); } }
     }
   }
 
@@ -307,9 +323,9 @@
     if (!tab || !tab.parentNode) return;
     var track = tab.parentNode, pad = 16;
     var l = tab.offsetLeft - pad, r = tab.offsetLeft + tab.offsetWidth + pad;
-    if (l < track.scrollLeft) track.scrollTo({ left: l, behavior: "smooth" });
+    if (l < track.scrollLeft) elScrollX(track, l, true);
     else if (r > track.scrollLeft + track.clientWidth)
-      track.scrollTo({ left: r - track.clientWidth, behavior: "smooth" });
+      elScrollX(track, r - track.clientWidth, true);
   }
   // pixels of sticky chrome above the content (compact header + the sub-nav)
   function stickyOffset() {
@@ -346,7 +362,7 @@
         a.appendChild(bilingual("span", null, g.label));
         pagenavTrack.appendChild(a);
       });
-      pagenavTrack.scrollTo({ left: 0 });
+      elScrollX(pagenavTrack, 0, false);
       observeCategories(section);
     }
 
@@ -396,7 +412,7 @@
       }
       tabInView(tabs[secId]);
       if (sectionById[secId]) buildPageNav(sectionById[secId]);
-      if (!opts || opts.scroll !== false) window.scrollTo({ top: 0, behavior: "auto" });
+      if (!opts || opts.scroll !== false) winScroll(0, false);
     }
 
     // section tabs
@@ -421,7 +437,7 @@
       var target = document.getElementById(a.getAttribute("data-cat"));
       if (target) {
         var y = target.getBoundingClientRect().top + window.scrollY - stickyOffset();
-        window.scrollTo({ top: y, behavior: "smooth" });
+        winScroll(y, true);
       }
     });
 
