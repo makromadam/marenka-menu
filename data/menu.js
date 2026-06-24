@@ -4336,8 +4336,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "6000"
                 }
@@ -4362,8 +4362,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "10000"
                 }
@@ -4388,8 +4388,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "6000"
                 }
@@ -4414,8 +4414,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "6000"
                 }
@@ -4440,8 +4440,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "6000"
                 }
@@ -4466,8 +4466,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "10000"
                 }
@@ -4492,8 +4492,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "8000"
                 }
@@ -4518,8 +4518,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "7000"
                 }
@@ -4531,8 +4531,8 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Beluga Noble (100 cl) / Russia",
-                "en": "Beluga Noble (100 cl) / Russia"
+                "tr": "Beluga Noble / Russia",
+                "en": "Beluga Noble / Russia"
               },
               "prices": [
                 {
@@ -4544,8 +4544,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "100 cl",
+                    "en": "100 cl"
                   },
                   "value": "11000"
                 }
@@ -4570,8 +4570,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "10800"
                 }
@@ -4611,8 +4611,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "6000"
                 }
@@ -4637,8 +4637,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "6000"
                 }
@@ -4663,8 +4663,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "7250"
                 }
@@ -4689,8 +4689,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "7250"
                 }
@@ -4715,8 +4715,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "6500"
                 }
@@ -4741,8 +4741,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "7500"
                 }
@@ -4767,8 +4767,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "7250"
                 }
@@ -4793,8 +4793,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "9250"
                 }
@@ -4806,8 +4806,8 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Monkey 47 Dry Gin (50 cl)",
-                "en": "Monkey 47 Dry Gin (50 cl)"
+                "tr": "Monkey 47 Dry Gin",
+                "en": "Monkey 47 Dry Gin"
               },
               "prices": [
                 {
@@ -4819,8 +4819,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "50 cl",
+                    "en": "50 cl"
                   },
                   "value": "7000"
                 }
@@ -4832,8 +4832,8 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Monkey 47 Sloe Gin (50 cl)",
-                "en": "Monkey 47 Sloe Gin (50 cl)"
+                "tr": "Monkey 47 Sloe Gin",
+                "en": "Monkey 47 Sloe Gin"
               },
               "prices": [
                 {
@@ -4845,8 +4845,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "50 cl",
+                    "en": "50 cl"
                   },
                   "value": "7000"
                 }
@@ -4871,8 +4871,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "9250"
                 }
@@ -4897,8 +4897,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "10800"
                 }
@@ -4938,8 +4938,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "6500"
                 }
@@ -4964,8 +4964,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "6500"
                 }
@@ -4990,8 +4990,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "6500"
                 }
@@ -5016,8 +5016,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "7000"
                 }
@@ -5042,8 +5042,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "8500"
                 }
@@ -5076,8 +5076,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "6000"
                 }
@@ -5109,8 +5109,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "6500"
                 }
@@ -5135,8 +5135,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "10500"
                 }
@@ -5161,8 +5161,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "7000"
                 }
@@ -5187,8 +5187,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "6000"
                 }
@@ -5220,8 +5220,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "6750"
                 }
@@ -5246,8 +5246,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "7500"
                 }
@@ -5272,8 +5272,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "30000"
                 }
@@ -5291,8 +5291,8 @@ window.MENU_DATA = {
               "prices": [
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "25000"
                 }
@@ -5317,8 +5317,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "10750"
                 }
@@ -5336,8 +5336,8 @@ window.MENU_DATA = {
               "prices": [
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "37500"
                 }
@@ -5355,8 +5355,8 @@ window.MENU_DATA = {
               "prices": [
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "42500"
                 }
@@ -5389,8 +5389,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "9000"
                 }
@@ -5415,8 +5415,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "8500"
                 }
@@ -5441,8 +5441,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "10500"
                 }
@@ -5467,8 +5467,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "7000"
                 }
@@ -5493,8 +5493,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "10000"
                 }
@@ -5519,8 +5519,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "9000"
                 }
@@ -5545,8 +5545,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "8750"
                 }
@@ -5571,8 +5571,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "8000"
                 }
@@ -5597,8 +5597,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "9500"
                 }
@@ -5623,8 +5623,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "11250"
                 }
@@ -5649,8 +5649,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "9000"
                 }
@@ -5683,8 +5683,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "6000"
                 }
@@ -5709,8 +5709,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "6500"
                 }
@@ -5743,8 +5743,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "20000"
                 }
@@ -5769,8 +5769,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "10000"
                 }
@@ -5803,8 +5803,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "5000"
                 }
@@ -5829,8 +5829,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "5500"
                 }
@@ -5855,8 +5855,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "7500"
                 }
@@ -5881,8 +5881,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "8750"
                 }
@@ -5894,8 +5894,8 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Casamigos Mezcal (100 cl)",
-                "en": "Casamigos Mezcal (100 cl)"
+                "tr": "Casamigos Mezcal",
+                "en": "Casamigos Mezcal"
               },
               "prices": [
                 {
@@ -5907,8 +5907,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "100 cl",
+                    "en": "100 cl"
                   },
                   "value": "10000"
                 }
@@ -5933,8 +5933,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "8500"
                 }
@@ -5959,8 +5959,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "8750"
                 }
@@ -5985,8 +5985,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "27500"
                 }
@@ -6011,8 +6011,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "8500"
                 }
@@ -6037,8 +6037,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "8500"
                 }
@@ -6071,8 +6071,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "6000"
                 }
@@ -6097,8 +6097,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "7000"
                 }
@@ -6123,8 +6123,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "7250"
                 }
@@ -6149,8 +6149,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "6000"
                 }
@@ -6175,8 +6175,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "7500"
                 }
@@ -6201,8 +6201,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "8500"
                 }
@@ -6235,8 +6235,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "8000"
                 }
@@ -6261,8 +6261,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "7250"
                 }
@@ -6287,8 +6287,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "9250"
                 }
@@ -6313,8 +6313,8 @@ window.MENU_DATA = {
                 },
                 {
                   "label": {
-                    "tr": "Şişe",
-                    "en": "Bottle"
+                    "tr": "70 cl",
+                    "en": "70 cl"
                   },
                   "value": "9750"
                 }
@@ -6372,8 +6372,8 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Baileys (10 cl)",
-                "en": "Baileys (10 cl)"
+                "tr": "Baileys",
+                "en": "Baileys"
               },
               "prices": [
                 {
@@ -6596,8 +6596,8 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Lillet Blanc (10 cl)",
-                "en": "Lillet Blanc (10 cl)"
+                "tr": "Lillet Blanc",
+                "en": "Lillet Blanc"
               },
               "prices": [
                 {
