@@ -152,7 +152,6 @@
     title.appendChild(bilingual("span", null, section.label));
     head.appendChild(title);
     var orn = el("div", "section-head__ornament", { "aria-hidden": "true" });
-    orn.appendChild(el("span", "section-head__diamond"));
     head.appendChild(orn);
     if (section.note && (section.note.tr || section.note.en)) {
       head.appendChild(bilingual("p", "section-head__note", section.note));
