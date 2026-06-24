@@ -232,20 +232,36 @@
     // scroll-spy for the sub-nav active state
     if (!("IntersectionObserver" in window)) return;
     var links = {};
+    var firstId = null;
     document.querySelectorAll(".subnav__link").forEach(function (l) {
-      links[l.getAttribute("data-target")] = l;
+      var id = l.getAttribute("data-target");
+      links[id] = l;
+      if (firstId === null) firstId = id;
     });
-    var current = null;
+    // Prime with the first section active and the strip at its start, so the
+    // first pill (e.g. "Kahvaltı") is never half-clipped on open. The strip is
+    // only auto-scrolled once the guest has actually scrolled the page.
+    var current = firstId;
+    if (firstId) links[firstId].setAttribute("aria-current", "true");
+    var hasScrolled = false;
+    window.addEventListener("scroll", function () { hasScrolled = true; }, { passive: true, once: true });
+
     var setCurrent = function (id) {
       if (id === current) return;
       current = id;
       for (var key in links) links[key].setAttribute("aria-current", String(key === id));
       var active = links[id];
-      if (active && active.parentNode) {
-        // keep the active pill in view within the scroller
-        var track = active.parentNode;
-        var off = active.offsetLeft - track.clientWidth / 2 + active.clientWidth / 2;
-        track.scrollTo({ left: off, behavior: "smooth" });
+      if (!hasScrolled || !active || !active.parentNode) return;
+      // keep the active pill fully in view; bias toward its start so the
+      // previous pill is never left visibly cut at the left edge
+      var track = active.parentNode;
+      var pad = 16;
+      var left = active.offsetLeft - pad;
+      var right = active.offsetLeft + active.offsetWidth + pad;
+      if (left < track.scrollLeft) {
+        track.scrollTo({ left: left, behavior: "smooth" });
+      } else if (right > track.scrollLeft + track.clientWidth) {
+        track.scrollTo({ left: right - track.clientWidth, behavior: "smooth" });
       }
     };
     var observer = new IntersectionObserver(function (entries) {
