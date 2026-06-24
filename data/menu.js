@@ -8519,7 +8519,22 @@ window.MENU_DATA = {
                 "tr": "Türk Kahvesi",
                 "en": "Turkish Coffee"
               },
-              "price": "110"
+              "prices": [
+                {
+                  "label": {
+                    "tr": "Tek",
+                    "en": "Single"
+                  },
+                  "value": "110"
+                },
+                {
+                  "label": {
+                    "tr": "Duble",
+                    "en": "Double"
+                  },
+                  "value": "195"
+                }
+              ]
             },
             {
               "name": {
@@ -8535,7 +8550,22 @@ window.MENU_DATA = {
                 "en": "Espresso / Double Espresso",
                 "latin": true
               },
-              "price": "175"
+              "prices": [
+                {
+                  "label": {
+                    "tr": "Tek",
+                    "en": "Single"
+                  },
+                  "value": "175"
+                },
+                {
+                  "label": {
+                    "tr": "Duble",
+                    "en": "Double"
+                  },
+                  "value": "245"
+                }
+              ]
             },
             {
               "name": {
@@ -8703,7 +8733,22 @@ window.MENU_DATA = {
                 "tr": "Süt ve Süt Ürünleri",
                 "en": "Milk and Dairy Products"
               },
-              "price": "255"
+              "prices": [
+                {
+                  "label": {
+                    "tr": "Tek",
+                    "en": "Single"
+                  },
+                  "value": "255"
+                },
+                {
+                  "label": {
+                    "tr": "Duble",
+                    "en": "Double"
+                  },
+                  "value": "275"
+                }
+              ]
             },
             {
               "name": {
