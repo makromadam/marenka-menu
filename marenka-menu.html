@@ -227,6 +227,7 @@ body[data-view="menu"]  .cover { display: none; }
   font-weight: 400;
   padding-left: 0.34em; /* optical: compensate trailing tracking */
 }
+.cover__tagline:empty { display: none; } /* no tagline → no leftover gap */
 
 .cover__noscript {
   max-width: 32ch;
@@ -1034,10 +1035,6 @@ body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
    Generated from the client spreadsheets — see scripts/build_menu_data.py.
    ========================================================================== */
 window.MENU_DATA = {
-  "tagline": {
-    "tr": "Lezzet ve zarafetin buluştuğu yer",
-    "en": "Where taste meets elegance"
-  },
   "sections": [
     {
       "id": "kahvalti",

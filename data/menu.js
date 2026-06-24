@@ -9,10 +9,6 @@
    Generated from the client spreadsheets — see scripts/build_menu_data.py.
    ========================================================================== */
 window.MENU_DATA = {
-  "tagline": {
-    "tr": "Lezzet ve zarafetin buluştuğu yer",
-    "en": "Where taste meets elegance"
-  },
   "sections": [
     {
       "id": "kahvalti",

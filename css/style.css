@@ -213,6 +213,7 @@ body[data-view="menu"]  .cover { display: none; }
   font-weight: 400;
   padding-left: 0.34em; /* optical: compensate trailing tracking */
 }
+.cover__tagline:empty { display: none; } /* no tagline → no leftover gap */
 
 .cover__noscript {
   max-width: 32ch;
