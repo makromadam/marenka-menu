@@ -361,11 +361,14 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 .subnav__track {
   display: flex;
   gap: var(--space-1);
-  max-width: var(--content-max);
+  /* wide enough for all tabs on desktop; `safe center` centers them when they
+     fit and falls back to start (no clipped first tab) when they overflow. */
+  max-width: min(100%, 1180px);
   margin-inline: auto;
   padding: var(--space-2) clamp(var(--space-3), 6vw, var(--space-6));
   overflow-x: auto;
   scrollbar-width: none;
+  justify-content: safe center;
 }
 .subnav__track::-webkit-scrollbar,
 .pagenav__track::-webkit-scrollbar { display: none; }
@@ -400,11 +403,12 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 .pagenav__track {
   display: flex;
   gap: var(--space-1);
-  max-width: var(--content-max);
+  max-width: min(100%, 1180px);
   margin-inline: auto;
   padding: var(--space-1) clamp(var(--space-3), 6vw, var(--space-6));
   overflow-x: auto;
   scrollbar-width: none;
+  justify-content: safe center;
 }
 .pagenav__link {
   flex: 0 0 auto;
