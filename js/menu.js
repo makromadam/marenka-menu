@@ -186,8 +186,10 @@
   }
 
   // which sections belong to the "Drinks" macro-group (rest are "Food")
-  var DRINK_IDS = { kokteyl: 1, bira: 1, raki: 1, distile: 1 };
+  var DRINK_IDS = { kokteyl: 1, bira: 1, raki: 1, distile: 1, sarap: 1 };
+  var SOFT_IDS = { alkolsuz: 1 };
   function macroGroup(id) {
+    if (SOFT_IDS[id]) return { tr: "İçecekler", en: "Beverages" };
     return DRINK_IDS[id] ? { tr: "İçkiler", en: "Drinks" } : { tr: "Yemekler", en: "Food" };
   }
 
