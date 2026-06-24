@@ -523,23 +523,18 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 }
 .category:first-of-type { margin-top: var(--space-2); }
 .category__label {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
+  display: block;
+  text-align: center;          /* centered sub-category heading */
   font-size: var(--fs-category);
   font-weight: 600;
   letter-spacing: 0.26em;
   text-transform: uppercase;
   color: var(--cream);
-}
-.category__label::after {
-  content: "";
-  flex: 1 1 auto;
-  height: 1px;
-  background: linear-gradient(90deg, var(--divider), transparent);
+  padding-left: 0.26em;        /* optical: balance trailing letter-spacing */
 }
 .category__note {
   margin-top: var(--space-1);
+  text-align: center;
   font-size: var(--fs-allergen);
   font-style: italic;
   color: var(--cream-soft);
