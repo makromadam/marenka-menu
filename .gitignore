@@ -1,0 +1,9 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*~
+.vscode/
+.idea/
+
+# Dependencies / build artifacts (this project has none — kept as a guard)
+node_modules/

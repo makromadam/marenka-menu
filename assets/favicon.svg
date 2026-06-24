@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#a45729"/>
+  <g fill="none" stroke="#f7f0e6" stroke-width="2.4" stroke-linecap="round">
+    <line x1="32" y1="14" x2="32" y2="22"/>
+    <line x1="24" y1="16" x2="26" y2="23"/>
+    <line x1="40" y1="16" x2="38" y2="23"/>
+  </g>
+  <text x="32" y="46" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
+        font-size="30" font-style="italic" fill="#f7f0e6">m</text>
+</svg>

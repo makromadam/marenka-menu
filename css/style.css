@@ -1,0 +1,730 @@
+/* =============================================================================
+   MARENKA — Online Menu
+   Single stylesheet. All design decisions are driven by the tokens in :root,
+   so colors, type and spacing can be retuned from one place.
+   Sections:  0 Fonts · 1 Tokens · 2 Reset/Base · 3 Background · 4 Layout
+              5 Cover · 6 Header · 7 Sub-nav · 8 Headings · 9 Product card
+              10 Language · 11 Motion · 12 A11y · 13 Print · 14 Responsive
+   ========================================================================== */
+
+/* 0 · FONTS ----------------------------------------------------------------- */
+/* Playfair Display is shipped locally (assets/fonts). Poppins Light Italic —
+   used ONLY for the allergen line — is pulled from Google Fonts via index.html,
+   with a graceful system-italic fallback. */
+@font-face {
+  font-family: "Playfair Display";
+  src: url("../assets/fonts/PlayfairDisplay-Regular.ttf") format("truetype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url("../assets/fonts/PlayfairDisplay-Medium.ttf") format("truetype");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url("../assets/fonts/PlayfairDisplay-Bold.ttf") format("truetype");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url("../assets/fonts/PlayfairDisplay-ExtraBold.ttf") format("truetype");
+  font-weight: 800; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url("../assets/fonts/PlayfairDisplay-Black.ttf") format("truetype");
+  font-weight: 900; font-style: normal; font-display: swap;
+}
+
+/* 1 · DESIGN TOKENS --------------------------------------------------------- */
+:root {
+  /* Palette */
+  --bg:          #a45729;             /* terracotta — the whole canvas      */
+  --bg-deep:     #8f4a22;             /* darker terracotta for depth/vignette */
+  --bg-rich:     #7d3f1d;             /* deepest, used in scrolled header   */
+  /* All copy is pure white; the two softer steps are still white, only
+     lighter, so the type keeps a readable hierarchy. */
+  --cream:       #ffffff;             /* primary text: titles, names, prices */
+  --cream-soft:  rgba(255, 255, 255, 0.86); /* ingredient text             */
+  --gold:        #e0c088;            /* fine rules, dots, borders, accents  */
+  --gold-deep:   #c9a24b;            /* hover / emphasis                   */
+  --allergen:    rgba(255, 255, 255, 0.80); /* allergen line               */
+  --divider:     rgba(255, 255, 255, 0.16);
+  --divider-soft:rgba(255, 255, 255, 0.10);
+  --overlay:     rgba(0, 0, 0, 0.10);
+
+  /* Typography */
+  --font-serif: "Playfair Display", "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-allergen: "Poppins", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Fluid type scale (320 → 1440) */
+  --fs-cover-logo: clamp(2.6rem, 12vw, 4.6rem);
+  --fs-display:    clamp(1.9rem, 6vw, 3rem);     /* major section (Food/Drinks) */
+  --fs-section:    clamp(1.55rem, 4.2vw, 2.3rem);/* sub section header          */
+  --fs-category:   clamp(0.78rem, 1.6vw, 0.92rem);
+  --fs-name:       clamp(1.04rem, 2.7vw, 1.22rem);
+  --fs-price:      clamp(1.02rem, 2.6vw, 1.2rem);
+  --fs-desc:       clamp(0.9rem, 2.3vw, 1rem);
+  --fs-allergen:   clamp(0.76rem, 2vw, 0.85rem);
+  --fs-ui:         clamp(0.74rem, 2vw, 0.84rem);
+  --fs-tagline:    clamp(0.72rem, 2.6vw, 0.86rem);
+
+  /* Spacing scale (4 / 8 base) */
+  --space-0: 4px;
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-7: 56px;
+  --space-8: 64px;
+  --space-10: 80px;
+  --space-12: 96px;
+
+  /* Structure */
+  --content-max: 760px;
+  --header-h: 88px;
+  --header-h-compact: 64px;
+  --radius: 14px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur: 0.45s;
+  --dur-fast: 0.22s;
+}
+
+/* 2 · RESET / BASE ---------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  /* sub-nav + header height so anchored scrolling clears the sticky chrome */
+  scroll-padding-top: calc(var(--header-h-compact) + 56px);
+}
+
+body {
+  font-family: var(--font-serif);
+  background-color: var(--bg);
+  color: var(--cream);
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100svh;
+  overflow-x: hidden;
+}
+
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; padding: 0; }
+
+/* 3 · BACKGROUND TEXTURE ---------------------------------------------------- */
+/* A near-invisible vignette + faint grain keeps the flat terracotta from
+   looking cheap, without ever reading as "texture". */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(247, 240, 230, 0.05), transparent 55%),
+    radial-gradient(140% 120% at 50% 100%, var(--bg-deep), transparent 60%);
+  pointer-events: none;
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.05;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* 4 · LAYOUT ---------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: clamp(var(--space-3), 6vw, var(--space-6));
+}
+
+.menu {
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-12);
+}
+
+/* The menu is hidden until the guest leaves the cover screen. */
+body[data-view="cover"] .site-header,
+body[data-view="cover"] .menu { display: none; }
+body[data-view="menu"]  .cover { display: none; }
+
+/* 5 · COVER / ENTRY SCREEN -------------------------------------------------- */
+.cover {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: var(--space-8) var(--space-3);
+  overflow: hidden;
+}
+.cover__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(var(--space-4), 6vh, var(--space-7));
+  max-width: 560px;
+}
+.cover__logo {
+  color: var(--cream);
+  width: min(82vw, 460px);
+  filter: drop-shadow(0 2px 18px rgba(0, 0, 0, 0.18));
+}
+.cover__logo svg { width: 100%; height: auto; }
+
+.cover__welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+.cover__rule {
+  width: 64px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.8;
+}
+.cover__tagline {
+  font-size: var(--fs-tagline);
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--cream-soft);
+  font-weight: 400;
+  padding-left: 0.34em; /* optical: compensate trailing tracking */
+}
+
+.cover__noscript {
+  max-width: 32ch;
+  font-size: var(--fs-allergen);
+  line-height: 1.6;
+  color: var(--cream-soft);
+}
+
+/* Shared elegant button */
+.btn {
+  --btn-fg: var(--cream);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  padding: 0.95em 2.1em;
+  font-size: var(--fs-ui);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--btn-fg);
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  background: transparent;
+  transition: color var(--dur-fast) var(--ease),
+              background-color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease),
+              transform var(--dur-fast) var(--ease);
+}
+.btn .btn__arrow { transition: transform var(--dur-fast) var(--ease); }
+@media (hover: hover) {
+  .btn:hover {
+    color: var(--bg-rich);
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+  .btn:hover .btn__arrow { transform: translateX(4px); }
+}
+.btn:active { transform: translateY(1px) scale(0.99); }
+
+/* 6 · HEADER ---------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--header-h);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-2);
+  padding-inline: clamp(var(--space-2), 4vw, var(--space-5));
+  transition: height var(--dur) var(--ease),
+              background-color var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease),
+              backdrop-filter var(--dur) var(--ease);
+}
+/* compacts + gains a faint backing once the guest scrolls */
+body[data-scrolled="true"] .site-header {
+  height: var(--header-h-compact);
+  background: color-mix(in srgb, var(--bg-rich) 86%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 0 var(--divider-soft), 0 12px 30px -24px rgba(0, 0, 0, 0.6);
+}
+
+.header__logo {
+  grid-column: 2;
+  justify-self: center;
+  color: var(--cream);
+  width: clamp(132px, 34vw, 188px);
+  transition: width var(--dur) var(--ease);
+}
+body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
+.header__logo svg { width: 100%; height: auto; }
+.header__home { display: block; }
+
+/* Back button (left). Standalone: returns to the cover, never history.back(). */
+.back-btn {
+  grid-column: 1;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 0.6em 0 0.4em;
+  color: var(--cream);
+  font-size: var(--fs-ui);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  transition: color var(--dur-fast) var(--ease);
+}
+.back-btn svg { width: 20px; height: 20px; transition: transform var(--dur-fast) var(--ease); }
+.back-btn__label { transition: opacity var(--dur) var(--ease); }
+@media (hover: hover) {
+  .back-btn:hover { color: var(--gold); }
+  .back-btn:hover svg { transform: translateX(-3px); }
+}
+.back-btn:active { color: var(--gold-deep); }
+
+/* Language toggle (right) */
+.lang-toggle {
+  grid-column: 3;
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  border: 1px solid var(--divider);
+  border-radius: 999px;
+  background: var(--overlay);
+}
+.lang-toggle__btn {
+  min-width: 44px;
+  min-height: 34px;
+  padding: 0 0.85em;
+  font-size: var(--fs-ui);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--cream-soft);
+  border-radius: 999px;
+  transition: color var(--dur-fast) var(--ease),
+              background-color var(--dur-fast) var(--ease);
+}
+.lang-toggle__btn[aria-pressed="true"] {
+  color: var(--cream);
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 0 0 1px var(--gold);
+  font-weight: 600;
+}
+@media (hover: hover) {
+  .lang-toggle__btn:not([aria-pressed="true"]):hover { color: var(--cream); }
+}
+
+/* 7 · SUB-NAV (sticky section jumper) --------------------------------------- */
+.subnav {
+  position: sticky;
+  top: var(--header-h-compact);
+  z-index: 40;
+  margin-top: calc(-1 * var(--space-1));
+  background: color-mix(in srgb, var(--bg-rich) 82%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--divider-soft);
+}
+.subnav__track {
+  display: flex;
+  gap: var(--space-1);
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding: var(--space-2) clamp(var(--space-3), 6vw, var(--space-6));
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+}
+.subnav__track::-webkit-scrollbar { display: none; }
+.subnav__link {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  padding: 0.5em 1.05em;
+  font-size: var(--fs-ui);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cream-soft);
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  transition: color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease),
+              background-color var(--dur-fast) var(--ease);
+}
+.subnav__link[aria-current="true"] {
+  color: var(--cream);
+  border-color: var(--gold);
+  background: var(--overlay);
+}
+@media (hover: hover) {
+  .subnav__link:hover { color: var(--cream); }
+}
+
+/* 8 · HEADINGS -------------------------------------------------------------- */
+.menu-section { padding-top: var(--space-8); }
+.menu-section:first-child { padding-top: var(--space-4); }
+
+/* Major banner — FOOD / DRINKS */
+.section-banner {
+  text-align: center;
+  margin-bottom: var(--space-6);
+}
+.section-banner__eyebrow {
+  display: block;
+  font-size: var(--fs-category);
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--cream);
+  margin-bottom: var(--space-2);
+  padding-left: 0.42em;
+}
+.section-banner__title {
+  font-size: var(--fs-display);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  color: var(--cream);
+}
+.section-banner__ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  color: var(--gold);
+}
+.section-banner__ornament::before,
+.section-banner__ornament::after {
+  content: "";
+  width: clamp(40px, 16vw, 90px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, currentColor);
+}
+.section-banner__ornament::after { transform: scaleX(-1); }
+.section-banner__diamond { width: 6px; height: 6px; rotate: 45deg; background: currentColor; }
+
+/* Section header (Breakfast, Lunch, Cocktails…) */
+.section-head {
+  text-align: center;
+  margin-bottom: var(--space-5);
+}
+.section-head__title {
+  font-size: var(--fs-section);
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  color: var(--cream);
+}
+.section-head__note {
+  margin-top: var(--space-1);
+  font-size: var(--fs-allergen);
+  font-style: italic;
+  color: var(--cream-soft);
+  opacity: 0.85;
+}
+
+/* Category label (Omelettes, Negroni…) */
+.category {
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+}
+.category:first-of-type { margin-top: var(--space-2); }
+.category__label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-category);
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--cream);
+}
+.category__label::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
+  background: linear-gradient(90deg, var(--divider), transparent);
+}
+.category__note {
+  margin-top: var(--space-1);
+  font-size: var(--fs-allergen);
+  font-style: italic;
+  color: var(--cream-soft);
+  opacity: 0.8;
+}
+
+/* 9 · PRODUCT CARD ---------------------------------------------------------- */
+.item-list { display: flex; flex-direction: column; }
+
+.item {
+  position: relative;
+  padding: var(--space-3) var(--space-2);
+  border-radius: var(--radius);
+  border-bottom: 1px solid var(--divider);
+  transition: transform var(--dur-fast) var(--ease),
+              background-color var(--dur-fast) var(--ease);
+}
+.item:last-child { border-bottom: 0; }
+
+/* a hairline gold accent that grows from the left on interaction */
+.item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 2px;
+  height: 0;
+  background: var(--gold);
+  border-radius: 2px;
+  transform: translateY(-50%);
+  transition: height var(--dur) var(--ease);
+}
+@media (hover: hover) {
+  .item:hover {
+    background: rgba(247, 240, 230, 0.04);
+    transform: translateX(4px);
+  }
+  .item:hover::before { height: 62%; }
+}
+.item:active { background: rgba(247, 240, 230, 0.06); }
+
+/* Line 1 — name · dotted leader · price */
+.item__head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-1);
+}
+.item__name {
+  font-size: var(--fs-name);
+  font-weight: 600;
+  color: var(--cream);
+  line-height: 1.25;
+}
+.item__leader {
+  flex: 1 1 auto;
+  align-self: flex-end;
+  margin-bottom: 0.32em;
+  min-width: 18px;
+  border-bottom: 1px dotted var(--gold);
+  opacity: 0.45;
+}
+.item__price {
+  flex: 0 0 auto;
+  font-size: var(--fs-price);
+  font-weight: 500;
+  color: var(--cream);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.item__price .cur { font-size: 0.82em; opacity: 0.7; margin-right: 0.06em; }
+
+/* Line 2 — ingredients */
+.item__desc {
+  margin-top: var(--space-1);
+  max-width: 60ch;
+  font-size: var(--fs-desc);
+  font-weight: 400;
+  color: var(--cream-soft);
+  line-height: 1.45;
+}
+
+/* Line 3 — allergens (Poppins Light Italic, the ONLY non-serif text) */
+.item__allergen {
+  margin-top: var(--space-1);
+  font-family: var(--font-allergen);
+  font-weight: 300;
+  font-style: italic;
+  font-size: var(--fs-allergen);
+  color: var(--allergen);
+  line-height: 1.4;
+}
+.item__allergen .item__allergen-label { font-weight: 300; }
+
+/* Multi-serving price grid (spirits / rakı) — no leader, prices listed below */
+.item--multiprice .item__head { flex-wrap: wrap; }
+.item__prices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  margin-top: var(--space-1);
+}
+.item__price-pair {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5em;
+  font-size: var(--fs-desc);
+}
+.item__price-pair .measure {
+  color: var(--cream-soft);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.86em;
+}
+.item__price-pair .amount {
+  color: var(--cream);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* footer */
+.menu-footer {
+  margin-top: var(--space-12);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--divider-soft);
+  text-align: center;
+  color: var(--cream-soft);
+}
+.menu-footer__mark { color: var(--cream); width: clamp(120px, 30vw, 150px); margin: 0 auto var(--space-3); }
+.menu-footer__mark svg { width: 100%; height: auto; }
+.menu-footer__line {
+  font-size: var(--fs-allergen);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cream-soft);
+  opacity: 0.7;
+}
+.menu-footer__legal {
+  margin-top: var(--space-2);
+  font-family: var(--font-allergen);
+  font-weight: 300;
+  font-style: italic;
+  font-size: var(--fs-allergen);
+  color: var(--allergen);
+  opacity: 0.8;
+}
+
+/* 10 · LANGUAGE VISIBILITY -------------------------------------------------- */
+/* Both languages are rendered; CSS shows only the active one → zero CLS. */
+.lang { display: inline; }
+body[data-lang="tr"] .lang.en,
+body[data-lang="en"] .lang.tr { display: none; }
+/* block-level bilingual nodes (descriptions) keep their box model */
+.item__desc.lang, .section-head__note.lang, .category__note.lang { display: block; }
+body[data-lang="tr"] .item__desc.lang.en,
+body[data-lang="en"] .item__desc.lang.tr { display: none; }
+
+/* 11 · MOTION --------------------------------------------------------------- */
+/* Cover → menu transition */
+.cover { animation: fade-in var(--dur) var(--ease) both; }
+body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
+
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes view-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Section entrance — a soft, one-time fade-up that plays when the menu opens.
+   Pure CSS, no observer. Content always finishes visible, so anchor jumps from
+   the sub-nav can never land on hidden cards. Disabled for reduced-motion. */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  body[data-view="menu"] .section-banner,
+  body[data-view="menu"] .section-head,
+  body[data-view="menu"] .category {
+    animation: fade-up 0.6s var(--ease) both;
+  }
+  body[data-view="menu"] .item {
+    animation: fade-up 0.55s var(--ease) both;
+  }
+  /* a gentle stagger for the first cards in each list */
+  body[data-view="menu"] .item-list .item:nth-child(1) { animation-delay: 0.02s; }
+  body[data-view="menu"] .item-list .item:nth-child(2) { animation-delay: 0.06s; }
+  body[data-view="menu"] .item-list .item:nth-child(3) { animation-delay: 0.10s; }
+  body[data-view="menu"] .item-list .item:nth-child(4) { animation-delay: 0.14s; }
+  body[data-view="menu"] .item-list .item:nth-child(n+5) { animation-delay: 0.18s; }
+}
+
+/* 12 · ACCESSIBILITY -------------------------------------------------------- */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.skip-link {
+  position: absolute;
+  left: 50%;
+  top: -60px;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 0.7em 1.2em;
+  background: var(--gold);
+  color: var(--bg-rich);
+  border-radius: 0 0 10px 10px;
+  letter-spacing: 0.1em;
+  transition: top var(--dur-fast) var(--ease);
+}
+.skip-link:focus-visible { top: 0; outline-offset: -3px; }
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* 13 · PRINT ---------------------------------------------------------------- */
+@media print {
+  :root { --content-max: 100%; }
+  body { background: #fff; color: #2b1a10; }
+  body::before, body::after { display: none; }
+  .cover, .site-header, .subnav, .lang-toggle, .back-btn, .menu-footer__mark { display: none !important; }
+  body[data-view="cover"] .menu { display: block !important; }
+  /* print both nothing-hidden? show active language only */
+  .item { break-inside: avoid; border-color: rgba(0,0,0,0.15); }
+  .item__name, .section-banner__title, .section-head__title { color: #2b1a10; }
+  .item__price, .item__price-pair .amount, .category__label, .section-banner__eyebrow { color: #8a5a25; }
+  .item__desc { color: #4a3525; }
+  .item__allergen, .menu-footer__legal { color: #6a4a30; }
+  .item:hover { transform: none; background: none; }
+}
+
+/* 14 · RESPONSIVE ----------------------------------------------------------- */
+@media (max-width: 420px) {
+  .back-btn__label { display: none; } /* keep the touch target, drop the word */
+  .item { padding-inline: var(--space-1); }
+}
+@media (min-width: 900px) {
+  :root { --header-h: 100px; }
+}
