@@ -379,6 +379,8 @@
     var pagenav = document.getElementById("pagenav");
     var pagenavTrack = document.getElementById("pagenav-track");
     var catObserver = null;
+    var catSetActive = null;   // activate a category pill (also used by clicks)
+    var catScrollSpy = null;   // bottom-of-page fallback for the last category
 
     // Build the in-page quick-jump strip for the active section's categories.
     function buildPageNav(section) {
@@ -396,29 +398,53 @@
       observeCategories(section);
     }
 
+    // True only when the page is actually scrollable AND scrolled to its end.
+    function atBottomScrollable() {
+      var se = document.scrollingElement || document.documentElement;
+      var ch = se.clientHeight || window.innerHeight;
+      if ((se.scrollHeight || 0) <= ch + 8) return false; // not scrollable
+      var st = window.scrollY || se.scrollTop || 0;
+      return (st + ch) >= (se.scrollHeight - 4);
+    }
+
     // Highlight the quick-jump pill for whichever category is in view.
     function observeCategories(section) {
       if (catObserver) catObserver.disconnect();
-      if (!("IntersectionObserver" in window) || pagenav.hidden) return;
-      var links = {};
+      if (catScrollSpy) { window.removeEventListener("scroll", catScrollSpy); catScrollSpy = null; }
+      catSetActive = null;
+      if (pagenav.hidden) return;
+      var links = {}, ids = [];
       pagenavTrack.querySelectorAll(".pagenav__link").forEach(function (l) {
-        links[l.getAttribute("data-cat")] = l;
+        var id = l.getAttribute("data-cat");
+        links[id] = l; ids.push(id);
       });
       var cur = null;
-      catObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (!e.isIntersecting) return;
-          var id = e.target.id;
-          if (id === cur) return;
-          cur = id;
-          for (var k in links) links[k].setAttribute("aria-current", String(k === id));
-          tabInView(links[id]);
+      catSetActive = function (id) {
+        if (!links[id] || id === cur) return;
+        cur = id;
+        for (var k in links) links[k].setAttribute("aria-current", String(k === id));
+        tabInView(links[id]);
+      };
+      if ("IntersectionObserver" in window) {
+        catObserver = new IntersectionObserver(function (entries) {
+          // at the very bottom the last category owns the highlight (it can't
+          // scroll high enough to enter this zone) — let the scroll spy win
+          if (atBottomScrollable()) return;
+          entries.forEach(function (e) {
+            if (e.isIntersecting) catSetActive(e.target.id);
+          });
+        }, { rootMargin: "-" + (stickyOffset() + 4) + "px 0px -55% 0px", threshold: 0 });
+        (section.groups || []).forEach(function (g, gi) {
+          var elc = document.getElementById("cat-" + section.id + "-" + gi);
+          if (elc) catObserver.observe(elc);
         });
-      }, { rootMargin: "-" + (stickyOffset() + 4) + "px 0px -55% 0px", threshold: 0 });
-      (section.groups || []).forEach(function (g, gi) {
-        var elc = document.getElementById("cat-" + section.id + "-" + gi);
-        if (elc) catObserver.observe(elc);
-      });
+      }
+      // Fallback: when scrolled to the bottom, activate the final category so its
+      // underline shows even though it never reaches the observer's zone.
+      catScrollSpy = function () {
+        if (atBottomScrollable() && ids.length) catSetActive(ids[ids.length - 1]);
+      };
+      window.addEventListener("scroll", catScrollSpy, { passive: true });
     }
 
     function showSection(secId, opts) {
@@ -482,11 +508,13 @@
       var a = e.target.closest ? e.target.closest(".pagenav__link") : null;
       if (!a) return;
       e.preventDefault();
-      var target = document.getElementById(a.getAttribute("data-cat"));
+      var id = a.getAttribute("data-cat");
+      var target = document.getElementById(id);
       if (target) {
         var y = target.getBoundingClientRect().top + window.scrollY - stickyOffset();
         winScroll(y, true);
       }
+      if (catSetActive) catSetActive(id); // instant underline, even for the last category
     });
 
     // swipe between pages (touch) — ignores gestures that start on a nav strip
