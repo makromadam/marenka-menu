@@ -81,7 +81,7 @@ window.MENU_DATA = {
                 "en": "Marenka American Breakfast"
               },
               "desc": {
-                "tr": "Dana sosis, füme dana eti, sahanda yumurta, hash brown, sote mantar,mozzarella sticks.",
+                "tr": "Dana sosis, füme dana eti, sahanda yumurta, hash brown, sote mantar, mozzarella sticks.",
                 "en": "Beef sausage, smoked beef, fried eggs, hash browns, sautéed mushrooms, mozzarella sticks."
               },
               "price": "975",
@@ -137,7 +137,7 @@ window.MENU_DATA = {
                 "en": "Spanish Omelette"
               },
               "desc": {
-                "tr": "Patates ve soğanlı omlet.Taze doğranmış sebze tabağı ve zeytin ile servis edilir.",
+                "tr": "Patates ve soğanlı omlet. Taze doğranmış sebze tabağı ve zeytin ile servis edilir.",
                 "en": "Omelette with potato and onion. Served with a freshly chopped vegetable platter and olives."
               },
               "price": "375",
@@ -169,7 +169,7 @@ window.MENU_DATA = {
                 "en": "Mixed Omelette"
               },
               "desc": {
-                "tr": "Sucuk,sosis, peynir.Taze doğranmış sebze tabağı ve zeytin ile servis edilir.",
+                "tr": "Sucuk, sosis, peynir. Taze doğranmış sebze tabağı ve zeytin ile servis edilir.",
                 "en": "Sucuk, sausage, cheese. Served with a freshly chopped vegetable platter and olives."
               },
               "price": "450",
@@ -297,7 +297,7 @@ window.MENU_DATA = {
                 "en": "Eggs with Potato & Onion"
               },
               "desc": {
-                "tr": "Yumurta, tereyağı,patates, soğan.",
+                "tr": "Yumurta, tereyağı, patates, soğan.",
                 "en": "Egg, butter, potato, onion."
               },
               "price": "350",
@@ -457,7 +457,7 @@ window.MENU_DATA = {
                 "en": "Pişi"
               },
               "desc": {
-                "tr": "Un,yağ,süt,maya,yumurta,su.",
+                "tr": "Un, yağ, süt, maya, yumurta, su.",
                 "en": "Flour, oil, milk, yeast, egg, water."
               },
               "price": "125",
@@ -505,7 +505,7 @@ window.MENU_DATA = {
                 "en": "Cheese Rolls"
               },
               "desc": {
-                "tr": "Yufka, peynir, maydanoz,yumurta,sıvı yağ.",
+                "tr": "Yufka, peynir, maydanoz, yumurta, sıvı yağ.",
                 "en": "Filo pastry, cheese, parsley, egg, vegetable oil."
               },
               "price": "250",
@@ -537,7 +537,7 @@ window.MENU_DATA = {
                 "en": "Croissant"
               },
               "desc": {
-                "tr": "Un, tereyağı,maya,yumurta.",
+                "tr": "Un, tereyağı, maya, yumurta.",
                 "en": "Flour, butter, yeast, egg."
               },
               "price": "250",
@@ -554,7 +554,7 @@ window.MENU_DATA = {
                 "latin": true
               },
               "desc": {
-                "tr": "Fındık,kakao,süt,soya",
+                "tr": "Fındık, kakao, süt, soya",
                 "en": "Hazelnut, cocoa, milk, soy."
               },
               "price": "250",
@@ -617,7 +617,7 @@ window.MENU_DATA = {
                 "en": "Crispy Chicken Burger"
               },
               "desc": {
-                "tr": "Pane Tavuk,Coleslaw salata, cheddar, tereyağı. Patates kızartması ve mayonez dip sos ile servis edilir.",
+                "tr": "Pane Tavuk, Coleslaw salata, cheddar, tereyağı. Patates kızartması ve mayonez dip sos ile servis edilir.",
                 "en": "Breaded chicken, coleslaw, cheddar, butter. Served with french fries and mayonnaise dipping sauce."
               },
               "price": "500",
@@ -1132,7 +1132,7 @@ window.MENU_DATA = {
                 "en": "Chicken Noodle"
               },
               "desc": {
-                "tr": "Tavuk,havuç,kabak,lahana,kapya biberler,zencefil,soya sos,susam,yağ,noodle,pırasa.",
+                "tr": "Tavuk, havuç, kabak, lahana, kapya biberler, zencefil, soya sos, susam, yağ, noodle, pırasa.",
                 "en": "Chicken, carrot, zucchini, cabbage, kapia peppers, ginger, soy sauce, sesame, oil, noodles, leek."
               },
               "price": "600",
@@ -1148,7 +1148,7 @@ window.MENU_DATA = {
                 "en": "Beef Noodle"
               },
               "desc": {
-                "tr": "Dana eti,havuç,kabak,lahana,kapya biberler,zencefil,soya sos,susam,yağ,noodle,pırasa.",
+                "tr": "Dana eti, havuç, kabak, lahana, kapya biberler, zencefil, soya sos, susam, yağ, noodle, pırasa.",
                 "en": "Beef, carrot, zucchini, cabbage, kapia peppers, ginger, soy sauce, sesame, oil, noodles, leek."
               },
               "price": "675",
@@ -1486,7 +1486,7 @@ window.MENU_DATA = {
                 "en": "Chicken Basket"
               },
               "desc": {
-                "tr": "Tavuk, süt,yumurta,panko unu, yağ, patates cipsi.",
+                "tr": "Tavuk, süt, yumurta, panko unu, yağ, patates cipsi.",
                 "en": "Chicken, milk, egg, panko flour, oil, potato chips."
               },
               "price": "550",
@@ -1647,7 +1647,7 @@ window.MENU_DATA = {
                 "latin": true
               },
               "desc": {
-                "tr": "Süt,şeker,krema",
+                "tr": "Süt, şeker, krema",
                 "en": "Milk, sugar, cream."
               },
               "price": "400",
@@ -1664,7 +1664,7 @@ window.MENU_DATA = {
                 "latin": true
               },
               "desc": {
-                "tr": "Tereyağı, yumurta,şeker,çikolata,un,kakao,kabartma tozu.",
+                "tr": "Tereyağı, yumurta, şeker, çikolata, un, kakao, kabartma tozu.",
                 "en": "Butter, egg, sugar, chocolate, flour, cocoa, baking powder."
               },
               "price": "400",
@@ -1681,7 +1681,7 @@ window.MENU_DATA = {
                 "latin": true
               },
               "desc": {
-                "tr": "Labne,şanti,yumurta,toz jelatin,kahve,kedi dili,kakao,şeker.",
+                "tr": "Labne, şanti, yumurta, toz jelatin, kahve, kedi dili, kakao, şeker.",
                 "en": "Labneh, whipped cream, egg, powdered gelatin, coffee, ladyfingers, cocoa, sugar."
               },
               "price": "400",
@@ -1697,7 +1697,7 @@ window.MENU_DATA = {
                 "en": "Profiterole"
               },
               "desc": {
-                "tr": "Yumurta, un,şeker,süt,çikolata, kakao,bitkisel yağ.",
+                "tr": "Yumurta, un, şeker, süt, çikolata, kakao, bitkisel yağ.",
                 "en": "Egg, flour, sugar, milk, chocolate, cocoa, vegetable oil."
               },
               "price": "400",
@@ -1919,7 +1919,7 @@ window.MENU_DATA = {
                 "en": "Buffalo Wings"
               },
               "desc": {
-                "tr": "Blue cheese sos ve sweet chili sos.Acılı",
+                "tr": "Blue cheese sos ve sweet chili sos. Acılı",
                 "en": "Blue cheese sauce and sweet chili sauce. Spicy."
               },
               "price": "400",
@@ -1935,7 +1935,7 @@ window.MENU_DATA = {
                 "en": "Turkish Meze Platter"
               },
               "desc": {
-                "tr": "Acuka, Pazı kavurma, girit ezme, rus salatası, fava, havuç tarator,pancar.",
+                "tr": "Acuka, Pazı kavurma, girit ezme, rus salatası, fava, havuç tarator, pancar.",
                 "en": "Acuka, sautéed chard, Cretan herb dip, Russian salad, fava, carrot tarator, beetroot."
               },
               "price": "525",
@@ -2191,7 +2191,7 @@ window.MENU_DATA = {
                 "en": "Sweet and Sour Chicken"
               },
               "desc": {
-                "tr": "Pilav, ananas, kapya biber, lahana, soğan,tatlı ekşi sos.",
+                "tr": "Pilav, ananas, kapya biber, lahana, soğan, tatlı ekşi sos.",
                 "en": "Rice pilaf, pineapple, kapia pepper, cabbage, onion, sweet and sour sauce."
               },
               "price": "750",
@@ -2239,7 +2239,7 @@ window.MENU_DATA = {
                 "en": "Honey Curried Chicken"
               },
               "desc": {
-                "tr": "Pilav, patates kızartması,ballı köri sos.",
+                "tr": "Pilav, patates kızartması, ballı köri sos.",
                 "en": "Rice pilaf, french fries, honey curry sauce."
               },
               "price": "750",
@@ -2864,7 +2864,7 @@ window.MENU_DATA = {
                 "latin": true
               },
               "desc": {
-                "tr": "Tereyağı, yumurta,şeker,çikolata,un,kakao,kabartma tozu.",
+                "tr": "Tereyağı, yumurta, şeker, çikolata, un, kakao, kabartma tozu.",
                 "en": "Butter, egg, sugar, chocolate, flour, cocoa, baking powder."
               },
               "price": "400",
@@ -2881,7 +2881,7 @@ window.MENU_DATA = {
                 "latin": true
               },
               "desc": {
-                "tr": "Labne,şanti,yumurta,toz jelatin,kahve,kedi dili,kakao,şeker.",
+                "tr": "Labne, şanti, yumurta, toz jelatin, kahve, kedi dili, kakao, şeker.",
                 "en": "Labneh, whipped cream, egg, powdered gelatin, coffee, ladyfingers, cocoa, sugar."
               },
               "price": "400",
@@ -2897,7 +2897,7 @@ window.MENU_DATA = {
                 "en": "Profiterole"
               },
               "desc": {
-                "tr": "Yumurta, un,şeker,süt,çikolata, kakao,bitkisel yağ.",
+                "tr": "Yumurta, un, şeker, süt, çikolata, kakao, bitkisel yağ.",
                 "en": "Egg, flour, sugar, milk, chocolate, cocoa, vegetable oil."
               },
               "price": "400",
@@ -2963,7 +2963,7 @@ window.MENU_DATA = {
                 "latin": true
               },
               "desc": {
-                "tr": "Süt,şeker,krema",
+                "tr": "Süt, şeker, krema",
                 "en": "Milk, sugar, cream."
               },
               "price": "400",
@@ -3034,7 +3034,7 @@ window.MENU_DATA = {
                 "latin": true
               },
               "desc": {
-                "tr": "Süt,şeker,krema",
+                "tr": "Süt, şeker, krema",
                 "en": "Milk, sugar, cream."
               },
               "price": "400",
@@ -3051,7 +3051,7 @@ window.MENU_DATA = {
                 "latin": true
               },
               "desc": {
-                "tr": "Tereyağı, yumurta,şeker,çikolata,un,kakao,kabartma tozu.",
+                "tr": "Tereyağı, yumurta, şeker, çikolata, un, kakao, kabartma tozu.",
                 "en": "Butter, egg, sugar, chocolate, flour, cocoa, baking powder."
               },
               "price": "400",
@@ -3068,7 +3068,7 @@ window.MENU_DATA = {
                 "latin": true
               },
               "desc": {
-                "tr": "Labne,şanti,yumurta,toz jelatin,kahve,kedi dili,kakao,şeker.",
+                "tr": "Labne, şanti, yumurta, toz jelatin, kahve, kedi dili, kakao, şeker.",
                 "en": "Labneh, whipped cream, egg, powdered gelatin, coffee, ladyfingers, cocoa, sugar."
               },
               "price": "400",
@@ -3084,7 +3084,7 @@ window.MENU_DATA = {
                 "en": "Profiterole"
               },
               "desc": {
-                "tr": "Yumurta, un,şeker,süt,çikolata, kakao,bitkisel yağ.",
+                "tr": "Yumurta, un, şeker, süt, çikolata, kakao, bitkisel yağ.",
                 "en": "Egg, flour, sugar, milk, chocolate, cocoa, vegetable oil."
               },
               "price": "400",
@@ -3156,7 +3156,7 @@ window.MENU_DATA = {
                 "en": "Buffalo Wings"
               },
               "desc": {
-                "tr": "Blue cheese sos ve sweet chili sos.Acılı",
+                "tr": "Blue cheese sos ve sweet chili sos. Acılı",
                 "en": "Blue cheese sauce and sweet chili sauce. Spicy."
               },
               "price": "400",
@@ -3310,7 +3310,7 @@ window.MENU_DATA = {
                 "en": "Honey Curried Chicken"
               },
               "desc": {
-                "tr": "Pilav, patates kızartması,ballı köri sos.",
+                "tr": "Pilav, patates kızartması, ballı köri sos.",
                 "en": "Rice pilaf, french fries, honey curry sauce."
               },
               "price": "750",
@@ -7952,8 +7952,8 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Chateau Haut Reys-Cabarnet Sauvignon,merlot",
-                "en": "Chateau Haut Reys-Cabarnet Sauvignon,merlot"
+                "tr": "Chateau Haut Reys-Cabarnet Sauvignon, merlot",
+                "en": "Chateau Haut Reys-Cabarnet Sauvignon, merlot"
               },
               "desc": {
                 "tr": "France · 2020",
@@ -8662,7 +8662,7 @@ window.MENU_DATA = {
                 "latin": true
               },
               "desc": {
-                "tr": "Lime,soda,sprite,nane",
+                "tr": "Lime, soda, sprite, nane",
                 "en": "Lime, Soda, Sprite, Mint"
               },
               "price": "295"
