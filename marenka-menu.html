@@ -4209,6 +4209,7 @@ window.MENU_DATA = {
                 "tr": "Mevsim yeşillikleri, domates, salatalık, havuç, lahana, pancar, zeytinyağı ve limon sos",
                 "en": "Mixed greens, tomato, cucumber, carrot, cabbage, beetroot, olive oil and lemon dressing."
               },
+              "price": "***",
               "kcal": "450",
               "allergens": {
                 "tr": "Belirgin alerjen yok",
@@ -4411,6 +4412,7 @@ window.MENU_DATA = {
                 "tr": "Sote sebzeler, patates püresi",
                 "en": "Sautéed vegetables, mashed potatoes."
               },
+              "price": "***",
               "kcal": "850",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri",
@@ -10094,9 +10096,13 @@ window.MENU_DATA = {
   function priceNode(value) {
     var p = el("span", "item__price");
     p.appendChild(document.createTextNode(String(value)));
-    var cur = el("span", "cur");
-    cur.textContent = CUR;
-    p.appendChild(cur);
+    // only append the currency to a real numeric price — placeholders like
+    // "***" show on their own
+    if (/\d/.test(String(value))) {
+      var cur = el("span", "cur");
+      cur.textContent = CUR;
+      p.appendChild(cur);
+    }
     return p;
   }
 

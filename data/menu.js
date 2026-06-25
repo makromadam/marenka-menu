@@ -3191,6 +3191,7 @@ window.MENU_DATA = {
                 "tr": "Mevsim yeşillikleri, domates, salatalık, havuç, lahana, pancar, zeytinyağı ve limon sos",
                 "en": "Mixed greens, tomato, cucumber, carrot, cabbage, beetroot, olive oil and lemon dressing."
               },
+              "price": "***",
               "kcal": "450",
               "allergens": {
                 "tr": "Belirgin alerjen yok",
@@ -3393,6 +3394,7 @@ window.MENU_DATA = {
                 "tr": "Sote sebzeler, patates püresi",
                 "en": "Sautéed vegetables, mashed potatoes."
               },
+              "price": "***",
               "kcal": "850",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri",

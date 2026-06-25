@@ -66,9 +66,13 @@
   function priceNode(value) {
     var p = el("span", "item__price");
     p.appendChild(document.createTextNode(String(value)));
-    var cur = el("span", "cur");
-    cur.textContent = CUR;
-    p.appendChild(cur);
+    // only append the currency to a real numeric price — placeholders like
+    // "***" show on their own
+    if (/\d/.test(String(value))) {
+      var cur = el("span", "cur");
+      cur.textContent = CUR;
+      p.appendChild(cur);
+    }
     return p;
   }
 
