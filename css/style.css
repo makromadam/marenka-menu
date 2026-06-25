@@ -46,12 +46,12 @@
   /* All copy is pure white; the two softer steps are still white, only
      lighter, so the type keeps a readable hierarchy. */
   --cream:       #ffffff;             /* primary text: titles, names, prices */
-  --cream-soft:  rgba(255, 255, 255, 0.86); /* ingredient text             */
+  --cream-soft:  rgba(255, 255, 255, 0.92); /* ingredient text (AA on bg)  */
   /* No gold/yellow anywhere — every fine rule, dot, divider and accent is
      white (kept subtle through low opacities at each use site). */
   --gold:        #ffffff;            /* fine white rules, dots, accents     */
   --gold-deep:   rgba(255, 255, 255, 0.72); /* hover / emphasis            */
-  --allergen:    rgba(255, 255, 255, 0.80); /* allergen line               */
+  --allergen:    rgba(255, 255, 255, 0.90); /* allergen line (AA on bg)    */
   --divider:     rgba(255, 255, 255, 0.16);
   --divider-soft:rgba(255, 255, 255, 0.10);
   --overlay:     rgba(0, 0, 0, 0.10);
@@ -321,7 +321,7 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 }
 .lang-toggle__btn {
   min-width: 44px;
-  min-height: 34px;
+  min-height: 44px;
   padding: 0 0.85em;
   font-size: var(--fs-ui);
   font-weight: 500;
@@ -377,6 +377,9 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
   text-transform: uppercase;
   color: var(--cream-soft);
   white-space: nowrap;
+  min-height: 44px;            /* mobile tap target */
+  display: inline-flex;
+  align-items: center;
   border: 1px solid transparent;
   border-radius: 999px;
   transition: color var(--dur-fast) var(--ease),
@@ -416,8 +419,11 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--cream-soft);
-  opacity: 0.78;
+  opacity: 0.9;
   white-space: nowrap;
+  min-height: 44px;            /* mobile tap target */
+  display: inline-flex;
+  align-items: center;
   border-radius: 999px;
   position: relative;
   transition: color var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease);
@@ -525,7 +531,6 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
   font-size: var(--fs-allergen);
   font-style: italic;
   color: var(--cream-soft);
-  opacity: 0.85;
 }
 
 /* Category label (Omelettes, Negroni…) */
@@ -551,7 +556,6 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
   font-size: var(--fs-allergen);
   font-style: italic;
   color: var(--cream-soft);
-  opacity: 0.8;
 }
 
 /* 9 · PRODUCT CARD ---------------------------------------------------------- */
@@ -691,10 +695,9 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
   font-size: var(--fs-allergen);
   letter-spacing: 0.04em;
   color: var(--cream-soft);
-  opacity: 0.85;
   font-variant-numeric: tabular-nums;
 }
-.item__kcal .item__kcal-unit { text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.8; }
+.item__kcal .item__kcal-unit { text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.9; }
 
 /* Page-to-page pager (← previous · next →) */
 .pager {
@@ -776,6 +779,12 @@ body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
   outline: 2px solid var(--cream);
   outline-offset: 3px;
   border-radius: 6px;
+}
+/* Engines without :focus-visible (e.g. Safari/iOS < 15.4) never match the rule
+   above, so :focus{outline:none} would leave keyboard/AT users with no focus
+   ring. Restore a real ring there. Modern engines keep the quiet pointer focus. */
+@supports not selector(:focus-visible) {
+  :focus { outline: 2px solid var(--cream); outline-offset: 3px; border-radius: 6px; }
 }
 .skip-link {
   position: absolute;

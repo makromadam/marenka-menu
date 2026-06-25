@@ -827,7 +827,8 @@ window.MENU_DATA = {
         {
           "label": {
             "tr": "Pizzalar",
-            "en": "Pizzas"
+            "en": "Pizzas",
+            "latin": true
           },
           "items": [
             {
@@ -2640,7 +2641,8 @@ window.MENU_DATA = {
         {
           "label": {
             "tr": "Pizzalar",
-            "en": "Pizzas"
+            "en": "Pizzas",
+            "latin": true
           },
           "items": [
             {
@@ -4196,8 +4198,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Efes Pilsen Özel Seri",
-                "en": "Efes Pilsen Özel Seri",
-                "latin": true
+                "en": "Efes Pilsen Özel Seri"
               },
               "price": "295",
               "vol": "50 cl",
@@ -4217,8 +4218,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Bomonti Filtresiz",
-                "en": "Bomonti Filtresiz",
-                "latin": true
+                "en": "Bomonti Filtresiz"
               },
               "price": "325",
               "vol": "50 cl",
@@ -8556,9 +8556,8 @@ window.MENU_DATA = {
           "items": [
             {
               "name": {
-                "tr": "Mor Salkim",
-                "en": "Mor Salkim",
-                "latin": true
+                "tr": "Mor Salkım",
+                "en": "Mor Salkım"
               },
               "desc": {
                 "tr": "Karadut, Bal, Limon",
@@ -8992,7 +8991,7 @@ window.MENU_DATA = {
               },
               "desc": {
                 "tr": "Vanilya, Çikolata, Mandalina, Çilek, Portakal",
-                "en": "Vanilya, Çikolata, Mandalina, Çilek, Portakal"
+                "en": "Vanilla, Chocolate, Mandarin, Strawberry, Orange"
               },
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri",

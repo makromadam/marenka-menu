@@ -60,12 +60,12 @@
   /* All copy is pure white; the two softer steps are still white, only
      lighter, so the type keeps a readable hierarchy. */
   --cream:       #ffffff;             /* primary text: titles, names, prices */
-  --cream-soft:  rgba(255, 255, 255, 0.86); /* ingredient text             */
+  --cream-soft:  rgba(255, 255, 255, 0.92); /* ingredient text (AA on bg)  */
   /* No gold/yellow anywhere — every fine rule, dot, divider and accent is
      white (kept subtle through low opacities at each use site). */
   --gold:        #ffffff;            /* fine white rules, dots, accents     */
   --gold-deep:   rgba(255, 255, 255, 0.72); /* hover / emphasis            */
-  --allergen:    rgba(255, 255, 255, 0.80); /* allergen line               */
+  --allergen:    rgba(255, 255, 255, 0.90); /* allergen line (AA on bg)    */
   --divider:     rgba(255, 255, 255, 0.16);
   --divider-soft:rgba(255, 255, 255, 0.10);
   --overlay:     rgba(0, 0, 0, 0.10);
@@ -335,7 +335,7 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 }
 .lang-toggle__btn {
   min-width: 44px;
-  min-height: 34px;
+  min-height: 44px;
   padding: 0 0.85em;
   font-size: var(--fs-ui);
   font-weight: 500;
@@ -391,6 +391,9 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
   text-transform: uppercase;
   color: var(--cream-soft);
   white-space: nowrap;
+  min-height: 44px;            /* mobile tap target */
+  display: inline-flex;
+  align-items: center;
   border: 1px solid transparent;
   border-radius: 999px;
   transition: color var(--dur-fast) var(--ease),
@@ -430,8 +433,11 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--cream-soft);
-  opacity: 0.78;
+  opacity: 0.9;
   white-space: nowrap;
+  min-height: 44px;            /* mobile tap target */
+  display: inline-flex;
+  align-items: center;
   border-radius: 999px;
   position: relative;
   transition: color var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease);
@@ -539,7 +545,6 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
   font-size: var(--fs-allergen);
   font-style: italic;
   color: var(--cream-soft);
-  opacity: 0.85;
 }
 
 /* Category label (Omelettes, Negroni…) */
@@ -565,7 +570,6 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
   font-size: var(--fs-allergen);
   font-style: italic;
   color: var(--cream-soft);
-  opacity: 0.8;
 }
 
 /* 9 · PRODUCT CARD ---------------------------------------------------------- */
@@ -705,10 +709,9 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
   font-size: var(--fs-allergen);
   letter-spacing: 0.04em;
   color: var(--cream-soft);
-  opacity: 0.85;
   font-variant-numeric: tabular-nums;
 }
-.item__kcal .item__kcal-unit { text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.8; }
+.item__kcal .item__kcal-unit { text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.9; }
 
 /* Page-to-page pager (← previous · next →) */
 .pager {
@@ -790,6 +793,12 @@ body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
   outline: 2px solid var(--cream);
   outline-offset: 3px;
   border-radius: 6px;
+}
+/* Engines without :focus-visible (e.g. Safari/iOS < 15.4) never match the rule
+   above, so :focus{outline:none} would leave keyboard/AT users with no focus
+   ring. Restore a real ring there. Modern engines keep the quiet pointer focus. */
+@supports not selector(:focus-visible) {
+  :focus { outline: 2px solid var(--cream); outline-offset: 3px; border-radius: 6px; }
 }
 .skip-link {
   position: absolute;
@@ -1836,7 +1845,8 @@ window.MENU_DATA = {
         {
           "label": {
             "tr": "Pizzalar",
-            "en": "Pizzas"
+            "en": "Pizzas",
+            "latin": true
           },
           "items": [
             {
@@ -3649,7 +3659,8 @@ window.MENU_DATA = {
         {
           "label": {
             "tr": "Pizzalar",
-            "en": "Pizzas"
+            "en": "Pizzas",
+            "latin": true
           },
           "items": [
             {
@@ -5205,8 +5216,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Efes Pilsen Özel Seri",
-                "en": "Efes Pilsen Özel Seri",
-                "latin": true
+                "en": "Efes Pilsen Özel Seri"
               },
               "price": "295",
               "vol": "50 cl",
@@ -5226,8 +5236,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Bomonti Filtresiz",
-                "en": "Bomonti Filtresiz",
-                "latin": true
+                "en": "Bomonti Filtresiz"
               },
               "price": "325",
               "vol": "50 cl",
@@ -9565,9 +9574,8 @@ window.MENU_DATA = {
           "items": [
             {
               "name": {
-                "tr": "Mor Salkim",
-                "en": "Mor Salkim",
-                "latin": true
+                "tr": "Mor Salkım",
+                "en": "Mor Salkım"
               },
               "desc": {
                 "tr": "Karadut, Bal, Limon",
@@ -10001,7 +10009,7 @@ window.MENU_DATA = {
               },
               "desc": {
                 "tr": "Vanilya, Çikolata, Mandalina, Çilek, Portakal",
-                "en": "Vanilya, Çikolata, Mandalina, Çilek, Portakal"
+                "en": "Vanilla, Chocolate, Mandarin, Strawberry, Orange"
               },
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri",
@@ -10095,7 +10103,7 @@ window.MENU_DATA = {
   /* International food terms kept in English casing (plain "I") even inside a
      Turkish dish name, so "Pizza" never renders dotted as "PİZZA" in one place
      and "PIZZA" in another. */
-  var LATIN_WORD_RE = /\b(Pizza|Spaghetti|Fettuccine|Profiterol|Tiramisu|Margherita|Arrabbiata|Linguine|Risotto|Ravioli|Panini|Bruschetta|Calzone|Penne|Twist|Mojito|Mocktail|Milkshake|Mexican|Riesling|Chardonnay|Sauvignon|Viognier|Grigio|Sangiovese|Tempranillo|Nebbiolo|Chianti|Pinot|Merlot|Cabernet|Shiraz|Syrah|Rkatsiteli|Selection|Frizzante|Imperial|Impérial|Perignon|Pérignon|Chablis|Cinzano|Vietti|Vindemia|Jaffelin|Whispering|Atelier|Alazani|Riscal|Khilon|Bias|Rioja|Vina|Vita|Colli|Bruni|Louis|Noir|Ice|Ruffino)\b/gi;
+  var LATIN_WORD_RE = /\b(Pizza|Spaghetti|Fettuccine|Profiterol|Tiramisu|Margherita|Arrabbiata|Linguine|Risotto|Ravioli|Panini|Bruschetta|Calzone|Penne|Twist|Mojito|Mocktail|Milkshake|Mexican|Riesling|Chardonnay|Sauvignon|Viognier|Grigio|Sangiovese|Tempranillo|Nebbiolo|Chianti|Pinot|Merlot|Cabernet|Shiraz|Syrah|Rkatsiteli|Selection|Frizzante|Imperial|Impérial|Perignon|Pérignon|Chablis|Cinzano|Vietti|Vindemia|Jaffelin|Whispering|Atelier|Alazani|Riscal|Khilon|Bias|Rioja|Vina|Vita|Colli|Bruni|Louis|Noir|Ice|Ruffino|Carpaccio|Schnitzel|Chimichurri|Cider|Americano|White|Pilsen)\b/gi;
 
   // Name node: EN span (always English casing) + TR span (Turkish casing, but
   // international words wrapped lang="en"; whole span English when value.latin).
@@ -10136,13 +10144,18 @@ window.MENU_DATA = {
     head.appendChild(name);
 
     if (!multi) {
-      head.appendChild(el("span", "item__leader", { "aria-hidden": "true" }));
+      var hasPrice = item.price != null && item.price !== "";
+      // only draw the dotted leader when there is something (price/volume) to
+      // lead to — otherwise a priceless item shows orphan dots
+      if (hasPrice || item.vol) {
+        head.appendChild(el("span", "item__leader", { "aria-hidden": "true" }));
+      }
       if (item.vol) {
         var vol = el("span", "item__vol");
         vol.textContent = item.vol;
         head.appendChild(vol);
       }
-      if (item.price != null && item.price !== "") {
+      if (hasPrice) {
         head.appendChild(priceNode(item.price));
       }
     }
@@ -10290,7 +10303,8 @@ window.MENU_DATA = {
     track.setAttribute("role", "tablist");
     sections.forEach(function (s) {
       var a = el("a", "subnav__link",
-        { href: "#sec-" + s.id, "data-target": "sec-" + s.id, role: "tab" });
+        { href: "#sec-" + s.id, "data-target": "sec-" + s.id, role: "tab",
+          id: "tab-" + s.id, "aria-controls": "sec-" + s.id });
       a.appendChild(bilingual("span", null, s.navLabel || s.label));
       track.appendChild(a);
     });
@@ -10449,6 +10463,7 @@ window.MENU_DATA = {
         var on = key === secId;
         tabs[key].setAttribute("aria-current", String(on));
         tabs[key].setAttribute("aria-selected", String(on));
+        tabs[key].setAttribute("tabindex", on ? "0" : "-1"); // roving tabindex
       }
       tabInView(tabs[secId]);
       if (sectionById[secId]) buildPageNav(sectionById[secId]);
@@ -10462,6 +10477,23 @@ window.MENU_DATA = {
         showSection(l.getAttribute("data-target"));
       });
     });
+    // WAI-ARIA Tabs keyboard contract: arrow keys / Home / End move between tabs
+    var subTrack = document.getElementById("subnav-track");
+    if (subTrack) {
+      subTrack.addEventListener("keydown", function (e) {
+        var k = e.key;
+        if (k !== "ArrowRight" && k !== "ArrowLeft" && k !== "Home" && k !== "End") return;
+        e.preventDefault();
+        var i = indexOf(currentSection), ni = i;
+        if (k === "ArrowRight") ni = (i + 1) % sections.length;
+        else if (k === "ArrowLeft") ni = (i - 1 + sections.length) % sections.length;
+        else if (k === "Home") ni = 0;
+        else if (k === "End") ni = sections.length - 1;
+        var target = "sec-" + sections[ni].id;
+        showSection(target);
+        if (tabs[target]) tabs[target].focus();
+      });
+    }
     // pager + in-page quick-jump (event-delegated)
     var mainEl = document.getElementById("menu-main");
     if (mainEl) {

@@ -75,7 +75,7 @@
   /* International food terms kept in English casing (plain "I") even inside a
      Turkish dish name, so "Pizza" never renders dotted as "PİZZA" in one place
      and "PIZZA" in another. */
-  var LATIN_WORD_RE = /\b(Pizza|Spaghetti|Fettuccine|Profiterol|Tiramisu|Margherita|Arrabbiata|Linguine|Risotto|Ravioli|Panini|Bruschetta|Calzone|Penne|Twist|Mojito|Mocktail|Milkshake|Mexican|Riesling|Chardonnay|Sauvignon|Viognier|Grigio|Sangiovese|Tempranillo|Nebbiolo|Chianti|Pinot|Merlot|Cabernet|Shiraz|Syrah|Rkatsiteli|Selection|Frizzante|Imperial|Impérial|Perignon|Pérignon|Chablis|Cinzano|Vietti|Vindemia|Jaffelin|Whispering|Atelier|Alazani|Riscal|Khilon|Bias|Rioja|Vina|Vita|Colli|Bruni|Louis|Noir|Ice|Ruffino)\b/gi;
+  var LATIN_WORD_RE = /\b(Pizza|Spaghetti|Fettuccine|Profiterol|Tiramisu|Margherita|Arrabbiata|Linguine|Risotto|Ravioli|Panini|Bruschetta|Calzone|Penne|Twist|Mojito|Mocktail|Milkshake|Mexican|Riesling|Chardonnay|Sauvignon|Viognier|Grigio|Sangiovese|Tempranillo|Nebbiolo|Chianti|Pinot|Merlot|Cabernet|Shiraz|Syrah|Rkatsiteli|Selection|Frizzante|Imperial|Impérial|Perignon|Pérignon|Chablis|Cinzano|Vietti|Vindemia|Jaffelin|Whispering|Atelier|Alazani|Riscal|Khilon|Bias|Rioja|Vina|Vita|Colli|Bruni|Louis|Noir|Ice|Ruffino|Carpaccio|Schnitzel|Chimichurri|Cider|Americano|White|Pilsen)\b/gi;
 
   // Name node: EN span (always English casing) + TR span (Turkish casing, but
   // international words wrapped lang="en"; whole span English when value.latin).
@@ -116,13 +116,18 @@
     head.appendChild(name);
 
     if (!multi) {
-      head.appendChild(el("span", "item__leader", { "aria-hidden": "true" }));
+      var hasPrice = item.price != null && item.price !== "";
+      // only draw the dotted leader when there is something (price/volume) to
+      // lead to — otherwise a priceless item shows orphan dots
+      if (hasPrice || item.vol) {
+        head.appendChild(el("span", "item__leader", { "aria-hidden": "true" }));
+      }
       if (item.vol) {
         var vol = el("span", "item__vol");
         vol.textContent = item.vol;
         head.appendChild(vol);
       }
-      if (item.price != null && item.price !== "") {
+      if (hasPrice) {
         head.appendChild(priceNode(item.price));
       }
     }
@@ -270,7 +275,8 @@
     track.setAttribute("role", "tablist");
     sections.forEach(function (s) {
       var a = el("a", "subnav__link",
-        { href: "#sec-" + s.id, "data-target": "sec-" + s.id, role: "tab" });
+        { href: "#sec-" + s.id, "data-target": "sec-" + s.id, role: "tab",
+          id: "tab-" + s.id, "aria-controls": "sec-" + s.id });
       a.appendChild(bilingual("span", null, s.navLabel || s.label));
       track.appendChild(a);
     });
@@ -429,6 +435,7 @@
         var on = key === secId;
         tabs[key].setAttribute("aria-current", String(on));
         tabs[key].setAttribute("aria-selected", String(on));
+        tabs[key].setAttribute("tabindex", on ? "0" : "-1"); // roving tabindex
       }
       tabInView(tabs[secId]);
       if (sectionById[secId]) buildPageNav(sectionById[secId]);
@@ -442,6 +449,23 @@
         showSection(l.getAttribute("data-target"));
       });
     });
+    // WAI-ARIA Tabs keyboard contract: arrow keys / Home / End move between tabs
+    var subTrack = document.getElementById("subnav-track");
+    if (subTrack) {
+      subTrack.addEventListener("keydown", function (e) {
+        var k = e.key;
+        if (k !== "ArrowRight" && k !== "ArrowLeft" && k !== "Home" && k !== "End") return;
+        e.preventDefault();
+        var i = indexOf(currentSection), ni = i;
+        if (k === "ArrowRight") ni = (i + 1) % sections.length;
+        else if (k === "ArrowLeft") ni = (i - 1 + sections.length) % sections.length;
+        else if (k === "Home") ni = 0;
+        else if (k === "End") ni = sections.length - 1;
+        var target = "sec-" + sections[ni].id;
+        showSection(target);
+        if (tabs[target]) tabs[target].focus();
+      });
+    }
     // pager + in-page quick-jump (event-delegated)
     var mainEl = document.getElementById("menu-main");
     if (mainEl) {
