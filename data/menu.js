@@ -37,6 +37,7 @@ window.MENU_DATA = {
                 "en": "Fried eggs, freshly chopped vegetables and greens, green olives, black olives, honey, clotted cream, butter, white cheese, cheese rolls."
               },
               "price": "750",
+              "kcal": "1100",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
                 "en": "Gluten, Egg, Milk and Dairy Products"
@@ -52,6 +53,7 @@ window.MENU_DATA = {
                 "en": "Poached egg, whole wheat bread, avocado, curd cheese salad, acuka, halloumi, green olives, black olives, cherry jam, honey, butter."
               },
               "price": "800",
+              "kcal": "950",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Kabuklu Kuruyemişler, Acı",
                 "en": "Gluten, Egg, Milk and Dairy Products, Tree Nuts, Spicy"
@@ -67,6 +69,7 @@ window.MENU_DATA = {
                 "en": "Beef sausage, scrambled eggs, grilled sucuk, grilled halloumi, sautéed mushrooms, cherry jam, clotted cream, pişi."
               },
               "price": "950",
+              "kcal": "1300",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Soya",
                 "en": "Gluten, Egg, Milk and Dairy Products, Soy"
@@ -82,6 +85,7 @@ window.MENU_DATA = {
                 "en": "Beef sausage, smoked beef, fried eggs, hash browns, sautéed mushrooms, mozzarella sticks."
               },
               "price": "975",
+              "kcal": "1450",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri, Soya, Gluten",
                 "en": "Egg, Milk and Dairy Products, Soy, Gluten"
@@ -105,6 +109,7 @@ window.MENU_DATA = {
                 "en": "Served with a freshly chopped vegetable platter and olives."
               },
               "price": "350",
+              "kcal": "500",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri",
                 "en": "Egg, Milk and Dairy Products"
@@ -120,6 +125,7 @@ window.MENU_DATA = {
                 "en": "Egg white omelette. Served with a freshly chopped vegetable platter and olives."
               },
               "price": "375",
+              "kcal": "350",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri",
                 "en": "Egg, Milk and Dairy Products"
@@ -135,6 +141,7 @@ window.MENU_DATA = {
                 "en": "Omelette with potato and onion. Served with a freshly chopped vegetable platter and olives."
               },
               "price": "375",
+              "kcal": "650",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri",
                 "en": "Egg, Milk and Dairy Products"
@@ -150,6 +157,7 @@ window.MENU_DATA = {
                 "en": "Served with a freshly chopped vegetable platter and olives."
               },
               "price": "390",
+              "kcal": "650",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri",
                 "en": "Egg, Milk and Dairy Products"
@@ -165,6 +173,7 @@ window.MENU_DATA = {
                 "en": "Sucuk, sausage, cheese. Served with a freshly chopped vegetable platter and olives."
               },
               "price": "450",
+              "kcal": "800",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri, Soya",
                 "en": "Egg, Milk and Dairy Products, Soy"
@@ -188,6 +197,7 @@ window.MENU_DATA = {
                 "en": "Egg, butter, pepper, tomato."
               },
               "price": "375",
+              "kcal": "550",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri",
                 "en": "Egg, Milk and Dairy Products"
@@ -203,6 +213,7 @@ window.MENU_DATA = {
                 "en": "Egg, butter, pepper, tomato, kashar cheese."
               },
               "price": "400",
+              "kcal": "750",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri",
                 "en": "Egg, Milk and Dairy Products"
@@ -218,6 +229,7 @@ window.MENU_DATA = {
                 "en": "Egg, butter, pepper, tomato, sucuk."
               },
               "price": "450",
+              "kcal": "800",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri",
                 "en": "Egg, Milk and Dairy Products"
@@ -241,6 +253,7 @@ window.MENU_DATA = {
                 "en": "Egg, butter."
               },
               "price": "250",
+              "kcal": "450",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri",
                 "en": "Egg, Milk and Dairy Products"
@@ -256,6 +269,7 @@ window.MENU_DATA = {
                 "en": "Boiled egg."
               },
               "price": "250",
+              "kcal": "200",
               "allergens": {
                 "tr": "Yumurta",
                 "en": "Egg"
@@ -271,6 +285,7 @@ window.MENU_DATA = {
                 "en": "Egg, butter, milk."
               },
               "price": "275",
+              "kcal": "500",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri",
                 "en": "Egg, Milk and Dairy Products"
@@ -286,6 +301,7 @@ window.MENU_DATA = {
                 "en": "Egg, butter, potato, onion."
               },
               "price": "350",
+              "kcal": "750",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri",
                 "en": "Egg, Milk and Dairy Products"
@@ -301,6 +317,7 @@ window.MENU_DATA = {
                 "en": "Egg, butter, sucuk."
               },
               "price": "400",
+              "kcal": "800",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri, Soya",
                 "en": "Egg, Milk and Dairy Products, Soy"
@@ -324,6 +341,7 @@ window.MENU_DATA = {
                 "en": "Served with french fries and pickles."
               },
               "price": "400",
+              "kcal": "900",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri",
                 "en": "Gluten, Milk and Dairy Products"
@@ -339,6 +357,7 @@ window.MENU_DATA = {
                 "en": "Served with french fries and pickles."
               },
               "price": "450",
+              "kcal": "950",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Soya",
                 "en": "Gluten, Milk and Dairy Products, Soy"
@@ -354,6 +373,7 @@ window.MENU_DATA = {
                 "en": "Smoked beef, sucuk, cheese, bazlama bread. Served with french fries and pickles."
               },
               "price": "500",
+              "kcal": "1150",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Soya, Hardal",
                 "en": "Gluten, Milk and Dairy Products, Soy, Mustard"
@@ -369,6 +389,7 @@ window.MENU_DATA = {
                 "en": "Pesto, cheese, Mediterranean greens. Served with french fries and pickles."
               },
               "price": "600",
+              "kcal": "1100",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Kabuklu Kuruyemişler, Hardal",
                 "en": "Gluten, Egg, Milk and Dairy Products, Tree Nuts, Mustard"
@@ -384,6 +405,7 @@ window.MENU_DATA = {
                 "en": "Whole wheat bread, avocado, sunflower seeds. Served with french fries and pickles."
               },
               "price": "600",
+              "kcal": "1050",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Kabuklu Kuruyemişler",
                 "en": "Gluten, Egg, Milk and Dairy Products, Tree Nuts"
@@ -399,6 +421,7 @@ window.MENU_DATA = {
                 "en": "Avocado, Mediterranean greens, cream cheese. Served with french fries and pickles."
               },
               "price": "650",
+              "kcal": "1050",
               "allergens": {
                 "tr": "Gluten, Yumurta, Balık, Süt ve Süt Ürünleri",
                 "en": "Gluten, Egg, Fish, Milk and Dairy Products"
@@ -422,6 +445,7 @@ window.MENU_DATA = {
                 "en": "Cherry, strawberry, sugar."
               },
               "price": "100",
+              "kcal": "300",
               "allergens": {
                 "tr": "Belirgin alerjen yok",
                 "en": "No major allergens"
@@ -430,14 +454,14 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Pişi",
-                "en": "Pişi",
-                "latin": true
+                "en": "Pişi"
               },
               "desc": {
                 "tr": "Un,yağ,süt,maya,yumurta,su.",
                 "en": "Flour, oil, milk, yeast, egg, water."
               },
               "price": "125",
+              "kcal": "650",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
                 "en": "Gluten, Egg, Milk and Dairy Products"
@@ -453,6 +477,7 @@ window.MENU_DATA = {
                 "en": "Honey, clotted cream."
               },
               "price": "250",
+              "kcal": "550",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri",
                 "en": "Milk and Dairy Products"
@@ -468,6 +493,7 @@ window.MENU_DATA = {
                 "en": "Tomato, cucumber, pepper, arugula, parsley."
               },
               "price": "250",
+              "kcal": "120",
               "allergens": {
                 "tr": "Belirgin alerjen yok",
                 "en": "No major allergens"
@@ -483,6 +509,7 @@ window.MENU_DATA = {
                 "en": "Filo pastry, cheese, parsley, egg, vegetable oil."
               },
               "price": "250",
+              "kcal": "600",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta",
                 "en": "Gluten, Milk and Dairy Products, Egg"
@@ -498,6 +525,7 @@ window.MENU_DATA = {
                 "en": "Black olives, green olives."
               },
               "price": "250",
+              "kcal": "250",
               "allergens": {
                 "tr": "Belirgin alerjen yok",
                 "en": "No major allergens"
@@ -513,6 +541,7 @@ window.MENU_DATA = {
                 "en": "Flour, butter, yeast, egg."
               },
               "price": "250",
+              "kcal": "450",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
                 "en": "Gluten, Egg, Milk and Dairy Products"
@@ -529,6 +558,7 @@ window.MENU_DATA = {
                 "en": "Hazelnut, cocoa, milk, soy."
               },
               "price": "250",
+              "kcal": "350",
               "allergens": {
                 "tr": "Soya, Süt ve Süt Ürünleri, Kabuklu Kuruyemişler",
                 "en": "Soy, Milk and Dairy Products, Tree Nuts"
@@ -544,6 +574,7 @@ window.MENU_DATA = {
                 "en": "Butter, sucuk."
               },
               "price": "300",
+              "kcal": "700",
               "allergens": {
                 "tr": "Soya, Süt ve Süt Ürünleri",
                 "en": "Soy, Milk and Dairy Products"
@@ -590,6 +621,7 @@ window.MENU_DATA = {
                 "en": "Breaded chicken, coleslaw, cheddar, butter. Served with french fries and mayonnaise dipping sauce."
               },
               "price": "500",
+              "kcal": "1150",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Hardal, Susam",
                 "en": "Gluten, Egg, Milk and Dairy Products, Mustard, Sesame"
@@ -606,6 +638,7 @@ window.MENU_DATA = {
                 "en": "Tomato, lettuce, pickles, red wine, caramelized onion, served with french fries and mayonnaise dipping sauce."
               },
               "price": "550",
+              "kcal": "1050",
               "allergens": {
                 "tr": "Gluten, Yumurta, Hardal, Susam, Süt ve Süt Ürünleri",
                 "en": "Gluten, Egg, Mustard, Sesame, Milk and Dairy Products"
@@ -622,6 +655,7 @@ window.MENU_DATA = {
                 "en": "Tomato, cheddar, lettuce, pickles, caramelized onion, red wine, served with french fries and mayonnaise dipping sauce."
               },
               "price": "600",
+              "kcal": "1150",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Hardal, Susam",
                 "en": "Gluten, Egg, Milk and Dairy Products, Mustard, Sesame"
@@ -638,6 +672,7 @@ window.MENU_DATA = {
                 "en": "Caramelized onion, blue cheese sauce, smoked beef, sauce, red wine, served with french fries and mayonnaise dipping sauce."
               },
               "price": "675",
+              "kcal": "1300",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Hardal, Susam",
                 "en": "Gluten, Egg, Milk and Dairy Products, Mustard, Sesame"
@@ -661,6 +696,7 @@ window.MENU_DATA = {
                 "en": "Ranch sauce, arugula, tomato, onion, corn. Served with french fries and mayonnaise dipping sauce."
               },
               "price": "500",
+              "kcal": "750",
               "allergens": {
                 "tr": "Gluten, Yumurta, Balık, Hardal, Susam, Süt ve Süt Ürünleri",
                 "en": "Gluten, Egg, Fish, Mustard, Sesame, Milk and Dairy Products"
@@ -676,6 +712,7 @@ window.MENU_DATA = {
                 "en": "Sautéed mushrooms and onion, green pepper, cheddar cheese. Served with french fries and mayonnaise dipping sauce."
               },
               "price": "550",
+              "kcal": "900",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Hardal, Susam",
                 "en": "Gluten, Egg, Milk and Dairy Products, Mustard, Sesame"
@@ -691,6 +728,7 @@ window.MENU_DATA = {
                 "en": "Sautéed mushrooms and onion, green pepper, salsa sauce. Served with french fries and mayonnaise dipping sauce. Spicy."
               },
               "price": "750",
+              "kcal": "1050",
               "allergens": {
                 "tr": "Gluten, Yumurta, Hardal, Susam, Süt ve Süt Ürünleri, Acı",
                 "en": "Gluten, Egg, Mustard, Sesame, Milk and Dairy Products, Spicy"
@@ -706,6 +744,7 @@ window.MENU_DATA = {
                 "en": "Avocado, cream cheese, mixed greens. Served with french fries and mayonnaise dipping sauce."
               },
               "price": "750",
+              "kcal": "800",
               "allergens": {
                 "tr": "Gluten, Yumurta, Balık, Süt ve Süt Ürünleri, Hardal, Susam",
                 "en": "Gluten, Egg, Fish, Milk and Dairy Products, Mustard, Sesame"
@@ -721,6 +760,7 @@ window.MENU_DATA = {
                 "en": "Sautéed mushrooms and onion, green pepper, mozzarella cheese. Served with french fries and mayonnaise dipping sauce."
               },
               "price": "750",
+              "kcal": "1100",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Hardal, Susam, Soya",
                 "en": "Gluten, Egg, Milk and Dairy Products, Mustard, Sesame, Soy"
@@ -744,6 +784,7 @@ window.MENU_DATA = {
                 "en": "Mixed vegetables. Served with french fries and mayonnaise dipping sauce."
               },
               "price": "400",
+              "kcal": "700",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
                 "en": "Gluten, Egg, Milk and Dairy Products"
@@ -759,6 +800,7 @@ window.MENU_DATA = {
                 "en": "Chicken, kapia pepper, green pepper, mozzarella cheese. Served with french fries and mayonnaise dipping sauce."
               },
               "price": "500",
+              "kcal": "850",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
                 "en": "Gluten, Egg, Milk and Dairy Products"
@@ -774,6 +816,7 @@ window.MENU_DATA = {
                 "en": "Beef, kapia pepper, green pepper, mozzarella cheese. Served with french fries and mayonnaise dipping sauce."
               },
               "price": "650",
+              "kcal": "950",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Soya",
                 "en": "Gluten, Egg, Milk and Dairy Products, Soy"
@@ -798,6 +841,7 @@ window.MENU_DATA = {
                 "en": "Tomato sauce, mozzarella cheese."
               },
               "price": "550",
+              "kcal": "950",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta",
                 "en": "Gluten, Milk and Dairy Products, Egg"
@@ -813,6 +857,7 @@ window.MENU_DATA = {
                 "en": "Halloumi, mixed greens, pesto sauce, parmesan."
               },
               "price": "550",
+              "kcal": "900",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Kabuklu Kuruyemişler, Yumurta",
                 "en": "Gluten, Milk and Dairy Products, Tree Nuts, Egg"
@@ -828,6 +873,7 @@ window.MENU_DATA = {
                 "en": "Turkey, onion, Mediterranean greens, parmesan."
               },
               "price": "575",
+              "kcal": "900",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta, Hardal",
                 "en": "Gluten, Milk and Dairy Products, Egg, Mustard"
@@ -843,6 +889,7 @@ window.MENU_DATA = {
                 "en": "Tomato sauce, mozzarella cheese, red onion, corn."
               },
               "price": "600",
+              "kcal": "1000",
               "allergens": {
                 "tr": "Gluten, Balık, Süt ve Süt Ürünleri, Yumurta",
                 "en": "Gluten, Fish, Milk and Dairy Products, Egg"
@@ -858,6 +905,7 @@ window.MENU_DATA = {
                 "en": "Tomato sauce, mozzarella cheese, sucuk, beef sausage, mushroom, fresh pepper, corn."
               },
               "price": "650",
+              "kcal": "1150",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Soya, Yumurta",
                 "en": "Gluten, Milk and Dairy Products, Soy, Egg"
@@ -874,6 +922,7 @@ window.MENU_DATA = {
                 "en": "Tomato sauce, mozzarella cheese, smoked beef, Turkish sucuk, olives, pepper."
               },
               "price": "675",
+              "kcal": "1150",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Soya, Yumurta, Hardal",
                 "en": "Gluten, Milk and Dairy Products, Soy, Egg, Mustard"
@@ -890,6 +939,7 @@ window.MENU_DATA = {
                 "en": "Crème fraîche sauce, parmesan, mozzarella cheese, Kars gruyère, gorgonzola cheese."
               },
               "price": "675",
+              "kcal": "1300",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta",
                 "en": "Gluten, Milk and Dairy Products, Egg"
@@ -905,6 +955,7 @@ window.MENU_DATA = {
                 "en": "Smoked beef, onion, arugula, parmesan."
               },
               "price": "750",
+              "kcal": "1100",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta, Hardal",
                 "en": "Gluten, Milk and Dairy Products, Egg, Mustard"
@@ -921,6 +972,7 @@ window.MENU_DATA = {
                 "en": "Tomato sauce, mozzarella cheese, beef tenderloin, arugula, parmesan, caramelized onion, jalapeño pepper."
               },
               "price": "875",
+              "kcal": "1250",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta, Acı",
                 "en": "Gluten, Milk and Dairy Products, Egg, Spicy"
@@ -936,6 +988,7 @@ window.MENU_DATA = {
                 "en": "Pesto sauce, mozzarella cheese, shrimp, calamari, salmon, octopus, arugula, parmesan cheese."
               },
               "price": "950",
+              "kcal": "1350",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta, Kabuklular, Yumuşakçalar, Balık",
                 "en": "Gluten, Milk and Dairy Products, Egg, Crustaceans, Molluscs, Fish"
@@ -960,6 +1013,7 @@ window.MENU_DATA = {
                 "en": "Olives, olive oil, mildly spicy tomato sauce."
               },
               "price": "550",
+              "kcal": "750",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Acı",
                 "en": "Gluten, Milk and Dairy Products, Spicy"
@@ -976,6 +1030,7 @@ window.MENU_DATA = {
                 "en": "Ground beef, onion, black pepper, carrot, celery, tomato sauce."
               },
               "price": "600",
+              "kcal": "950",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Soya, Kereviz",
                 "en": "Gluten, Milk and Dairy Products, Soy, Celery"
@@ -991,6 +1046,7 @@ window.MENU_DATA = {
                 "en": "Chicken, garlic, cream, mushroom."
               },
               "price": "750",
+              "kcal": "1250",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Kabuklu Kuruyemişler",
                 "en": "Gluten, Egg, Milk and Dairy Products, Tree Nuts"
@@ -1007,6 +1063,7 @@ window.MENU_DATA = {
                 "en": "Beef tenderloin, pink sauce, red wine, kapia pepper, mildly spicy."
               },
               "price": "875",
+              "kcal": "1150",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Kereviz, Acı",
                 "en": "Gluten, Egg, Milk and Dairy Products, Celery, Spicy"
@@ -1022,6 +1079,7 @@ window.MENU_DATA = {
                 "en": "Wine cream sauce, mixed peppers, capers."
               },
               "price": "900",
+              "kcal": "1100",
               "allergens": {
                 "tr": "Gluten, Yumurta, Balık, Süt ve Süt Ürünleri, Sülfit",
                 "en": "Gluten, Egg, Fish, Milk and Dairy Products, Sulphites"
@@ -1037,6 +1095,7 @@ window.MENU_DATA = {
                 "en": "Mixed seafood, white wine."
               },
               "price": "950",
+              "kcal": "1100",
               "allergens": {
                 "tr": "Gluten, Kabuklular, Balık, Süt ve Süt Ürünleri, Sülfit, Yumuşakçalar",
                 "en": "Gluten, Crustaceans, Fish, Milk and Dairy Products, Sulphites, Molluscs"
@@ -1060,6 +1119,7 @@ window.MENU_DATA = {
                 "en": "Mixed vegetables, soy sauce."
               },
               "price": "550",
+              "kcal": "750",
               "allergens": {
                 "tr": "Gluten, Yumurta, Soya, Susam",
                 "en": "Gluten, Egg, Soy, Sesame"
@@ -1075,6 +1135,7 @@ window.MENU_DATA = {
                 "en": "Chicken, carrot, zucchini, cabbage, kapia peppers, ginger, soy sauce, sesame, oil, noodles, leek."
               },
               "price": "600",
+              "kcal": "950",
               "allergens": {
                 "tr": "Gluten, Yumurta, Soya, Susam",
                 "en": "Gluten, Egg, Soy, Sesame"
@@ -1090,6 +1151,7 @@ window.MENU_DATA = {
                 "en": "Beef, carrot, zucchini, cabbage, kapia peppers, ginger, soy sauce, sesame, oil, noodles, leek."
               },
               "price": "675",
+              "kcal": "1000",
               "allergens": {
                 "tr": "Gluten, Yumurta, Soya, Susam",
                 "en": "Gluten, Egg, Soy, Sesame"
@@ -1106,6 +1168,7 @@ window.MENU_DATA = {
                 "en": "Shrimp, chicken, vegetables, saffron sauce."
               },
               "price": "950",
+              "kcal": "1100",
               "allergens": {
                 "tr": "Gluten, Kabuklular, Yumurta, Soya, Süt ve Süt Ürünleri, Susam",
                 "en": "Gluten, Crustaceans, Egg, Soy, Milk and Dairy Products, Sesame"
@@ -1129,6 +1192,7 @@ window.MENU_DATA = {
                 "en": "Cherry tomato, balsamic sauce, red onion, dried apricot, tulum cheese, walnuts."
               },
               "price": "450",
+              "kcal": "450",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri, Sülfit, Kabuklu Kuruyemişler",
                 "en": "Milk and Dairy Products, Sulphites, Tree Nuts"
@@ -1144,6 +1208,7 @@ window.MENU_DATA = {
                 "en": "Mixed greens, cherry tomato, cucumber, cabbage, olive oil and lemon dressing."
               },
               "price": "450",
+              "kcal": "300",
               "allergens": {
                 "tr": "Sülfit",
                 "en": "Sulphites"
@@ -1159,6 +1224,7 @@ window.MENU_DATA = {
                 "en": "Arugula, onion, fresh sour sauce, green apple, carrot, walnuts."
               },
               "price": "450",
+              "kcal": "450",
               "allergens": {
                 "tr": "Kabuklu Kuruyemişler, Sülfit",
                 "en": "Tree Nuts, Sulphites"
@@ -1174,6 +1240,7 @@ window.MENU_DATA = {
                 "en": "Tomato, onion, olives, cucumber, white cheese, oregano, kapia pepper, olive oil and lemon dressing."
               },
               "price": "500",
+              "kcal": "550",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri, Sülfit",
                 "en": "Milk and Dairy Products, Sulphites"
@@ -1189,6 +1256,7 @@ window.MENU_DATA = {
                 "en": "Purslane, quinoa, dried apricot, green apple, raisins, sunflower seeds, orange dressing, olive oil."
               },
               "price": "500",
+              "kcal": "450",
               "allergens": {
                 "tr": "Kabuklu Kuruyemişler, Sülfit, Hardal",
                 "en": "Tree Nuts, Sulphites, Mustard"
@@ -1204,6 +1272,7 @@ window.MENU_DATA = {
                 "en": "Caesar dressing, iceberg lettuce, croutons."
               },
               "price": "600",
+              "kcal": "850",
               "allergens": {
                 "tr": "Gluten, Yumurta, Balık, Süt ve Süt Ürünleri, Hardal",
                 "en": "Gluten, Egg, Fish, Milk and Dairy Products, Mustard"
@@ -1219,6 +1288,7 @@ window.MENU_DATA = {
                 "en": "Red onion, Mediterranean greens, tomato, cucumber, corn, chickpeas, green olives."
               },
               "price": "600",
+              "kcal": "650",
               "allergens": {
                 "tr": "Balık, Yumurta",
                 "en": "Fish, Egg"
@@ -1234,6 +1304,7 @@ window.MENU_DATA = {
                 "en": "Sautéed spinach, avocado, beetroot, California pepper, quinoa, carrot, soybeans, chickpeas, corn."
               },
               "price": "650",
+              "kcal": "750",
               "allergens": {
                 "tr": "Soya",
                 "en": "Soy"
@@ -1249,6 +1320,7 @@ window.MENU_DATA = {
                 "en": "Chicken, sautéed vegetables, avocado, beetroot, couscous, soybeans, chickpeas, corn."
               },
               "price": "675",
+              "kcal": "850",
               "allergens": {
                 "tr": "Gluten, Soya",
                 "en": "Gluten, Soy"
@@ -1264,6 +1336,7 @@ window.MENU_DATA = {
                 "en": "Calamari, mixed greens, beer, tomato, cucumber, onion, white cheese, olive oil and lemon dressing."
               },
               "price": "750",
+              "kcal": "950",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri, Yumuşakçalar, Gluten",
                 "en": "Milk and Dairy Products, Molluscs, Gluten"
@@ -1280,6 +1353,7 @@ window.MENU_DATA = {
                 "en": "Ground beef, sautéed spinach, avocado, beetroot, pepper, quinoa, carrot, couscous, soybeans, chickpeas."
               },
               "price": "750",
+              "kcal": "1000",
               "allergens": {
                 "tr": "Gluten, Yumurta, Soya",
                 "en": "Gluten, Egg, Soy"
@@ -1295,6 +1369,7 @@ window.MENU_DATA = {
                 "en": "Seafood, Mediterranean greens, tomato, cucumber, red onion, avocado, olive oil and lemon dressing."
               },
               "price": "850",
+              "kcal": "650",
               "allergens": {
                 "tr": "Kabuklular, Balık, Yumuşakçalar, Soya",
                 "en": "Crustaceans, Fish, Molluscs, Soy"
@@ -1310,6 +1385,7 @@ window.MENU_DATA = {
                 "en": "Beef, sautéed spinach, vegetables, beetroot, couscous, soybeans, chickpeas, cherry tomato."
               },
               "price": "1100",
+              "kcal": "1000",
               "allergens": {
                 "tr": "Gluten, Soya",
                 "en": "Gluten, Soy"
@@ -1325,6 +1401,7 @@ window.MENU_DATA = {
                 "en": "Salmon, sautéed spinach, avocado, beetroot, quinoa, carrot, soybeans, chickpeas."
               },
               "price": "1200",
+              "kcal": "950",
               "allergens": {
                 "tr": "Balık, Soya",
                 "en": "Fish, Soy"
@@ -1348,6 +1425,7 @@ window.MENU_DATA = {
                 "en": "Deep-fried potatoes."
               },
               "price": "250",
+              "kcal": "650",
               "allergens": {
                 "tr": "Gluten",
                 "en": "Gluten"
@@ -1363,6 +1441,7 @@ window.MENU_DATA = {
                 "en": "Crispy french fries, parmesan cheese, truffle oil."
               },
               "price": "300",
+              "kcal": "850",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri, Gluten",
                 "en": "Milk and Dairy Products, Gluten"
@@ -1378,6 +1457,7 @@ window.MENU_DATA = {
                 "en": "Carrot, zucchini, cabbage, onion, leek, soy sauce."
               },
               "price": "325",
+              "kcal": "550",
               "allergens": {
                 "tr": "Gluten, Soya, Yumurta",
                 "en": "Gluten, Soy, Egg"
@@ -1393,6 +1473,7 @@ window.MENU_DATA = {
                 "en": "Grilled kapia pepper, pesto, glaze sauce."
               },
               "price": "375",
+              "kcal": "600",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri, Kabuklu Kuruyemişler, Sülfit",
                 "en": "Milk and Dairy Products, Tree Nuts, Sulphites"
@@ -1408,6 +1489,7 @@ window.MENU_DATA = {
                 "en": "Chicken, milk, egg, panko flour, oil, potato chips."
               },
               "price": "550",
+              "kcal": "1100",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
                 "en": "Gluten, Egg, Milk and Dairy Products"
@@ -1423,6 +1505,7 @@ window.MENU_DATA = {
                 "en": "Crispy bread, arugula, cream cheese, smoked salmon, glaze sauce."
               },
               "price": "650",
+              "kcal": "500",
               "allergens": {
                 "tr": "Gluten, Balık, Süt ve Süt Ürünleri, Sülfit",
                 "en": "Gluten, Fish, Milk and Dairy Products, Sulphites"
@@ -1438,6 +1521,7 @@ window.MENU_DATA = {
                 "en": "French fries, Chinese spring rolls, cheese rolls, halloumi, chicken fingers, beef sausage, mozzarella sticks."
               },
               "price": "900",
+              "kcal": "1200",
               "allergens": {
                 "tr": "Gluten, Yumurta, Soya, Süt ve Süt Ürünleri, Hardal, Susam",
                 "en": "Gluten, Egg, Soy, Milk and Dairy Products, Mustard, Sesame"
@@ -1453,6 +1537,7 @@ window.MENU_DATA = {
                 "en": "Lemon, tartar sauce."
               },
               "price": "975",
+              "kcal": "850",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Hardal, Yumurta, Yumuşakçalar",
                 "en": "Gluten, Milk and Dairy Products, Mustard, Egg, Molluscs"
@@ -1476,6 +1561,7 @@ window.MENU_DATA = {
                 "en": "Mozzarella cheese, tomato sauce, potato chips."
               },
               "price": "400",
+              "kcal": "900",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Soya, Yumurta",
                 "en": "Gluten, Milk and Dairy Products, Soy, Egg"
@@ -1491,6 +1577,7 @@ window.MENU_DATA = {
                 "en": "Ground beef burger, potato chips."
               },
               "price": "450",
+              "kcal": "1050",
               "allergens": {
                 "tr": "Gluten, Yumurta, Hardal, Süt ve Süt Ürünleri, Susam, Soya",
                 "en": "Gluten, Egg, Mustard, Milk and Dairy Products, Sesame, Soy"
@@ -1506,6 +1593,7 @@ window.MENU_DATA = {
                 "en": "Ground beef, onion, black pepper, carrot, celery, tomato sauce."
               },
               "price": "475",
+              "kcal": "850",
               "allergens": {
                 "tr": "Gluten, Kereviz, Süt ve Süt Ürünleri",
                 "en": "Gluten, Celery, Milk and Dairy Products"
@@ -1521,6 +1609,7 @@ window.MENU_DATA = {
                 "en": "Ground beef, rice pilaf, potato chips."
               },
               "price": "525",
+              "kcal": "1100",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
                 "en": "Gluten, Egg, Milk and Dairy Products"
@@ -1544,6 +1633,7 @@ window.MENU_DATA = {
                 "en": "Watermelon."
               },
               "price": "300",
+              "kcal": "200",
               "allergens": {
                 "tr": "Belirgin alerjen yok",
                 "en": "No major allergens"
@@ -1560,6 +1650,7 @@ window.MENU_DATA = {
                 "en": "Milk, sugar, cream."
               },
               "price": "400",
+              "kcal": "450",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri",
                 "en": "Egg, Milk and Dairy Products"
@@ -1576,6 +1667,7 @@ window.MENU_DATA = {
                 "en": "Butter, egg, sugar, chocolate, flour, cocoa, baking powder."
               },
               "price": "400",
+              "kcal": "700",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri, Gluten, Kabuklu Kuruyemişler",
                 "en": "Egg, Milk and Dairy Products, Gluten, Tree Nuts"
@@ -1592,6 +1684,7 @@ window.MENU_DATA = {
                 "en": "Labneh, whipped cream, egg, powdered gelatin, coffee, ladyfingers, cocoa, sugar."
               },
               "price": "400",
+              "kcal": "550",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri, Gluten",
                 "en": "Egg, Milk and Dairy Products, Gluten"
@@ -1607,6 +1700,7 @@ window.MENU_DATA = {
                 "en": "Egg, flour, sugar, milk, chocolate, cocoa, vegetable oil."
               },
               "price": "400",
+              "kcal": "650",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri, Gluten",
                 "en": "Egg, Milk and Dairy Products, Gluten"
@@ -1622,6 +1716,7 @@ window.MENU_DATA = {
                 "en": "***Varies by preparation"
               },
               "price": "400",
+              "kcal": "700",
               "allergens": {
                 "tr": "Servis personeline danışınız",
                 "en": "Please ask our staff"
@@ -1637,9 +1732,10 @@ window.MENU_DATA = {
                 "en": "Seasonal fruits."
               },
               "price": "400",
+              "kcal": "250",
               "allergens": {
-                "tr": "Belirgin alerjen yok",
-                "en": "No major allergens"
+                "tr": "Servis personeline danışınız",
+                "en": "Please ask our staff"
               }
             },
             {
@@ -1653,6 +1749,7 @@ window.MENU_DATA = {
                 "en": "Choice of sauce: cherry sauce or chocolate sauce."
               },
               "price": "400",
+              "kcal": "750",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri",
                 "en": "Egg, Milk and Dairy Products"
@@ -1689,6 +1786,7 @@ window.MENU_DATA = {
                 "en": "Chicken stock, carrot, cream, flour."
               },
               "price": "350",
+              "kcal": "250",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri",
                 "en": "Gluten, Milk and Dairy Products"
@@ -1704,6 +1802,7 @@ window.MENU_DATA = {
                 "en": "Gruyère cheese, white wine, croutons, caramelized onion."
               },
               "price": "350",
+              "kcal": "400",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri",
                 "en": "Gluten, Milk and Dairy Products"
@@ -1719,6 +1818,7 @@ window.MENU_DATA = {
                 "en": "Mixed seafood. Spicy."
               },
               "price": "525",
+              "kcal": "350",
               "allergens": {
                 "tr": "Kabuklular, Balık, Yumuşakçalar, Soya, Gluten, Acı",
                 "en": "Crustaceans, Fish, Molluscs, Soy, Gluten, Spicy"
@@ -1742,6 +1842,7 @@ window.MENU_DATA = {
                 "en": "Deep-fried potatoes."
               },
               "price": "250",
+              "kcal": "650",
               "allergens": {
                 "tr": "Gluten",
                 "en": "Gluten"
@@ -1757,6 +1858,7 @@ window.MENU_DATA = {
                 "en": "Crispy french fries, parmesan cheese, truffle oil."
               },
               "price": "300",
+              "kcal": "850",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri, Gluten",
                 "en": "Milk and Dairy Products, Gluten"
@@ -1772,6 +1874,7 @@ window.MENU_DATA = {
                 "en": "Carrot, zucchini, cabbage, onion, leek, soy sauce."
               },
               "price": "325",
+              "kcal": "550",
               "allergens": {
                 "tr": "Gluten, Soya, Yumurta",
                 "en": "Gluten, Soy, Egg"
@@ -1787,6 +1890,7 @@ window.MENU_DATA = {
                 "en": "Baguette, butter, spiced garlic sauce, mozzarella cheese."
               },
               "price": "325",
+              "kcal": "700",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri, Gluten",
                 "en": "Milk and Dairy Products, Gluten"
@@ -1802,6 +1906,7 @@ window.MENU_DATA = {
                 "en": "Grilled kapia pepper, pesto, glaze sauce."
               },
               "price": "375",
+              "kcal": "600",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri, Kabuklu Kuruyemişler, Sülfit",
                 "en": "Milk and Dairy Products, Tree Nuts, Sulphites"
@@ -1817,6 +1922,7 @@ window.MENU_DATA = {
                 "en": "Blue cheese sauce and sweet chili sauce. Spicy."
               },
               "price": "400",
+              "kcal": "850",
               "allergens": {
                 "tr": "Gluten, Soya, Hardal, Sülfit, Süt ve Süt Ürünleri, Acı",
                 "en": "Gluten, Soy, Mustard, Sulphites, Milk and Dairy Products, Spicy"
@@ -1832,6 +1938,7 @@ window.MENU_DATA = {
                 "en": "Acuka, sautéed chard, Cretan herb dip, Russian salad, fava, carrot tarator, beetroot."
               },
               "price": "525",
+              "kcal": "700",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Kabuklu Kuruyemişler, Susam",
                 "en": "Gluten, Milk and Dairy Products, Tree Nuts, Sesame"
@@ -1847,6 +1954,7 @@ window.MENU_DATA = {
                 "en": "Mustard seed, black peppercorns, citrus zest, capers, cherry tomato, fresh dill, olive oil."
               },
               "price": "625",
+              "kcal": "350",
               "allergens": {
                 "tr": "Balık, Hardal",
                 "en": "Fish, Mustard"
@@ -1862,6 +1970,7 @@ window.MENU_DATA = {
                 "en": "Filo pastry, sweet chili sauce."
               },
               "price": "625",
+              "kcal": "650",
               "allergens": {
                 "tr": "Gluten, Balık, Susam",
                 "en": "Gluten, Fish, Sesame"
@@ -1877,6 +1986,7 @@ window.MENU_DATA = {
                 "en": "Crispy bread, arugula, cream cheese, smoked salmon, glaze sauce."
               },
               "price": "650",
+              "kcal": "500",
               "allergens": {
                 "tr": "Gluten, Balık, Süt ve Süt Ürünleri, Sülfit",
                 "en": "Gluten, Fish, Milk and Dairy Products, Sulphites"
@@ -1892,6 +2002,7 @@ window.MENU_DATA = {
                 "en": "Spinach, garlic, creamy wine sauce."
               },
               "price": "725",
+              "kcal": "650",
               "allergens": {
                 "tr": "Kabuklular, Süt ve Süt Ürünleri, Sülfit, Gluten",
                 "en": "Crustaceans, Milk and Dairy Products, Sulphites, Gluten"
@@ -1907,6 +2018,7 @@ window.MENU_DATA = {
                 "en": "Four kinds of cheese, apple, two kinds of smoked meat, grapes, nuts, grissini."
               },
               "price": "825",
+              "kcal": "1100",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Kabuklu Kuruyemişler, Hardal",
                 "en": "Gluten, Milk and Dairy Products, Tree Nuts, Mustard"
@@ -1922,6 +2034,7 @@ window.MENU_DATA = {
                 "en": "Mustard sauce, rare beef, sesame oil, cherry tomato, red onion, glaze."
               },
               "price": "825",
+              "kcal": "450",
               "allergens": {
                 "tr": "Hardal, Susam, Sülfit, Süt ve Süt Ürünleri",
                 "en": "Mustard, Sesame, Sulphites, Milk and Dairy Products"
@@ -1937,6 +2050,7 @@ window.MENU_DATA = {
                 "en": "Arugula, rock samphire, olive oil, oregano, capers, balsamic glaze."
               },
               "price": "875",
+              "kcal": "350",
               "allergens": {
                 "tr": "Sülfit, Yumuşakçalar, Soya",
                 "en": "Sulphites, Molluscs, Soy"
@@ -1952,6 +2066,7 @@ window.MENU_DATA = {
                 "en": "French fries, Chinese spring rolls, cheese rolls, halloumi, chicken fingers, beef sausage, mozzarella sticks."
               },
               "price": "900",
+              "kcal": "1200",
               "allergens": {
                 "tr": "Gluten, Yumurta, Soya, Süt ve Süt Ürünleri, Hardal, Susam",
                 "en": "Gluten, Egg, Soy, Milk and Dairy Products, Mustard, Sesame"
@@ -1967,6 +2082,7 @@ window.MENU_DATA = {
                 "en": "Lemon, beer, tartar sauce."
               },
               "price": "975",
+              "kcal": "850",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Hardal, Yumurta, Yumuşakçalar",
                 "en": "Gluten, Milk and Dairy Products, Mustard, Egg, Molluscs"
@@ -1990,6 +2106,7 @@ window.MENU_DATA = {
                 "en": "Mixed greens, cherry tomato, cucumber, cabbage, olive oil and lemon dressing."
               },
               "price": "450",
+              "kcal": "300",
               "allergens": {
                 "tr": "Sülfit",
                 "en": "Sulphites"
@@ -2005,6 +2122,7 @@ window.MENU_DATA = {
                 "en": "Arugula, onion, fresh sour sauce, green apple, carrot, walnuts."
               },
               "price": "450",
+              "kcal": "450",
               "allergens": {
                 "tr": "Kabuklu Kuruyemişler, Sülfit",
                 "en": "Tree Nuts, Sulphites"
@@ -2020,6 +2138,7 @@ window.MENU_DATA = {
                 "en": "Tomato, onion, olives, cucumber, white cheese, oregano, kapia pepper, olive oil and lemon dressing."
               },
               "price": "500",
+              "kcal": "550",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri, Sülfit",
                 "en": "Milk and Dairy Products, Sulphites"
@@ -2035,6 +2154,7 @@ window.MENU_DATA = {
                 "en": "Purslane, quinoa, dried apricot, green apple, raisins, sunflower seeds, orange dressing, olive oil."
               },
               "price": "500",
+              "kcal": "450",
               "allergens": {
                 "tr": "Kabuklu Kuruyemişler, Sülfit, Hardal",
                 "en": "Tree Nuts, Sulphites, Mustard"
@@ -2058,6 +2178,7 @@ window.MENU_DATA = {
                 "en": "Grilled vegetables, potatoes, rice pilaf."
               },
               "price": "650",
+              "kcal": "850",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri",
                 "en": "Milk and Dairy Products"
@@ -2073,6 +2194,7 @@ window.MENU_DATA = {
                 "en": "Rice pilaf, pineapple, kapia pepper, cabbage, onion, sweet and sour sauce."
               },
               "price": "750",
+              "kcal": "850",
               "allergens": {
                 "tr": "Soya, Gluten, Susam",
                 "en": "Soy, Gluten, Sesame"
@@ -2088,6 +2210,7 @@ window.MENU_DATA = {
                 "en": "Mashed potatoes, sautéed vegetables, cognac, demi-glace sauce, fresh black pepper. Spicy."
               },
               "price": "750",
+              "kcal": "950",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri, Kereviz, Gluten, Soya, Acı",
                 "en": "Milk and Dairy Products, Celery, Gluten, Soy, Spicy"
@@ -2103,6 +2226,7 @@ window.MENU_DATA = {
                 "en": "Chicken, garlic, cream, mushroom."
               },
               "price": "750",
+              "kcal": "1250",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Kabuklu Kuruyemişler",
                 "en": "Gluten, Egg, Milk and Dairy Products, Tree Nuts"
@@ -2118,6 +2242,7 @@ window.MENU_DATA = {
                 "en": "Rice pilaf, french fries, honey curry sauce."
               },
               "price": "750",
+              "kcal": "900",
               "allergens": {
                 "tr": "Hardal, Gluten, Süt ve Süt Ürünleri",
                 "en": "Mustard, Gluten, Milk and Dairy Products"
@@ -2133,6 +2258,7 @@ window.MENU_DATA = {
                 "en": "Caesar dressing, seasonal salad, parmesan, butter."
               },
               "price": "750",
+              "kcal": "950",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Hardal",
                 "en": "Gluten, Egg, Milk and Dairy Products, Mustard"
@@ -2148,6 +2274,7 @@ window.MENU_DATA = {
                 "en": "Sautéed vegetables, mashed potatoes, white wine, creamy mushroom sauce."
               },
               "price": "750",
+              "kcal": "900",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri, Gluten, Hardal",
                 "en": "Milk and Dairy Products, Gluten, Mustard"
@@ -2163,6 +2290,7 @@ window.MENU_DATA = {
                 "en": "Teriyaki sauce, sesame, rice pilaf, vegetables."
               },
               "price": "800",
+              "kcal": "850",
               "allergens": {
                 "tr": "Soya, Susam, Gluten",
                 "en": "Soy, Sesame, Gluten"
@@ -2186,6 +2314,7 @@ window.MENU_DATA = {
                 "en": "Eggplant, mozzarella cheese, bread, red kapia pepper, tomato sauce, köfte."
               },
               "price": "825",
+              "kcal": "950",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
                 "en": "Gluten, Egg, Milk and Dairy Products"
@@ -2202,6 +2331,7 @@ window.MENU_DATA = {
                 "en": "Beef tenderloin, pink sauce, red wine, kapia pepper, mildly spicy."
               },
               "price": "875",
+              "kcal": "1150",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Kereviz, Acı",
                 "en": "Gluten, Egg, Milk and Dairy Products, Celery, Spicy"
@@ -2217,6 +2347,7 @@ window.MENU_DATA = {
                 "en": "Crispy potatoes, tomato sauce, yogurt, red garlic butter."
               },
               "price": "1050",
+              "kcal": "1150",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri, Gluten",
                 "en": "Milk and Dairy Products, Gluten"
@@ -2232,6 +2363,7 @@ window.MENU_DATA = {
                 "en": "Sautéed vegetables, pavé potatoes."
               },
               "price": "1550",
+              "kcal": "900",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri, Gluten",
                 "en": "Milk and Dairy Products, Gluten"
@@ -2247,6 +2379,7 @@ window.MENU_DATA = {
                 "en": "Demi-glace black pepper sauce, mashed potatoes, cognac, sautéed vegetables. Spicy."
               },
               "price": "1650",
+              "kcal": "1050",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri, Kereviz, Acı, Gluten",
                 "en": "Milk and Dairy Products, Celery, Spicy, Gluten"
@@ -2262,6 +2395,7 @@ window.MENU_DATA = {
                 "en": "Sautéed vegetables, pavé potatoes, white wine, creamy mushroom sauce."
               },
               "price": "1700",
+              "kcal": "1050",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri, Gluten",
                 "en": "Milk and Dairy Products, Gluten"
@@ -2278,6 +2412,7 @@ window.MENU_DATA = {
                 "en": "Sautéed vegetables, gorgonzola sauce, white wine, pavé potatoes."
               },
               "price": "1800",
+              "kcal": "1150",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri, Gluten",
                 "en": "Milk and Dairy Products, Gluten"
@@ -2293,6 +2428,7 @@ window.MENU_DATA = {
                 "en": "Caramelized red grape wine sauce, mint sauce, sautéed vegetables."
               },
               "price": "1800",
+              "kcal": "1100",
               "allergens": {
                 "tr": "Sülfit, Süt ve Süt Ürünleri",
                 "en": "Sulphites, Milk and Dairy Products"
@@ -2308,6 +2444,7 @@ window.MENU_DATA = {
                 "en": "Sautéed spinach, mashed potatoes, garlic butter, pink sauce."
               },
               "price": "1850",
+              "kcal": "1250",
               "allergens": {
                 "tr": "Kabuklular, Süt ve Süt Ürünleri, Gluten",
                 "en": "Crustaceans, Milk and Dairy Products, Gluten"
@@ -2324,6 +2461,7 @@ window.MENU_DATA = {
                 "en": "Smoked turkey and beef, garlic butter, creamy mushroom sauce."
               },
               "price": "1950",
+              "kcal": "1200",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
                 "en": "Gluten, Egg, Milk and Dairy Products"
@@ -2347,6 +2485,7 @@ window.MENU_DATA = {
                 "en": "Olive oil, garlic, lemon sauce."
               },
               "price": "750",
+              "kcal": "700",
               "allergens": {
                 "tr": "Balık, Gluten",
                 "en": "Fish, Gluten"
@@ -2362,6 +2501,7 @@ window.MENU_DATA = {
                 "en": "Grilled lime, pavé potatoes, sautéed spinach, chimichurri sauce. Spicy."
               },
               "price": "750",
+              "kcal": "850",
               "allergens": {
                 "tr": "Balık, Sülfit, Hardal, Acı",
                 "en": "Fish, Sulphites, Mustard, Spicy"
@@ -2377,6 +2517,7 @@ window.MENU_DATA = {
                 "en": "Sautéed spinach, mashed potatoes."
               },
               "price": "1050",
+              "kcal": "750",
               "allergens": {
                 "tr": "Balık, Süt ve Süt Ürünleri, Hardal",
                 "en": "Fish, Milk and Dairy Products, Mustard"
@@ -2392,6 +2533,7 @@ window.MENU_DATA = {
                 "en": "Sautéed spinach, mashed potatoes."
               },
               "price": "1050",
+              "kcal": "950",
               "allergens": {
                 "tr": "Balık, Süt ve Süt Ürünleri, Gluten",
                 "en": "Fish, Milk and Dairy Products, Gluten"
@@ -2407,6 +2549,7 @@ window.MENU_DATA = {
                 "en": "Mixed seafood, white wine, creamy wine sauce."
               },
               "price": "950",
+              "kcal": "1100",
               "allergens": {
                 "tr": "Gluten, Kabuklular, Balık, Süt ve Süt Ürünleri, Sülfit, Yumuşakçalar",
                 "en": "Gluten, Crustaceans, Fish, Milk and Dairy Products, Sulphites, Molluscs"
@@ -2422,6 +2565,7 @@ window.MENU_DATA = {
                 "en": "Mixed seafood, white wine."
               },
               "price": "1300",
+              "kcal": "1150",
               "allergens": {
                 "tr": "Kabuklular, Balık, Yumuşakçalar, Süt ve Süt Ürünleri, Sülfit",
                 "en": "Crustaceans, Fish, Molluscs, Milk and Dairy Products, Sulphites"
@@ -2437,6 +2581,7 @@ window.MENU_DATA = {
                 "en": "Mashed potatoes, grilled lime, chimichurri sauce, chili pepper, mixed salad, sautéed spinach, Tom Yum sauce."
               },
               "price": "1350",
+              "kcal": "850",
               "allergens": {
                 "tr": "Kabuklular, Süt ve Süt Ürünleri, Acı, Balık, Sülfit",
                 "en": "Crustaceans, Milk and Dairy Products, Spicy, Fish, Sulphites"
@@ -2452,6 +2597,7 @@ window.MENU_DATA = {
                 "en": "Fava purée, arugula, soy sauce, garlic olive oil sauce."
               },
               "price": "1600",
+              "kcal": "800",
               "allergens": {
                 "tr": "Soya, Süt ve Süt Ürünleri, Yumuşakçalar, Sülfit, Bakla",
                 "en": "Soy, Milk and Dairy Products, Molluscs, Sulphites, Broad Beans"
@@ -2467,6 +2613,7 @@ window.MENU_DATA = {
                 "en": "Fish skewers, shrimp, calamari, octopus, beer, garlic olive oil and lemon sauce, Mediterranean greens."
               },
               "price": "1950",
+              "kcal": "1250",
               "allergens": {
                 "tr": "Kabuklular, Balık, Yumuşakçalar, Süt ve Süt Ürünleri, Gluten, Soya",
                 "en": "Crustaceans, Fish, Molluscs, Milk and Dairy Products, Gluten, Soy"
@@ -2482,6 +2629,7 @@ window.MENU_DATA = {
                 "en": "Green olives, octopus, beer, shrimp, mixed vegetables, mozzarella, chimichurri."
               },
               "price": "1950",
+              "kcal": "950",
               "allergens": {
                 "tr": "Kabuklular, Süt ve Süt Ürünleri, Yumuşakçalar, Gluten",
                 "en": "Crustaceans, Milk and Dairy Products, Molluscs, Gluten"
@@ -2506,6 +2654,7 @@ window.MENU_DATA = {
                 "en": "Tomato sauce, mozzarella cheese."
               },
               "price": "550",
+              "kcal": "950",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta",
                 "en": "Gluten, Milk and Dairy Products, Egg"
@@ -2521,6 +2670,7 @@ window.MENU_DATA = {
                 "en": "Turkey, onion, Mediterranean greens, parmesan."
               },
               "price": "575",
+              "kcal": "900",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta, Hardal",
                 "en": "Gluten, Milk and Dairy Products, Egg, Mustard"
@@ -2536,6 +2686,7 @@ window.MENU_DATA = {
                 "en": "Tomato sauce, mozzarella cheese, sucuk, beef sausage, mushroom, fresh pepper, corn."
               },
               "price": "650",
+              "kcal": "1150",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Soya, Yumurta",
                 "en": "Gluten, Milk and Dairy Products, Soy, Egg"
@@ -2552,6 +2703,7 @@ window.MENU_DATA = {
                 "en": "Tomato sauce, mozzarella cheese, smoked beef, Turkish sucuk, olives, pepper."
               },
               "price": "675",
+              "kcal": "1150",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Soya, Yumurta, Hardal",
                 "en": "Gluten, Milk and Dairy Products, Soy, Egg, Mustard"
@@ -2568,6 +2720,7 @@ window.MENU_DATA = {
                 "en": "Crème fraîche sauce, parmesan, mozzarella cheese, Kars gruyère, gorgonzola cheese."
               },
               "price": "675",
+              "kcal": "1300",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta",
                 "en": "Gluten, Milk and Dairy Products, Egg"
@@ -2584,6 +2737,7 @@ window.MENU_DATA = {
                 "en": "Tomato sauce, mozzarella cheese, beef tenderloin, arugula, parmesan, caramelized onion, jalapeño pepper."
               },
               "price": "875",
+              "kcal": "1250",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta, Acı",
                 "en": "Gluten, Milk and Dairy Products, Egg, Spicy"
@@ -2599,6 +2753,7 @@ window.MENU_DATA = {
                 "en": "Pesto sauce, mozzarella cheese, shrimp, calamari, salmon, octopus, arugula, parmesan cheese."
               },
               "price": "950",
+              "kcal": "1350",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta, Kabuklular, Yumuşakçalar, Balık",
                 "en": "Gluten, Milk and Dairy Products, Egg, Crustaceans, Molluscs, Fish"
@@ -2622,6 +2777,7 @@ window.MENU_DATA = {
                 "en": "Mozzarella cheese, tomato sauce, potato chips."
               },
               "price": "400",
+              "kcal": "900",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Soya, Yumurta",
                 "en": "Gluten, Milk and Dairy Products, Soy, Egg"
@@ -2637,6 +2793,7 @@ window.MENU_DATA = {
                 "en": "Ground beef burger, potato chips."
               },
               "price": "450",
+              "kcal": "1050",
               "allergens": {
                 "tr": "Gluten, Yumurta, Hardal, Süt ve Süt Ürünleri, Susam, Soya",
                 "en": "Gluten, Egg, Mustard, Milk and Dairy Products, Sesame, Soy"
@@ -2652,6 +2809,7 @@ window.MENU_DATA = {
                 "en": "Ground beef, onion, black pepper, carrot, celery, tomato sauce."
               },
               "price": "475",
+              "kcal": "850",
               "allergens": {
                 "tr": "Gluten, Kereviz, Süt ve Süt Ürünleri",
                 "en": "Gluten, Celery, Milk and Dairy Products"
@@ -2667,6 +2825,7 @@ window.MENU_DATA = {
                 "en": "Ground beef, rice pilaf, potato chips."
               },
               "price": "525",
+              "kcal": "1100",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
                 "en": "Gluten, Egg, Milk and Dairy Products"
@@ -2690,6 +2849,7 @@ window.MENU_DATA = {
                 "en": "Watermelon."
               },
               "price": "300",
+              "kcal": "200",
               "allergens": {
                 "tr": "Belirgin alerjen yok",
                 "en": "No major allergens"
@@ -2706,6 +2866,7 @@ window.MENU_DATA = {
                 "en": "Butter, egg, sugar, chocolate, flour, cocoa, baking powder."
               },
               "price": "400",
+              "kcal": "700",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri, Gluten, Kabuklu Kuruyemişler",
                 "en": "Egg, Milk and Dairy Products, Gluten, Tree Nuts"
@@ -2722,6 +2883,7 @@ window.MENU_DATA = {
                 "en": "Labneh, whipped cream, egg, powdered gelatin, coffee, ladyfingers, cocoa, sugar."
               },
               "price": "400",
+              "kcal": "550",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri, Gluten",
                 "en": "Egg, Milk and Dairy Products, Gluten"
@@ -2737,6 +2899,7 @@ window.MENU_DATA = {
                 "en": "Egg, flour, sugar, milk, chocolate, cocoa, vegetable oil."
               },
               "price": "400",
+              "kcal": "650",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri, Gluten",
                 "en": "Egg, Milk and Dairy Products, Gluten"
@@ -2752,6 +2915,7 @@ window.MENU_DATA = {
                 "en": "***Varies by preparation"
               },
               "price": "400",
+              "kcal": "700",
               "allergens": {
                 "tr": "Servis personeline danışınız",
                 "en": "Please ask our staff"
@@ -2767,9 +2931,10 @@ window.MENU_DATA = {
                 "en": "Seasonal fruits."
               },
               "price": "400",
+              "kcal": "250",
               "allergens": {
-                "tr": "Belirgin alerjen yok",
-                "en": "No major allergens"
+                "tr": "Servis personeline danışınız",
+                "en": "Please ask our staff"
               }
             },
             {
@@ -2783,6 +2948,7 @@ window.MENU_DATA = {
                 "en": "Choice of sauce: cherry sauce or chocolate sauce."
               },
               "price": "400",
+              "kcal": "750",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri",
                 "en": "Egg, Milk and Dairy Products"
@@ -2799,6 +2965,7 @@ window.MENU_DATA = {
                 "en": "Milk, sugar, cream."
               },
               "price": "400",
+              "kcal": "450",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri",
                 "en": "Egg, Milk and Dairy Products"
@@ -2835,6 +3002,7 @@ window.MENU_DATA = {
                 "en": "Watermelon."
               },
               "price": "300",
+              "kcal": "200",
               "allergens": {
                 "tr": "Belirgin alerjen yok",
                 "en": "No major allergens"
@@ -2851,6 +3019,7 @@ window.MENU_DATA = {
                 "en": "Choice of sauce: cherry sauce or chocolate sauce."
               },
               "price": "400",
+              "kcal": "750",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri",
                 "en": "Egg, Milk and Dairy Products"
@@ -2867,6 +3036,7 @@ window.MENU_DATA = {
                 "en": "Milk, sugar, cream."
               },
               "price": "400",
+              "kcal": "450",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri",
                 "en": "Egg, Milk and Dairy Products"
@@ -2883,6 +3053,7 @@ window.MENU_DATA = {
                 "en": "Butter, egg, sugar, chocolate, flour, cocoa, baking powder."
               },
               "price": "400",
+              "kcal": "700",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri, Gluten, Kabuklu Kuruyemişler",
                 "en": "Egg, Milk and Dairy Products, Gluten, Tree Nuts"
@@ -2899,6 +3070,7 @@ window.MENU_DATA = {
                 "en": "Labneh, whipped cream, egg, powdered gelatin, coffee, ladyfingers, cocoa, sugar."
               },
               "price": "400",
+              "kcal": "550",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri, Gluten",
                 "en": "Egg, Milk and Dairy Products, Gluten"
@@ -2914,6 +3086,7 @@ window.MENU_DATA = {
                 "en": "Egg, flour, sugar, milk, chocolate, cocoa, vegetable oil."
               },
               "price": "400",
+              "kcal": "650",
               "allergens": {
                 "tr": "Yumurta, Süt ve Süt Ürünleri, Gluten",
                 "en": "Egg, Milk and Dairy Products, Gluten"
@@ -2937,6 +3110,7 @@ window.MENU_DATA = {
                 "en": "Carrot, zucchini, cabbage, onion, leek, soy sauce."
               },
               "price": "325",
+              "kcal": "550",
               "allergens": {
                 "tr": "Gluten, Soya, Yumurta",
                 "en": "Gluten, Soy, Egg"
@@ -2952,6 +3126,7 @@ window.MENU_DATA = {
                 "en": "Chicken stock, carrot, cream, flour."
               },
               "price": "350",
+              "kcal": "250",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri",
                 "en": "Gluten, Milk and Dairy Products"
@@ -2967,6 +3142,7 @@ window.MENU_DATA = {
                 "en": "Grilled kapia pepper, pesto, glaze sauce."
               },
               "price": "375",
+              "kcal": "600",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri, Kabuklu Kuruyemişler, Sülfit",
                 "en": "Milk and Dairy Products, Tree Nuts, Sulphites"
@@ -2982,6 +3158,7 @@ window.MENU_DATA = {
                 "en": "Blue cheese sauce and sweet chili sauce. Spicy."
               },
               "price": "400",
+              "kcal": "850",
               "allergens": {
                 "tr": "Gluten, Soya, Hardal, Sülfit, Süt ve Süt Ürünleri, Acı",
                 "en": "Gluten, Soy, Mustard, Sulphites, Milk and Dairy Products, Spicy"
@@ -2997,6 +3174,7 @@ window.MENU_DATA = {
                 "en": "Arugula, onion, fresh sour sauce, green apple, carrot, walnuts."
               },
               "price": "450",
+              "kcal": "450",
               "allergens": {
                 "tr": "Kabuklu Kuruyemişler, Sülfit",
                 "en": "Tree Nuts, Sulphites"
@@ -3011,6 +3189,7 @@ window.MENU_DATA = {
                 "tr": "Mevsim yeşillikleri, domates, salatalık, havuç, lahana, pancar, zeytinyağı ve limon sos",
                 "en": "Mixed greens, tomato, cucumber, carrot, cabbage, beetroot, olive oil and lemon dressing."
               },
+              "kcal": "450",
               "allergens": {
                 "tr": "Belirgin alerjen yok",
                 "en": "No major allergens"
@@ -3026,6 +3205,7 @@ window.MENU_DATA = {
                 "en": "Baguette, butter, spiced garlic sauce, mozzarella cheese."
               },
               "price": "325",
+              "kcal": "700",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri, Gluten",
                 "en": "Milk and Dairy Products, Gluten"
@@ -3050,6 +3230,7 @@ window.MENU_DATA = {
                 "en": "Tomato sauce, mozzarella cheese."
               },
               "price": "550",
+              "kcal": "950",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta",
                 "en": "Gluten, Milk and Dairy Products, Egg"
@@ -3066,6 +3247,7 @@ window.MENU_DATA = {
                 "en": "Crème fraîche sauce, parmesan, mozzarella cheese, Kars gruyère, gorgonzola cheese."
               },
               "price": "675",
+              "kcal": "1300",
               "allergens": {
                 "tr": "Gluten, Süt ve Süt Ürünleri, Yumurta",
                 "en": "Gluten, Milk and Dairy Products, Egg"
@@ -3081,6 +3263,7 @@ window.MENU_DATA = {
                 "en": "Olive oil, garlic, lemon sauce."
               },
               "price": "750",
+              "kcal": "700",
               "allergens": {
                 "tr": "Balık, Gluten",
                 "en": "Fish, Gluten"
@@ -3096,6 +3279,7 @@ window.MENU_DATA = {
                 "en": "Garlic, cream, mushroom."
               },
               "price": "750",
+              "kcal": "1250",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Kabuklu Kuruyemişler",
                 "en": "Gluten, Egg, Milk and Dairy Products, Tree Nuts"
@@ -3111,6 +3295,7 @@ window.MENU_DATA = {
                 "en": "Caesar dressing, seasonal salad, parmesan, butter."
               },
               "price": "750",
+              "kcal": "950",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri, Hardal",
                 "en": "Gluten, Egg, Milk and Dairy Products, Mustard"
@@ -3126,6 +3311,7 @@ window.MENU_DATA = {
                 "en": "Rice pilaf, french fries, honey curry sauce."
               },
               "price": "750",
+              "kcal": "900",
               "allergens": {
                 "tr": "Hardal, Gluten, Süt ve Süt Ürünleri",
                 "en": "Mustard, Gluten, Milk and Dairy Products"
@@ -3141,6 +3327,7 @@ window.MENU_DATA = {
                 "en": "Eggplant, mozzarella cheese, bread, red kapia pepper, tomato sauce, köfte."
               },
               "price": "825",
+              "kcal": "950",
               "allergens": {
                 "tr": "Gluten, Yumurta, Süt ve Süt Ürünleri",
                 "en": "Gluten, Egg, Milk and Dairy Products"
@@ -3156,6 +3343,7 @@ window.MENU_DATA = {
                 "en": "Wine cream sauce, mixed peppers, capers."
               },
               "price": "900",
+              "kcal": "1100",
               "allergens": {
                 "tr": "Gluten, Yumurta, Balık, Süt ve Süt Ürünleri, Sülfit",
                 "en": "Gluten, Egg, Fish, Milk and Dairy Products, Sulphites"
@@ -3171,6 +3359,7 @@ window.MENU_DATA = {
                 "en": "Crispy potatoes, tomato sauce, yogurt, red garlic butter."
               },
               "price": "1050",
+              "kcal": "1150",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri, Gluten",
                 "en": "Milk and Dairy Products, Gluten"
@@ -3186,6 +3375,7 @@ window.MENU_DATA = {
                 "en": "Sautéed spinach, mashed potatoes."
               },
               "price": "1050",
+              "kcal": "750",
               "allergens": {
                 "tr": "Balık, Süt ve Süt Ürünleri, Hardal",
                 "en": "Fish, Milk and Dairy Products, Mustard"
@@ -3201,6 +3391,7 @@ window.MENU_DATA = {
                 "tr": "Sote sebzeler, patates püresi",
                 "en": "Sautéed vegetables, mashed potatoes."
               },
+              "kcal": "850",
               "allergens": {
                 "tr": "Süt ve Süt Ürünleri",
                 "en": "Milk and Dairy Products"
@@ -3237,8 +3428,8 @@ window.MENU_DATA = {
             "en": "Signature Cocktails"
           },
           "note": {
-            "tr": "Her biri 750 ₺",
-            "en": "Each 750 ₺"
+            "tr": "Her biri 750 TL",
+            "en": "Each 750 TL"
           },
           "items": [
             {
@@ -3991,11 +4182,12 @@ window.MENU_DATA = {
           "items": [
             {
               "name": {
-                "tr": "Efes Pilsen Malt / 50 cl",
-                "en": "Efes Pilsen Malt / 50 cl",
+                "tr": "Efes Pilsen Malt",
+                "en": "Efes Pilsen Malt",
                 "latin": true
               },
               "price": "295",
+              "vol": "50 cl",
               "allergens": {
                 "tr": "Gluten",
                 "en": "Gluten"
@@ -4003,11 +4195,12 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Efes Pilsen Özel Seri / 50 cl",
-                "en": "Efes Pilsen Özel Seri / 50 cl",
+                "tr": "Efes Pilsen Özel Seri",
+                "en": "Efes Pilsen Özel Seri",
                 "latin": true
               },
               "price": "295",
+              "vol": "50 cl",
               "allergens": {
                 "tr": "Gluten",
                 "en": "Gluten"
@@ -4015,18 +4208,20 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Efes Pilsen Glutensiz / 50 cl",
-                "en": "Efes Pilsen Gluten-Free / 50 cl"
+                "tr": "Efes Pilsen Glutensiz",
+                "en": "Efes Pilsen Gluten-Free"
               },
-              "price": "395"
+              "price": "395",
+              "vol": "50 cl"
             },
             {
               "name": {
-                "tr": "Bomonti Filtresiz / 50 cl",
-                "en": "Bomonti Filtresiz / 50 cl",
+                "tr": "Bomonti Filtresiz",
+                "en": "Bomonti Filtresiz",
                 "latin": true
               },
               "price": "325",
+              "vol": "50 cl",
               "allergens": {
                 "tr": "Gluten",
                 "en": "Gluten"
@@ -4034,11 +4229,12 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Miller / 33 cl",
-                "en": "Miller / 33 cl",
+                "tr": "Miller",
+                "en": "Miller",
                 "latin": true
               },
               "price": "345",
+              "vol": "33 cl",
               "allergens": {
                 "tr": "Gluten",
                 "en": "Gluten"
@@ -4046,11 +4242,12 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Corona / 35,5 cl",
-                "en": "Corona / 35,5 cl",
+                "tr": "Corona",
+                "en": "Corona",
                 "latin": true
               },
               "price": "395",
+              "vol": "35,5 cl",
               "allergens": {
                 "tr": "Gluten",
                 "en": "Gluten"
@@ -4058,11 +4255,12 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Leffe Blonde / 33 cl",
-                "en": "Leffe Blonde / 33 cl",
+                "tr": "Leffe Blonde",
+                "en": "Leffe Blonde",
                 "latin": true
               },
               "price": "445",
+              "vol": "33 cl",
               "allergens": {
                 "tr": "Gluten",
                 "en": "Gluten"
@@ -4070,11 +4268,12 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Stella Artois / 44 cl",
-                "en": "Stella Artois / 44 cl",
+                "tr": "Stella Artois",
+                "en": "Stella Artois",
                 "latin": true
               },
               "price": "375",
+              "vol": "44 cl",
               "allergens": {
                 "tr": "Gluten",
                 "en": "Gluten"
@@ -4082,11 +4281,12 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "1664 Blanc / 33 cl",
-                "en": "1664 Blanc / 33 cl",
+                "tr": "1664 Blanc",
+                "en": "1664 Blanc",
                 "latin": true
               },
               "price": "385",
+              "vol": "33 cl",
               "allergens": {
                 "tr": "Gluten",
                 "en": "Gluten"
@@ -4094,11 +4294,12 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Weihenstephaner / 33 cl",
-                "en": "Weihenstephaner / 33 cl",
+                "tr": "Weihenstephaner",
+                "en": "Weihenstephaner",
                 "latin": true
               },
               "price": "445",
+              "vol": "33 cl",
               "allergens": {
                 "tr": "Gluten",
                 "en": "Gluten"
@@ -4106,10 +4307,11 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Peja Alkolsüz / 33 cl",
-                "en": "Peja Non-Alcoholic / 33 cl"
+                "tr": "Peja Alkolsüz",
+                "en": "Peja Non-Alcoholic"
               },
               "price": "250",
+              "vol": "33 cl",
               "allergens": {
                 "tr": "Gluten",
                 "en": "Gluten"
@@ -5028,8 +5230,8 @@ window.MENU_DATA = {
         },
         {
           "label": {
-            "tr": "Viski · Amerikan Viskileri",
-            "en": "Whisky · American Whiskey"
+            "tr": "Amerikan Viskileri",
+            "en": "American Whiskey"
           },
           "items": [
             {
@@ -5178,8 +5380,8 @@ window.MENU_DATA = {
         },
         {
           "label": {
-            "tr": "Viski · Harman İskoç Viskileri",
-            "en": "Whisky · Blended Scotch"
+            "tr": "Harman İskoç Viskileri",
+            "en": "Blended Scotch"
           },
           "items": [
             {
@@ -5503,8 +5705,9 @@ window.MENU_DATA = {
         },
         {
           "label": {
-            "tr": "Viski · Tek Malt Viskiler",
-            "en": "Whisky · Single Malts"
+            "tr": "Single Malt · Speyside",
+            "en": "Single Malt · Speyside",
+            "latin": true
           },
           "items": [
             {
@@ -5614,7 +5817,16 @@ window.MENU_DATA = {
                 "tr": "Gluten",
                 "en": "Gluten"
               }
-            },
+            }
+          ]
+        },
+        {
+          "label": {
+            "tr": "Single Malt · Islay",
+            "en": "Single Malt · Islay",
+            "latin": true
+          },
+          "items": [
             {
               "name": {
                 "tr": "Ardberg 10 YO",
@@ -5668,7 +5880,16 @@ window.MENU_DATA = {
                 "tr": "Gluten",
                 "en": "Gluten"
               }
-            },
+            }
+          ]
+        },
+        {
+          "label": {
+            "tr": "Single Malt · Lowland",
+            "en": "Single Malt · Lowland",
+            "latin": true
+          },
+          "items": [
             {
               "name": {
                 "tr": "Glenkinchie 12 YO",
@@ -5695,7 +5916,16 @@ window.MENU_DATA = {
                 "tr": "Gluten",
                 "en": "Gluten"
               }
-            },
+            }
+          ]
+        },
+        {
+          "label": {
+            "tr": "Single Malt · Highland",
+            "en": "Single Malt · Highland",
+            "latin": true
+          },
+          "items": [
             {
               "name": {
                 "tr": "Glenmorangie Original 12 YO",
@@ -5776,7 +6006,16 @@ window.MENU_DATA = {
                 "tr": "Gluten",
                 "en": "Gluten"
               }
-            },
+            }
+          ]
+        },
+        {
+          "label": {
+            "tr": "Single Malt · Island",
+            "en": "Single Malt · Island",
+            "latin": true
+          },
+          "items": [
             {
               "name": {
                 "tr": "Talisker 10 YO",
@@ -5808,8 +6047,8 @@ window.MENU_DATA = {
         },
         {
           "label": {
-            "tr": "Viski · İrlanda Viskileri",
-            "en": "Whisky · Irish Whiskey"
+            "tr": "İrlanda Viskileri",
+            "en": "Irish Whiskey"
           },
           "items": [
             {
@@ -5870,8 +6109,8 @@ window.MENU_DATA = {
         },
         {
           "label": {
-            "tr": "Viski · Japon Viskileri",
-            "en": "Whisky · Japanese Whiskey"
+            "tr": "Japon Viskileri",
+            "en": "Japanese Whiskey"
           },
           "items": [
             {
@@ -7036,8 +7275,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "House Selection",
-                "en": "House Selection",
-                "latin": true
+                "en": "House Selection"
               },
               "desc": {
                 "tr": "Beyaz · Konya",
@@ -7067,8 +7305,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Vinkara-Narince",
-                "en": "Vinkara-Narince",
-                "latin": true
+                "en": "Vinkara-Narince"
               },
               "desc": {
                 "tr": "Beyaz · Ankara · 2025",
@@ -7098,8 +7335,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Paşaeli-Emir",
-                "en": "Paşaeli-Emir",
-                "latin": true
+                "en": "Paşaeli-Emir"
               },
               "desc": {
                 "tr": "Beyaz · Nevşehir · 2024",
@@ -7129,8 +7365,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "House Selection",
-                "en": "House Selection",
-                "latin": true
+                "en": "House Selection"
               },
               "desc": {
                 "tr": "Kırmızı · Konya",
@@ -7159,9 +7394,8 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Chamlija Kara Sevda-Papaskarasi",
-                "en": "Chamlija Kara Sevda-Papaskarasi",
-                "latin": true
+                "tr": "Chamlija Kara Sevda-Papaskarası",
+                "en": "Chamlija Kara Sevda-Papaskarası"
               },
               "desc": {
                 "tr": "Kırmızı · Kırklareli · 2022",
@@ -7191,8 +7425,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Eski Bağlar-Öküzgözü",
-                "en": "Eski Bağlar-Öküzgözü",
-                "latin": true
+                "en": "Eski Bağlar-Öküzgözü"
               },
               "desc": {
                 "tr": "Kırmızı · Elazığ · 2021",
@@ -7222,8 +7455,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "House Selection",
-                "en": "House Selection",
-                "latin": true
+                "en": "House Selection"
               },
               "desc": {
                 "tr": "Rosé · Konya",
@@ -7253,8 +7485,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Likya-Tilki Kuyruğu Blush",
-                "en": "Likya-Tilki Kuyruğu Blush",
-                "latin": true
+                "en": "Likya-Tilki Kuyruğu Blush"
               },
               "desc": {
                 "tr": "Rosé · Antalya · 2024",
@@ -7283,9 +7514,8 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Paşaeli-Çalkarasi",
-                "en": "Paşaeli-Çalkarasi",
-                "latin": true
+                "tr": "Paşaeli-Çalkarası",
+                "en": "Paşaeli-Çalkarası"
               },
               "desc": {
                 "tr": "Rosé · Denizli · 2024",
@@ -7323,8 +7553,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Vinkara Atelier-Riesling",
-                "en": "Vinkara Atelier-Riesling",
-                "latin": true
+                "en": "Vinkara Atelier-Riesling"
               },
               "desc": {
                 "tr": "Ankara · 2024",
@@ -7338,9 +7567,8 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Paşaeli Yaşli Asmalar-Sidalan",
-                "en": "Paşaeli Yaşli Asmalar-Sidalan",
-                "latin": true
+                "tr": "Paşaeli Yaşlı Asmalar-Sıdalan",
+                "en": "Paşaeli Yaşlı Asmalar-Sıdalan"
               },
               "desc": {
                 "tr": "Çanakkale · 2024",
@@ -7355,8 +7583,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Yedi Bilgeler Khilon-Sauvignon Blanc",
-                "en": "Yedi Bilgeler Khilon-Sauvignon Blanc",
-                "latin": true
+                "en": "Yedi Bilgeler Khilon-Sauvignon Blanc"
               },
               "desc": {
                 "tr": "Denizli · 2025",
@@ -7371,8 +7598,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Yedi Bilgeler Anaxagoras-Chardonnay",
-                "en": "Yedi Bilgeler Anaxagoras-Chardonnay",
-                "latin": true
+                "en": "Yedi Bilgeler Anaxagoras-Chardonnay"
               },
               "desc": {
                 "tr": "Denizli · 2025",
@@ -7387,8 +7613,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Yedi Bilgeler Vindemia Güz-Bornova Misketi",
-                "en": "Yedi Bilgeler Vindemia Güz-Bornova Misketi",
-                "latin": true
+                "en": "Yedi Bilgeler Vindemia Güz-Bornova Misketi"
               },
               "desc": {
                 "tr": "İzmir · 2024",
@@ -7403,8 +7628,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Usca Sonnet 99-Viognier",
-                "en": "Usca Sonnet 99-Viognier",
-                "latin": true
+                "en": "Usca Sonnet 99-Viognier"
               },
               "desc": {
                 "tr": "Urla · 2025",
@@ -7419,8 +7643,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Chamlija Quartz-Füme Blanc",
-                "en": "Chamlija Quartz-Füme Blanc",
-                "latin": true
+                "en": "Chamlija Quartz-Füme Blanc"
               },
               "desc": {
                 "tr": "Kırklareli · 2024",
@@ -7434,9 +7657,8 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Yaban Kolektif By Levon Bağiş-Sungurlu",
-                "en": "Yaban Kolektif By Levon Bağiş-Sungurlu",
-                "latin": true
+                "tr": "Yaban Kolektif By Levon Bağış-Sungurlu",
+                "en": "Yaban Kolektif By Levon Bağış-Sungurlu"
               },
               "desc": {
                 "tr": "Çorum · 2023",
@@ -7451,8 +7673,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Dugladze Alazani Valley-Rkatsiteli",
-                "en": "Dugladze Alazani Valley-Rkatsiteli",
-                "latin": true
+                "en": "Dugladze Alazani Valley-Rkatsiteli"
               },
               "desc": {
                 "tr": "Georgia · 2023",
@@ -7467,8 +7688,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Pasqua-Pinot Grigio",
-                "en": "Pasqua-Pinot Grigio",
-                "latin": true
+                "en": "Pasqua-Pinot Grigio"
               },
               "desc": {
                 "tr": "Italy · 2023",
@@ -7483,8 +7703,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Ress Trocken-Riesling",
-                "en": "Ress Trocken-Riesling",
-                "latin": true
+                "en": "Ress Trocken-Riesling"
               },
               "desc": {
                 "tr": "Germany · 2023",
@@ -7499,8 +7718,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Louis Moreau Chablis-Chardonnay",
-                "en": "Louis Moreau Chablis-Chardonnay",
-                "latin": true
+                "en": "Louis Moreau Chablis-Chardonnay"
               },
               "desc": {
                 "tr": "France / Bourgogne · 2023",
@@ -7522,9 +7740,8 @@ window.MENU_DATA = {
           "items": [
             {
               "name": {
-                "tr": "Likya-Merzifon Karasi",
-                "en": "Likya-Merzifon Karasi",
-                "latin": true
+                "tr": "Likya-Merzifon Karası",
+                "en": "Likya-Merzifon Karası"
               },
               "desc": {
                 "tr": "Antalya · 2022",
@@ -7539,8 +7756,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Chamlija-Cabernet Sauvignon",
-                "en": "Chamlija-Cabernet Sauvignon",
-                "latin": true
+                "en": "Chamlija-Cabernet Sauvignon"
               },
               "desc": {
                 "tr": "Kırklareli · 2022",
@@ -7554,9 +7770,8 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Vinkara Reserve-Kalecik Karasi",
-                "en": "Vinkara Reserve-Kalecik Karasi",
-                "latin": true
+                "tr": "Vinkara Reserve-Kalecik Karası",
+                "en": "Vinkara Reserve-Kalecik Karası"
               },
               "desc": {
                 "tr": "Kalecik · 2021",
@@ -7571,8 +7786,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Büyülü Bağ-Shiraz Reserve",
-                "en": "Büyülü Bağ-Shiraz Reserve",
-                "latin": true
+                "en": "Büyülü Bağ-Shiraz Reserve"
               },
               "desc": {
                 "tr": "Çeşme · 2020",
@@ -7586,9 +7800,8 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Paşaeli Yaşli Asmalar-Karasakiz",
-                "en": "Paşaeli Yaşli Asmalar-Karasakiz",
-                "latin": true
+                "tr": "Paşaeli Yaşlı Asmalar-Karasakız",
+                "en": "Paşaeli Yaşlı Asmalar-Karasakız"
               },
               "desc": {
                 "tr": "Çanakkale / Kaz Dağları · 2022",
@@ -7603,8 +7816,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Yedi Bilgeler Bias-Merlot",
-                "en": "Yedi Bilgeler Bias-Merlot",
-                "latin": true
+                "en": "Yedi Bilgeler Bias-Merlot"
               },
               "desc": {
                 "tr": "İzmir · 2021",
@@ -7619,8 +7831,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Eski Bağlar-Öküzgözü Boğazkere Reserve",
-                "en": "Eski Bağlar-Öküzgözü Boğazkere Reserve",
-                "latin": true
+                "en": "Eski Bağlar-Öküzgözü Boğazkere Reserve"
               },
               "desc": {
                 "tr": "Elazığ · 2021",
@@ -7635,8 +7846,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Chateau Kalpak Bbk",
-                "en": "Chateau Kalpak Bbk",
-                "latin": true
+                "en": "Chateau Kalpak Bbk"
               },
               "desc": {
                 "tr": "Tekirdağ · 2021",
@@ -7650,9 +7860,8 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Chamlija Nev-I Şahsina Münhasir",
-                "en": "Chamlija Nev-I Şahsina Münhasir",
-                "latin": true
+                "tr": "Chamlija Nev-I Şahsına Münhasır",
+                "en": "Chamlija Nev-I Şahsına Münhasır"
               },
               "desc": {
                 "tr": "Kırklareli · 2020",
@@ -7666,9 +7875,8 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Yaban Kolektif By Levon Bağiş-Erciş Karasi",
-                "en": "Yaban Kolektif By Levon Bağiş-Erciş Karasi",
-                "latin": true
+                "tr": "Yaban Kolektif By Levon Bağış-Erciş Karası",
+                "en": "Yaban Kolektif By Levon Bağış-Erciş Karası"
               },
               "desc": {
                 "tr": "Van · 2020",
@@ -7683,8 +7891,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Jaffelin-Pinot Noir",
-                "en": "Jaffelin-Pinot Noir",
-                "latin": true
+                "en": "Jaffelin-Pinot Noir"
               },
               "desc": {
                 "tr": "France / Bourgogne · 2023",
@@ -7699,8 +7906,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Vietti Perbacco Langhe-Nebbiolo",
-                "en": "Vietti Perbacco Langhe-Nebbiolo",
-                "latin": true
+                "en": "Vietti Perbacco Langhe-Nebbiolo"
               },
               "desc": {
                 "tr": "Italy · 2020",
@@ -7715,8 +7921,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Colli Bruni Chianti Docg-Sangiovese",
-                "en": "Colli Bruni Chianti Docg-Sangiovese",
-                "latin": true
+                "en": "Colli Bruni Chianti Docg-Sangiovese"
               },
               "desc": {
                 "tr": "Italy · 2023",
@@ -7731,8 +7936,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Marques De Riscal Vina Collada Rioja-Tempranillo",
-                "en": "Marques De Riscal Vina Collada Rioja-Tempranillo",
-                "latin": true
+                "en": "Marques De Riscal Vina Collada Rioja-Tempranillo"
               },
               "desc": {
                 "tr": "Spain · 2018",
@@ -7747,8 +7951,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Chateau Haut Reys-Cabarnet Sauvignon,merlot",
-                "en": "Chateau Haut Reys-Cabarnet Sauvignon,merlot",
-                "latin": true
+                "en": "Chateau Haut Reys-Cabarnet Sauvignon,merlot"
               },
               "desc": {
                 "tr": "France · 2020",
@@ -7771,8 +7974,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Yedi Bilgeler Lasos-Shiraz Öküzgözü",
-                "en": "Yedi Bilgeler Lasos-Shiraz Öküzgözü",
-                "latin": true
+                "en": "Yedi Bilgeler Lasos-Shiraz Öküzgözü"
               },
               "desc": {
                 "tr": "Denizli · 2024",
@@ -7787,8 +7989,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Usca Sonnet 8 Blush-Öküzgözü",
-                "en": "Usca Sonnet 8 Blush-Öküzgözü",
-                "latin": true
+                "en": "Usca Sonnet 8 Blush-Öküzgözü"
               },
               "desc": {
                 "tr": "Urla · 2023",
@@ -7802,9 +8003,8 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Vinkara Atelier Yari Tatli Rosé",
-                "en": "Vinkara Atelier Yari Tatli Rosé",
-                "latin": true
+                "tr": "Vinkara Atelier Yarı Tatlı Rosé",
+                "en": "Vinkara Atelier Yarı Tatlı Rosé"
               },
               "desc": {
                 "tr": "Kalecik · 2024",
@@ -7819,8 +8019,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Pasqua-Pinot Grigio Blush",
-                "en": "Pasqua-Pinot Grigio Blush",
-                "latin": true
+                "en": "Pasqua-Pinot Grigio Blush"
               },
               "desc": {
                 "tr": "Italy · 2024",
@@ -7835,8 +8034,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Whispering Angel",
-                "en": "Whispering Angel",
-                "latin": true
+                "en": "Whispering Angel"
               },
               "desc": {
                 "tr": "France · 2024",
@@ -7859,8 +8057,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Leona Bubble Frizzante",
-                "en": "Leona Bubble Frizzante",
-                "latin": true
+                "en": "Leona Bubble Frizzante"
               },
               "desc": {
                 "tr": "Türkiye",
@@ -7889,9 +8086,8 @@ window.MENU_DATA = {
             },
             {
               "name": {
-                "tr": "Vinkara Yaşasin Rosé",
-                "en": "Vinkara Yaşasin Rosé",
-                "latin": true
+                "tr": "Vinkara Yaşasın Rosé",
+                "en": "Vinkara Yaşasın Rosé"
               },
               "desc": {
                 "tr": "Kalecik",
@@ -7913,9 +8109,8 @@ window.MENU_DATA = {
           "items": [
             {
               "name": {
-                "tr": "Paşaeli Sidalan Pet-Nat",
-                "en": "Paşaeli Sidalan Pet-Nat",
-                "latin": true
+                "tr": "Paşaeli Sıdalan Pet-Nat",
+                "en": "Paşaeli Sıdalan Pet-Nat"
               },
               "desc": {
                 "tr": "Çanakkale",
@@ -7938,8 +8133,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Dolce Vita Prosecco",
-                "en": "Dolce Vita Prosecco",
-                "latin": true
+                "en": "Dolce Vita Prosecco"
               },
               "desc": {
                 "tr": "Italy",
@@ -7969,8 +8163,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Cinzano Prosecco Doc",
-                "en": "Cinzano Prosecco Doc",
-                "latin": true
+                "en": "Cinzano Prosecco Doc"
               },
               "desc": {
                 "tr": "Italy",
@@ -7985,8 +8178,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Ruffino Prosecco",
-                "en": "Ruffino Prosecco",
-                "latin": true
+                "en": "Ruffino Prosecco"
               },
               "desc": {
                 "tr": "Italy",
@@ -8009,8 +8201,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Moët & Chandon Brut Impérial",
-                "en": "Moët & Chandon Brut Impérial",
-                "latin": true
+                "en": "Moët & Chandon Brut Impérial"
               },
               "desc": {
                 "tr": "France",
@@ -8025,8 +8216,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Moët & Chandon Rosé Impérial",
-                "en": "Moët & Chandon Rosé Impérial",
-                "latin": true
+                "en": "Moët & Chandon Rosé Impérial"
               },
               "desc": {
                 "tr": "France",
@@ -8041,8 +8231,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Moët & Chandon Ice Impérial",
-                "en": "Moët & Chandon Ice Impérial",
-                "latin": true
+                "en": "Moët & Chandon Ice Impérial"
               },
               "desc": {
                 "tr": "France",
@@ -8057,8 +8246,7 @@ window.MENU_DATA = {
             {
               "name": {
                 "tr": "Dom Pérignon Blanc",
-                "en": "Dom Pérignon Blanc",
-                "latin": true
+                "en": "Dom Pérignon Blanc"
               },
               "desc": {
                 "tr": "France · 2013",

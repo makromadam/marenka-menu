@@ -619,7 +619,22 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
-.item__price .cur { font-size: 0.82em; opacity: 0.7; margin-right: 0.06em; }
+.item__price .cur { font-size: 0.82em; opacity: 0.7; margin-left: 0.32em; }
+
+/* Serving-size tag for single-price drinks (e.g. bottled beer "50 cl") —
+   sits beside the price, never wraps into the name. */
+.item__vol {
+  flex: 0 0 auto;
+  align-self: baseline;
+  margin-right: 0.55em;
+  color: var(--cream-soft);
+  font-size: 0.82em;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
 
 /* Line 2 — ingredients */
 .item__desc {
@@ -654,20 +669,32 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 .item__price-pair {
   display: inline-flex;
   align-items: baseline;
-  gap: 0.5em;
-  font-size: var(--fs-desc);
+  gap: 0.45em;
+  font-size: var(--fs-price);   /* same point size as single prices */
+  white-space: nowrap;          /* keep "33 cl" + "225 TL" on one line */
 }
 .item__price-pair .measure {
   color: var(--cream-soft);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  font-size: 0.86em;
+  font-size: 0.9em;
 }
 .item__price-pair .amount {
   color: var(--cream);
   font-weight: 500;
   font-variant-numeric: tabular-nums;
 }
+
+/* Calories — quiet line under the description, same in both languages */
+.item__kcal {
+  margin-top: var(--space-1);
+  font-size: var(--fs-allergen);
+  letter-spacing: 0.04em;
+  color: var(--cream-soft);
+  opacity: 0.85;
+  font-variant-numeric: tabular-nums;
+}
+.item__kcal .item__kcal-unit { text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.8; }
 
 /* Page-to-page pager (← previous · next →) */
 .pager {
@@ -798,7 +825,8 @@ body[data-view="menu"] .menu { animation: view-in 0.5s var(--ease) both; }
   .section-head__eyebrow { color: #8a5a25; }
   .section-head__ornament { color: #b98a4a; }
   .item__desc { color: #4a3525; }
-  .item__allergen { color: #6a4a30; }
+  .item__allergen, .item__kcal { color: #6a4a30; }
+  .item__vol { color: #8a5a25; }
   .item:hover { transform: none; background: none; }
 }
 

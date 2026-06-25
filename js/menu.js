@@ -12,7 +12,7 @@
 
   var root = document.documentElement;
   var body = document.body;
-  var CUR = "₺"; // ₺
+  var CUR = "TL"; // shown after the amount, e.g. "500 TL"
   var STORE_LANG = "marenka.lang";
   var SUPPORTED = { tr: true, en: true };
 
@@ -65,17 +65,17 @@
 
   function priceNode(value) {
     var p = el("span", "item__price");
+    p.appendChild(document.createTextNode(String(value)));
     var cur = el("span", "cur");
     cur.textContent = CUR;
     p.appendChild(cur);
-    p.appendChild(document.createTextNode(String(value)));
     return p;
   }
 
   /* International food terms kept in English casing (plain "I") even inside a
      Turkish dish name, so "Pizza" never renders dotted as "PİZZA" in one place
      and "PIZZA" in another. */
-  var LATIN_WORD_RE = /(Pizza|Spaghetti|Fettuccine|Profiterol|Tiramisu|Margherita|Arrabbiata|Linguine|Risotto|Ravioli|Panini|Bruschetta|Calzone|Penne|Twist|Mojito|Mocktail|Milkshake)/gi;
+  var LATIN_WORD_RE = /\b(Pizza|Spaghetti|Fettuccine|Profiterol|Tiramisu|Margherita|Arrabbiata|Linguine|Risotto|Ravioli|Panini|Bruschetta|Calzone|Penne|Twist|Mojito|Mocktail|Milkshake|Mexican|Riesling|Chardonnay|Sauvignon|Viognier|Grigio|Sangiovese|Tempranillo|Nebbiolo|Chianti|Pinot|Merlot|Cabernet|Shiraz|Syrah|Rkatsiteli|Selection|Frizzante|Imperial|Impérial|Perignon|Pérignon|Chablis|Cinzano|Vietti|Vindemia|Jaffelin|Whispering|Atelier|Alazani|Riscal|Khilon|Bias|Rioja|Vina|Vita|Colli|Bruni|Louis|Noir|Ice|Ruffino)\b/gi;
 
   // Name node: EN span (always English casing) + TR span (Turkish casing, but
   // international words wrapped lang="en"; whole span English when value.latin).
@@ -117,6 +117,11 @@
 
     if (!multi) {
       head.appendChild(el("span", "item__leader", { "aria-hidden": "true" }));
+      if (item.vol) {
+        var vol = el("span", "item__vol");
+        vol.textContent = item.vol;
+        head.appendChild(vol);
+      }
       if (item.price != null && item.price !== "") {
         head.appendChild(priceNode(item.price));
       }
@@ -132,7 +137,7 @@
         var m = el("span", "measure");
         m.appendChild(bilingual("span", null, pr.label));
         var a = el("span", "amount");
-        a.textContent = CUR + String(pr.value);
+        a.textContent = String(pr.value) + " " + CUR;
         pair.appendChild(m);
         pair.appendChild(a);
         prices.appendChild(pair);
@@ -144,6 +149,19 @@
     if (item.desc && (item.desc.tr || item.desc.en)) {
       var d = bilingual("p", "item__desc", item.desc);
       li.appendChild(d);
+    }
+
+    // calories (kcal — universal, shown the same in both languages)
+    if (item.kcal != null && item.kcal !== "") {
+      var k = el("p", "item__kcal");
+      var kv = el("span", "item__kcal-val");
+      kv.textContent = String(item.kcal);
+      var ku = el("span", "item__kcal-unit");
+      ku.textContent = "kcal";
+      k.appendChild(kv);
+      k.appendChild(document.createTextNode(" "));
+      k.appendChild(ku);
+      li.appendChild(k);
     }
 
     // allergens (Poppins Light Italic — the only non-serif text in the menu)
