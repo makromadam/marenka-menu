@@ -30,14 +30,14 @@ marenka-menu/
 │   └── menu.js           # ← THE menu content (TR/EN). Edit this to update the menu.
 └── assets/
     ├── logo.svg          # Marenka wordmark (themeable via `currentColor`)
-    ├── favicon.svg
-    └── fonts/            # Playfair Display (Regular/Medium/Bold/ExtraBold/Black)
+    └── favicon.svg
 ```
 
-> Poppins Light Italic (used **only** for the allergen line) is loaded from
-> Google Fonts in `index.html`; everything else is Playfair Display, bundled
-> locally. If you later host Poppins yourself, add an `@font-face` for it in
-> `css/style.css` and drop the Google Fonts `<link>`.
+> **Montserrat** (the primary type for the whole menu) and **Poppins Light
+> Italic** (used **only** for the allergen line) are both loaded from Google
+> Fonts in `index.html`, each with a graceful system fallback. To self-host
+> instead, add `@font-face` rules in `css/style.css` and drop the Google Fonts
+> `<link>`.
 
 ## Editing the menu — `data/menu.js`
 
@@ -100,7 +100,7 @@ under `:root`. Change them once and the whole menu follows. Key tokens:
 | `--bg` | terracotta canvas (`#a45729`) |
 | `--cream` / `--cream-soft` / `--allergen` | text (white tones) |
 | `--gold` / `--gold-deep` | accent lines, dots, borders, hover |
-| `--font-serif` | Playfair Display (everything except the allergen line) |
+| `--font-serif` | Montserrat (everything except the allergen line) |
 | `--font-allergen` | Poppins Light Italic (allergen line only) |
 | `--space-1 … --space-12` | 4/8-based spacing scale |
 | `--content-max` | max reading width (cards are centered within it) |

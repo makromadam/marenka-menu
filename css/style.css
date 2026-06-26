@@ -8,34 +8,8 @@
    ========================================================================== */
 
 /* 0 · FONTS ----------------------------------------------------------------- */
-/* Playfair Display is shipped locally (assets/fonts). Poppins Light Italic —
-   used ONLY for the allergen line — is pulled from Google Fonts via index.html,
-   with a graceful system-italic fallback. */
-@font-face {
-  font-family: "Playfair Display";
-  src: url("../assets/fonts/PlayfairDisplay-Regular.ttf") format("truetype");
-  font-weight: 400; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: "Playfair Display";
-  src: url("../assets/fonts/PlayfairDisplay-Medium.ttf") format("truetype");
-  font-weight: 500; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: "Playfair Display";
-  src: url("../assets/fonts/PlayfairDisplay-Bold.ttf") format("truetype");
-  font-weight: 700; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: "Playfair Display";
-  src: url("../assets/fonts/PlayfairDisplay-ExtraBold.ttf") format("truetype");
-  font-weight: 800; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: "Playfair Display";
-  src: url("../assets/fonts/PlayfairDisplay-Black.ttf") format("truetype");
-  font-weight: 900; font-style: normal; font-display: swap;
-}
+/* Montserrat (primary type) and Poppins Light Italic (allergen line only) are
+   both pulled from Google Fonts via index.html, with graceful system fallbacks. */
 
 /* 1 · DESIGN TOKENS --------------------------------------------------------- */
 :root {
@@ -57,7 +31,8 @@
   --overlay:     rgba(0, 0, 0, 0.10);
 
   /* Typography */
-  --font-serif: "Playfair Display", "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  /* Name kept as --font-serif for compatibility; now carries Montserrat (sans). */
+  --font-serif: "Montserrat", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-allergen: "Poppins", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 
   /* Fluid type scale (320 → 1440) */
@@ -543,12 +518,12 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 .category__label {
   display: block;
   text-align: center;          /* centered sub-category heading */
-  font-size: var(--fs-category);
-  font-weight: 600;
-  letter-spacing: 0.26em;
+  font-size: var(--fs-section);/* standard sub-heading size (was --fs-category, too small) */
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--cream);
-  padding-left: 0.26em;        /* optical: balance trailing letter-spacing */
+  padding-left: 0.16em;        /* optical: balance trailing letter-spacing */
 }
 .category__note {
   margin-top: var(--space-1);

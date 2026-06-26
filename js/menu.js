@@ -224,14 +224,8 @@
     var sec = el("section", "menu-section",
       { id: "sec-" + section.id, "aria-labelledby": "h-" + section.id, role: "tabpanel", tabindex: "-1" });
 
-    // page header — consistent across every page: eyebrow (Food/Drinks) + title
+    // page header — consistent across every page: just the section title
     var head = el("div", "section-head");
-    var eye = el("span", "section-head__eyebrow");
-    // a section may carry its own eyebrow; otherwise fall back to Food/Drinks
-    var eyebrow = section.eyebrow && (section.eyebrow.tr || section.eyebrow.en)
-      ? section.eyebrow : macroGroup(section.id);
-    eye.appendChild(bilingual("span", null, eyebrow));
-    head.appendChild(eye);
     var title = el("h2", "section-head__title", { id: "h-" + section.id });
     title.appendChild(bilingual("span", null, section.label));
     head.appendChild(title);
