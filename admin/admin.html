@@ -8,6 +8,20 @@
   <!--ADMIN_CSS-->
 </head>
 <body>
+  <div id="login" class="login">
+    <form id="login-form" class="login__card" autocomplete="on">
+      <div class="login__brand">Marenka<small>Yönetim Paneli</small></div>
+      <label class="login__label">Kullanıcı adı
+        <input id="login-user" type="text" autocomplete="username" autocapitalize="off" spellcheck="false" />
+      </label>
+      <label class="login__label">Şifre
+        <input id="login-pass" type="password" autocomplete="current-password" />
+      </label>
+      <button class="btn btn--primary btn--block" type="submit">Giriş</button>
+      <p id="login-error" class="login__error" hidden>Kullanıcı adı veya şifre hatalı.</p>
+    </form>
+  </div>
+
   <div class="app">
     <header class="topbar">
       <span class="topbar__brand">Marenka <small>Yönetim Paneli</small></span>
@@ -18,11 +32,16 @@
       <button id="btn-reset" class="btn btn--ghost btn--sm" type="button">Orijinale dön</button>
       <button id="btn-data" class="btn btn--sm" type="button">Veri indir (menu.js)</button>
       <button id="btn-html" class="btn btn--primary btn--sm" type="button">Menüyü indir (HTML)</button>
+      <button id="btn-logout" class="btn btn--ghost btn--sm" type="button">Çıkış</button>
       <span id="status" class="topbar__status">Hazır</span>
     </header>
 
     <div class="main">
       <aside class="tree">
+        <div class="tree__search">
+          <input id="search" type="search" placeholder="Ürün, kategori veya bölüm ara…" autocomplete="off" />
+          <button id="search-clear" class="tree__search-clear" type="button" title="Temizle" hidden>✕</button>
+        </div>
         <div id="tree-body"></div>
       </aside>
       <main id="detail" class="detail"></main>

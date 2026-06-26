@@ -39,8 +39,36 @@ body {
 button { font-family: inherit; font-size: inherit; cursor: pointer; }
 input, textarea, select { font-family: inherit; font-size: inherit; }
 
+/* ---- auth gate ----------------------------------------------------------- */
+/* locked by default; admin.js adds .is-authed once the password is accepted */
+.app { display: none; }
+.login { display: flex; }
+body.is-authed .app { display: flex; }
+body.is-authed .login { display: none; }
+
+.login {
+  position: fixed; inset: 0; z-index: 50;
+  align-items: center; justify-content: center;
+  background: radial-gradient(120% 120% at 50% 0%, var(--bg) 0%, var(--bg-deep) 100%);
+  padding: 24px;
+}
+.login__card {
+  width: 100%; max-width: 340px;
+  background: var(--paper-2); border-radius: 16px; box-shadow: var(--shadow);
+  padding: 26px 24px; display: flex; flex-direction: column; gap: 14px;
+}
+.login__brand {
+  font-weight: 700; font-size: 20px; letter-spacing: .03em; text-align: center;
+  color: var(--bg-deep); margin-bottom: 6px;
+}
+.login__brand small { display: block; font-weight: 400; font-size: 11px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--ink-soft); margin-top: 4px; }
+.login__label { font-size: 12px; font-weight: 600; color: var(--ink-soft); display: block; }
+.login__label input { margin-top: 5px; }
+.login__error { color: var(--danger); font-size: 13px; margin: 2px 0 0; text-align: center; }
+
 /* ---- layout -------------------------------------------------------------- */
-.app { display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
+.app { flex-direction: column; height: 100vh; height: 100dvh; }
 
 .topbar {
   flex: 0 0 auto;
@@ -78,9 +106,43 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
   flex: 0 0 340px; max-width: 50%;
   border-right: 1px solid var(--line);
   background: var(--paper-2);
-  overflow: auto; padding: 12px;
+  overflow: auto; padding: 0 12px 12px;
+  display: flex; flex-direction: column;
 }
-.tree__add { margin: 6px 2px 14px; }
+.tree__search {
+  position: sticky; top: 0; z-index: 2; background: var(--paper-2);
+  display: flex; align-items: center; gap: 6px; padding: 12px 0 10px; margin-bottom: 4px;
+  border-bottom: 1px solid var(--line);
+}
+.tree__search input {
+  flex: 1 1 auto; border: 1px solid var(--line-strong); border-radius: 999px;
+  padding: 8px 13px; font-size: 13px; background: #fff; outline: none;
+}
+.tree__search input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(164,87,41,.15); }
+.tree__search-clear {
+  flex: 0 0 auto; border: 1px solid var(--line); background: #fff; border-radius: 999px;
+  width: 30px; height: 30px; color: var(--ink-soft); font-size: 13px;
+}
+.tree__search-clear:hover { border-color: var(--line-strong); }
+
+/* search results */
+.results__head { font-size: 12px; color: var(--ink-soft); margin: 6px 2px 8px; }
+.result {
+  display: flex; align-items: baseline; gap: 8px; width: 100%; text-align: left;
+  border: 1px solid var(--line); background: #fff; border-radius: 8px;
+  padding: 7px 10px; margin-bottom: 6px;
+}
+.result:hover { border-color: var(--line-strong); background: var(--accent-soft); }
+.result.is-selected { outline: 2px solid var(--line-strong); }
+.result__kind { flex: 0 0 auto; font-size: 10px; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: #fff; background: var(--accent); border-radius: 999px; padding: 2px 7px; }
+.result__kind--cat { background: #7a6a55; }
+.result__kind--sec { background: #4f6d57; }
+.result__body { flex: 1 1 auto; min-width: 0; }
+.result__name { font-weight: 600; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.result__name mark { background: #ffe9b0; color: inherit; border-radius: 2px; }
+.result__path { font-size: 11px; color: var(--ink-soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.results__empty { color: var(--ink-soft); padding: 16px 4px; }
 .node { margin-bottom: 2px; }
 .node__row {
   display: flex; align-items: center; gap: 4px;
@@ -136,11 +198,11 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
 .bi__col label { display: block; font-size: 11px; font-weight: 700; letter-spacing: .06em; color: var(--accent); margin-bottom: 4px; }
 @media (max-width: 560px) { .bi { grid-template-columns: 1fr; } }
 
-input[type="text"], textarea, select {
-  width: 100%; border: 1px solid var(--line-strong); border-radius: 8px;
+input[type="text"], input[type="password"], textarea, select {
+  display: block; width: 100%; border: 1px solid var(--line-strong); border-radius: 8px;
   padding: 9px 11px; background: #fff; color: var(--ink); outline: none;
 }
-input[type="text"]:focus, textarea:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(164,87,41,.15); }
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(164,87,41,.15); }
 textarea { resize: vertical; min-height: 60px; line-height: 1.4; }
 
 .check { display: flex; align-items: flex-start; gap: 9px; }
@@ -176,6 +238,20 @@ textarea { resize: vertical; min-height: 60px; line-height: 1.4; }
 </style>
 </head>
 <body>
+  <div id="login" class="login">
+    <form id="login-form" class="login__card" autocomplete="on">
+      <div class="login__brand">Marenka<small>Yönetim Paneli</small></div>
+      <label class="login__label">Kullanıcı adı
+        <input id="login-user" type="text" autocomplete="username" autocapitalize="off" spellcheck="false" />
+      </label>
+      <label class="login__label">Şifre
+        <input id="login-pass" type="password" autocomplete="current-password" />
+      </label>
+      <button class="btn btn--primary btn--block" type="submit">Giriş</button>
+      <p id="login-error" class="login__error" hidden>Kullanıcı adı veya şifre hatalı.</p>
+    </form>
+  </div>
+
   <div class="app">
     <header class="topbar">
       <span class="topbar__brand">Marenka <small>Yönetim Paneli</small></span>
@@ -186,11 +262,16 @@ textarea { resize: vertical; min-height: 60px; line-height: 1.4; }
       <button id="btn-reset" class="btn btn--ghost btn--sm" type="button">Orijinale dön</button>
       <button id="btn-data" class="btn btn--sm" type="button">Veri indir (menu.js)</button>
       <button id="btn-html" class="btn btn--primary btn--sm" type="button">Menüyü indir (HTML)</button>
+      <button id="btn-logout" class="btn btn--ghost btn--sm" type="button">Çıkış</button>
       <span id="status" class="topbar__status">Hazır</span>
     </header>
 
     <div class="main">
       <aside class="tree">
+        <div class="tree__search">
+          <input id="search" type="search" placeholder="Ürün, kategori veya bölüm ara…" autocomplete="off" />
+          <button id="search-clear" class="tree__search-clear" type="button" title="Temizle" hidden>✕</button>
+        </div>
         <div id="tree-body"></div>
       </aside>
       <main id="detail" class="detail"></main>
@@ -9228,10 +9309,51 @@ window.MENU_DATA = {
   "use strict";
 
   var DRAFT_KEY = "marenka.admin.draft.v1";
+  var AUTH_KEY = "marenka.admin.auth.v1";
+  // SHA-256 of "<user>:<password>" — credentials are NOT stored in plain text.
+  var AUTH_HASH = "6cea591e4864646c8f8bce8148e89c74fe505a60afc212552de165a0da521bee";
   var DATA = null;
   var sel = null;        // { type:'section'|'group'|'item', si, gi, ii }
   var open = {};         // expansion state, keys "s0", "s0g1"
   var saveTimer = null;
+  var searchQuery = "";  // active search/filter text
+  var booted = false;
+
+  /* ---- SHA-256 (self-contained, works in any context) -------------------- */
+  var sha256 = function sha256(ascii) {
+    function rr(value, amount) { return (value >>> amount) | (value << (32 - amount)); }
+    var mathPow = Math.pow, maxWord = mathPow(2, 32), i, j, result = "";
+    var words = [], asciiBitLength = ascii.length * 8;
+    var hash = sha256.h = sha256.h || [], k = sha256.k = sha256.k || [], primeCounter = k.length;
+    var isComposite = {};
+    for (var candidate = 2; primeCounter < 64; candidate++) {
+      if (!isComposite[candidate]) {
+        for (i = 0; i < 313; i += candidate) { isComposite[i] = candidate; }
+        hash[primeCounter] = (mathPow(candidate, .5) * maxWord) | 0;
+        k[primeCounter++] = (mathPow(candidate, 1 / 3) * maxWord) | 0;
+      }
+    }
+    ascii += "\x80";
+    while (ascii.length % 64 - 56) ascii += "\x00";
+    for (i = 0; i < ascii.length; i++) { j = ascii.charCodeAt(i); if (j >> 8) return; words[i >> 2] |= j << ((3 - i) % 4) * 8; }
+    words[words.length] = (asciiBitLength / maxWord) | 0;
+    words[words.length] = asciiBitLength;
+    for (j = 0; j < words.length;) {
+      var w = words.slice(j, j += 16), oldHash = hash; hash = hash.slice(0, 8);
+      for (i = 0; i < 64; i++) {
+        var w15 = w[i - 15], w2 = w[i - 2], a = hash[0], e = hash[4];
+        var t1 = hash[7] + (rr(e, 6) ^ rr(e, 11) ^ rr(e, 25)) + ((e & hash[5]) ^ ((~e) & hash[6])) + k[i]
+          + (w[i] = (i < 16) ? w[i] : (w[i - 16] + (rr(w15, 7) ^ rr(w15, 18) ^ (w15 >>> 3)) + w[i - 7]
+            + (rr(w2, 17) ^ rr(w2, 19) ^ (w2 >>> 10))) | 0);
+        var t2 = (rr(a, 2) ^ rr(a, 13) ^ rr(a, 22)) + ((a & hash[1]) ^ (a & hash[2]) ^ (hash[1] & hash[2]));
+        hash = [(t1 + t2) | 0].concat(hash); hash[4] = (hash[4] + t1) | 0;
+      }
+      for (i = 0; i < 8; i++) { hash[i] = (hash[i] + oldHash[i]) | 0; }
+    }
+    for (i = 0; i < 8; i++) { for (j = 3; j + 1; j--) { var b = (hash[i] >> (j * 8)) & 255; result += ((b < 16) ? 0 : "") + b.toString(16); } }
+    return result;
+  };
+  function hashCreds(s) { return sha256(unescape(encodeURIComponent(s))); }
 
   /* ---- tiny helpers ------------------------------------------------------ */
   function el(tag, cls, attrs) {
@@ -9354,6 +9476,65 @@ window.MENU_DATA = {
   }
 
   function renderTree() {
+    if (searchQuery && searchQuery.trim()) renderSearchResults();
+    else renderFullTree();
+  }
+
+  function norm(s) { return String(s == null ? "" : s).toLocaleLowerCase("tr"); }
+  function matchAny(q) {
+    for (var i = 1; i < arguments.length; i++) {
+      var o = arguments[i];
+      if (o && (norm(o.tr).indexOf(q) >= 0 || norm(o.en).indexOf(q) >= 0)) return true;
+    }
+    return false;
+  }
+  function escapeHtml(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function highlight(text, q) {
+    var e = escapeHtml(text); if (!q) return e;
+    try { return e.replace(new RegExp("(" + q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi"), "<mark>$1</mark>"); }
+    catch (_) { return e; }
+  }
+  function renderSearchResults() {
+    var root = $("tree-body"); root.innerHTML = "";
+    var q = norm(searchQuery).trim();
+    var results = [];
+    (DATA.sections || []).forEach(function (s, si) {
+      if (matchAny(q, s.label, s.navLabel, s.eyebrow)) results.push({ type: "section", si: si });
+      (s.groups || []).forEach(function (g, gi) {
+        if (matchAny(q, g.label, g.note)) results.push({ type: "group", si: si, gi: gi });
+        (g.items || []).forEach(function (it, ii) {
+          if (matchAny(q, it.name, it.desc, it.allergens)) results.push({ type: "item", si: si, gi: gi, ii: ii });
+        });
+      });
+    });
+    var head = el("div", "results__head"); head.textContent = results.length + " sonuç";
+    root.appendChild(head);
+    if (!results.length) { var em = el("div", "results__empty"); em.textContent = "Eşleşen öğe yok."; root.appendChild(em); return; }
+    var CAP = 300;
+    results.slice(0, CAP).forEach(function (r) { root.appendChild(resultRow(r, q)); });
+    if (results.length > CAP) {
+      var more = el("div", "results__empty");
+      more.textContent = "… ve " + (results.length - CAP) + " sonuç daha. Aramayı daraltın.";
+      root.appendChild(more);
+    }
+  }
+  function resultRow(r, q) {
+    var s = DATA.sections[r.si];
+    var btn = el("button", "result" + (isSel(r.type, r.si, r.gi, r.ii) ? " is-selected" : ""), { type: "button" });
+    var kindLabel, kindCls = "", name, path = "";
+    if (r.type === "section") { kindLabel = "Bölüm"; kindCls = "result__kind--sec"; name = txt(s.label); }
+    else if (r.type === "group") { kindLabel = "Kategori"; kindCls = "result__kind--cat"; name = txt(s.groups[r.gi].label); path = txt(s.label); }
+    else { var it = s.groups[r.gi].items[r.ii]; kindLabel = "Ürün"; name = txt(it.name); path = txt(s.label) + " › " + txt(s.groups[r.gi].label); }
+    var k = el("span", "result__kind " + kindCls); k.textContent = kindLabel;
+    var body = el("div", "result__body");
+    var nm = el("div", "result__name"); nm.innerHTML = highlight(name || "(adsız)", q); body.appendChild(nm);
+    if (path) { var p = el("div", "result__path"); p.textContent = path; body.appendChild(p); }
+    btn.appendChild(k); btn.appendChild(body);
+    btn.addEventListener("click", function () { select(r.type, r.si, r.gi, r.ii); });
+    return btn;
+  }
+
+  function renderFullTree() {
     var root = $("tree-body"); root.innerHTML = "";
     (DATA.sections || []).forEach(function (s, si) {
       var sk = "s" + si;
@@ -9717,9 +9898,22 @@ window.MENU_DATA = {
     var fi = $("file-import");
     $("btn-import").addEventListener("click", function () { fi.click(); });
     fi.addEventListener("change", function () { if (fi.files && fi.files[0]) importFile(fi.files[0]); fi.value = ""; });
+    $("btn-logout").addEventListener("click", function () {
+      try { sessionStorage.removeItem(AUTH_KEY); } catch (e) {}
+      location.reload();
+    });
+    // search / filter
+    var si = $("search"), sc = $("search-clear"), st = null;
+    si.addEventListener("input", function () {
+      sc.hidden = !si.value;
+      if (st) clearTimeout(st);
+      st = setTimeout(function () { searchQuery = si.value; renderTree(); }, 120);
+    });
+    sc.addEventListener("click", function () { si.value = ""; sc.hidden = true; searchQuery = ""; renderTree(); si.focus(); });
   }
 
   function boot() {
+    if (booted) return; booted = true;
     loadInitial();
     bindToolbar();
     // expand the first section for convenience
@@ -9728,8 +9922,28 @@ window.MENU_DATA = {
     setStatus(localStorage.getItem(DRAFT_KEY) ? "Yerel taslak yüklendi" : "Hazır");
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
-  else boot();
+  /* ---- auth gate --------------------------------------------------------- */
+  function unlock() { document.body.classList.add("is-authed"); boot(); }
+  function initAuth() {
+    var authed = false;
+    try { authed = sessionStorage.getItem(AUTH_KEY) === "1"; } catch (e) {}
+    if (authed) { unlock(); return; }
+    var form = $("login-form");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var u = ($("login-user").value || "").trim(), p = $("login-pass").value || "";
+      if (hashCreds(u + ":" + p) === AUTH_HASH) {
+        try { sessionStorage.setItem(AUTH_KEY, "1"); } catch (e2) {}
+        $("login-error").hidden = true; unlock();
+      } else {
+        $("login-error").hidden = false; $("login-pass").value = ""; $("login-pass").focus();
+      }
+    });
+    try { $("login-user").focus(); } catch (e3) {}
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAuth);
+  else initAuth();
 })();
 
 </script>
