@@ -592,6 +592,10 @@ window.MENU_DATA = {
           "tr": "Yemekler",
           "en": "Food"
         }
+      },
+      "footnote": {
+        "tr": "Kahvaltı servisimiz 13.00'a kadardır.",
+        "en": "Breakfast is served until 1:00 PM."
       }
     },
     {

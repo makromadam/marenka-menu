@@ -103,9 +103,10 @@
     function fixObj(o) { if (o) { if (o.tr != null) o.tr = fixSpacing(o.tr); if (o.en != null) o.en = fixSpacing(o.en); } return o; }
     function emptyBi(o) { return !o || ((!o.tr || !o.tr.trim()) && (!o.en || !o.en.trim())); }
     (d.sections || []).forEach(function (s) {
-      fixObj(s.navLabel); fixObj(s.label); fixObj(s.note); fixObj(s.eyebrow);
+      fixObj(s.navLabel); fixObj(s.label); fixObj(s.note); fixObj(s.eyebrow); fixObj(s.footnote);
       if (emptyBi(s.note)) delete s.note;
       if (emptyBi(s.eyebrow)) delete s.eyebrow;
+      if (emptyBi(s.footnote)) delete s.footnote;
       (s.groups || []).forEach(function (g) {
         fixObj(g.label); fixObj(g.note);
         if (emptyBi(g.note)) delete g.note;
@@ -442,6 +443,8 @@
     card.appendChild(biField("Üst başlık / eyebrow (isteğe bağlı)", function (create) { return create ? ensure(s, "eyebrow") : s.eyebrow; },
       { hint: "Başlığın üstündeki küçük etiket (ör. Mutfaktan / İçkiler). Boş bırakılırsa otomatik belirlenir." }));
     card.appendChild(biField("Not (isteğe bağlı)", function (create) { return create ? ensure(s, "note") : s.note; }, { area: true }));
+    card.appendChild(biField("Alt not (bölümün altında — isteğe bağlı)", function (create) { return create ? ensure(s, "footnote") : s.footnote; },
+      { area: true, hint: "Bölümün en altında gösterilir (ör. \"Kahvaltı servisimiz 13.00'a kadardır.\")." }));
     var idField = field("Kimlik (id) — bağlantı/sekme için", textInput(s.id, function (v) {
       s.id = slug(v) || s.id; changed();
     }), "Yalnızca küçük harf, rakam ve tire. Mevcut bölümlerde değiştirmemeniz önerilir.");

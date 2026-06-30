@@ -547,6 +547,17 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
   color: var(--cream-soft);
 }
 
+/* Closing note for a whole section (e.g. breakfast service hours) */
+.section-foot {
+  margin-top: var(--space-8);
+  text-align: center;
+}
+.section-foot__note {
+  font-size: var(--fs-allergen);
+  font-style: italic;
+  color: var(--cream-soft);
+}
+
 /* Category label (Omelettes, Negroni…) */
 .category {
   margin-top: var(--space-6);
@@ -756,7 +767,7 @@ body[data-scrolled="true"] .header__logo { width: clamp(112px, 28vw, 150px); }
 body[data-lang="tr"] .lang.en,
 body[data-lang="en"] .lang.tr { display: none; }
 /* block-level bilingual nodes (descriptions) keep their box model */
-.item__desc.lang, .section-head__note.lang, .category__note.lang { display: block; }
+.item__desc.lang, .section-head__note.lang, .category__note.lang, .section-foot__note.lang { display: block; }
 body[data-lang="tr"] .item__desc.lang.en,
 body[data-lang="en"] .item__desc.lang.tr { display: none; }
 
@@ -1610,6 +1621,10 @@ window.MENU_DATA = {
           "tr": "Yemekler",
           "en": "Food"
         }
+      },
+      "footnote": {
+        "tr": "Kahvaltı servisimiz 13.00'a kadardır.",
+        "en": "Breakfast is served until 1:00 PM."
       }
     },
     {
@@ -10275,6 +10290,13 @@ window.MENU_DATA = {
     (section.groups || []).forEach(function (g, gi) {
       sec.appendChild(renderCategory(g, section.id, gi));
     });
+
+    // optional closing note for the whole section (e.g. service hours)
+    if (section.footnote && (section.footnote.tr || section.footnote.en)) {
+      var foot = el("div", "section-foot");
+      foot.appendChild(bilingual("p", "section-foot__note", section.footnote));
+      sec.appendChild(foot);
+    }
 
     // page-to-page pager (← previous section · next section →)
     var prev = sections[index - 1], next = sections[index + 1];

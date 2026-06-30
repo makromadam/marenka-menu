@@ -246,6 +246,13 @@
       sec.appendChild(renderCategory(g, section.id, gi));
     });
 
+    // optional closing note for the whole section (e.g. service hours)
+    if (section.footnote && (section.footnote.tr || section.footnote.en)) {
+      var foot = el("div", "section-foot");
+      foot.appendChild(bilingual("p", "section-foot__note", section.footnote));
+      sec.appendChild(foot);
+    }
+
     // page-to-page pager (← previous section · next section →)
     var prev = sections[index - 1], next = sections[index + 1];
     if (prev || next) {
