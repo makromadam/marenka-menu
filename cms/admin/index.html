@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Marenka — Yönetim Paneli</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <div id="login" class="login">
+    <form id="login-form" class="login__card" autocomplete="on">
+      <div class="login__brand">Marenka<small>Yönetim Paneli</small></div>
+      <label class="login__label">Kullanıcı adı
+        <input id="login-user" type="text" autocomplete="username" autocapitalize="off" spellcheck="false" />
+      </label>
+      <label class="login__label">Şifre
+        <input id="login-pass" type="password" autocomplete="current-password" />
+      </label>
+      <button class="btn btn--primary btn--block" type="submit">Giriş</button>
+      <p id="login-error" class="login__error" hidden>Kullanıcı adı veya şifre hatalı.</p>
+    </form>
+  </div>
+
+  <div class="app">
+    <header class="topbar">
+      <span class="topbar__brand">Marenka <small>Yönetim Paneli</small></span>
+      <button id="btn-add-section" class="btn btn--sm" type="button">+ Bölüm</button>
+      <div class="topbar__spacer"></div>
+      <button id="btn-preview" class="btn btn--ghost btn--sm" type="button" title="Taslağı yeni sekmede önizle">Önizle</button>
+      <button id="btn-revisions" class="btn btn--ghost btn--sm" type="button" title="Yayınlanan eski sürümler">Geçmiş</button>
+      <button id="btn-import" class="btn btn--ghost btn--sm" type="button" title="JSON/JS yedeğinden içe aktar">İçe aktar</button>
+      <button id="btn-export" class="btn btn--ghost btn--sm" type="button" title="Taslağı JSON olarak indir">Yedek</button>
+      <button id="btn-revert" class="btn btn--ghost btn--sm" type="button" title="Yayınlanan son sürüme dön">Yayına dön</button>
+      <button id="btn-publish" class="btn btn--primary btn--sm" type="button" title="Değişiklikleri canlı menüye al">Yayınla</button>
+      <button id="btn-logout" class="btn btn--ghost btn--sm" type="button">Çıkış</button>
+      <span id="status" class="topbar__status">Hazır</span>
+    </header>
+
+    <div class="main">
+      <aside class="tree">
+        <div class="tree__search">
+          <input id="search" type="search" placeholder="Ürün, kategori veya bölüm ara…" autocomplete="off" />
+          <button id="search-clear" class="tree__search-clear" type="button" title="Temizle" hidden>✕</button>
+        </div>
+        <div id="tree-body"></div>
+      </aside>
+      <main id="detail" class="detail"></main>
+    </div>
+  </div>
+
+  <!-- revisions / history -->
+  <div id="revisions" class="modal" hidden>
+    <div class="modal__card" role="dialog" aria-modal="true" aria-label="Yayın geçmişi">
+      <div class="modal__head">
+        <h2>Yayın geçmişi</h2>
+        <button id="revisions-close" class="btn btn--ghost btn--sm" type="button">Kapat</button>
+      </div>
+      <p class="modal__hint">Bir sürümü taslağa yükleyip “Yayınla” ile yeniden canlıya alabilirsiniz.</p>
+      <div id="revisions-list" class="modal__list"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <input id="file-import" class="hidden-file" type="file" accept=".js,.json,.html,application/json,text/javascript,text/html" />
+
+  <script src="admin.js"></script>
+</body>
+</html>

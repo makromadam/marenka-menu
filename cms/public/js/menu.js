@@ -1,0 +1,659 @@
+/* =============================================================================
+   MARENKA — menu interactions + renderer (database edition)
+   The menu is fetched from the API (/api/menu) and re-rendered live whenever
+   the owner publishes a change (Server-Sent Events on /api/events).
+   Everything visual lives in CSS; this file only:
+     · fetches the menu data and renders the cards
+     · language switching (TR / EN)            → sets data-lang, persists choice
+     · cover ↔ menu view + the back button     → sets data-view (never history.back)
+     · sticky-header compaction + sub-nav scroll-spy (progressive enhancement)
+     · live refresh on publish (SSE), preserving the open section / language
+   ========================================================================== */
+(function () {
+  "use strict";
+
+  var root = document.documentElement;
+  var body = document.body;
+  var CUR = "TL"; // shown after the amount, e.g. "500 TL"
+  var STORE_LANG = "marenka.lang";
+  var SUPPORTED = { tr: true, en: true };
+
+  /* ---- tiny DOM helpers -------------------------------------------------- */
+  function el(tag, cls, attrs) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (attrs) for (var k in attrs) n.setAttribute(k, attrs[k]);
+    return n;
+  }
+
+  // Scroll helpers — older Safari/WebKit ignores the object form of scrollTo,
+  // so fall back to the legacy positional form / scrollLeft assignment.
+  var CAN_SMOOTH = "scrollBehavior" in document.documentElement.style;
+  function winScroll(y, smooth) {
+    if (CAN_SMOOTH) {
+      try { window.scrollTo({ top: y, behavior: smooth ? "smooth" : "auto" }); return; } catch (e) {}
+    }
+    window.scrollTo(0, y);
+  }
+  function elScrollX(node, x, smooth) {
+    if (CAN_SMOOTH && node.scrollTo) {
+      try { node.scrollTo({ left: x, behavior: smooth ? "smooth" : "auto" }); return; } catch (e) {}
+    }
+    node.scrollLeft = x;
+  }
+
+  // Render a bilingual value as two spans; only the active language shows (CSS).
+  function bilingual(tag, cls, value) {
+    var frag = document.createDocumentFragment();
+    // International terms (value.latin) are cased with English rules even on the
+    // Turkish span, so CSS uppercase never produces a dotted "İ" (e.g. Negroni).
+    var trLang = value && value.latin ? "en" : "tr";
+    var tr = el(tag, (cls ? cls + " " : "") + "lang tr", { lang: trLang });
+    var en = el(tag, (cls ? cls + " " : "") + "lang en", { lang: "en" });
+    tr.textContent = value && value.tr != null ? value.tr : "";
+    en.textContent = value && value.en != null ? value.en : value && value.tr != null ? value.tr : "";
+    frag.appendChild(tr);
+    frag.appendChild(en);
+    return frag;
+  }
+
+  function slug(s) {
+    return String(s)
+      .toLowerCase()
+      .replace(/[çÇ]/g, "c").replace(/[ğĞ]/g, "g").replace(/[ıİ]/g, "i")
+      .replace(/[öÖ]/g, "o").replace(/[şŞ]/g, "s").replace(/[üÜ]/g, "u")
+      .replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+  }
+
+  function priceNode(value) {
+    var p = el("span", "item__price");
+    p.appendChild(document.createTextNode(String(value)));
+    // only append the currency to a real numeric price — placeholders like
+    // "***" show on their own
+    if (/\d/.test(String(value))) {
+      var cur = el("span", "cur");
+      cur.textContent = CUR;
+      p.appendChild(cur);
+    }
+    return p;
+  }
+
+  /* International food terms kept in English casing (plain "I") even inside a
+     Turkish dish name, so "Pizza" never renders dotted as "PİZZA" in one place
+     and "PIZZA" in another. */
+  var LATIN_WORD_RE = /\b(Pizza|Spaghetti|Fettuccine|Profiterol|Tiramisu|Margherita|Arrabbiata|Linguine|Risotto|Ravioli|Panini|Bruschetta|Calzone|Penne|Twist|Mojito|Mocktail|Milkshake|Mexican|Riesling|Chardonnay|Sauvignon|Viognier|Grigio|Sangiovese|Tempranillo|Nebbiolo|Chianti|Pinot|Merlot|Cabernet|Shiraz|Syrah|Rkatsiteli|Selection|Frizzante|Imperial|Impérial|Perignon|Pérignon|Chablis|Cinzano|Vietti|Vindemia|Jaffelin|Whispering|Atelier|Alazani|Riscal|Khilon|Bias|Rioja|Vina|Vita|Colli|Bruni|Louis|Noir|Ice|Ruffino|Carpaccio|Schnitzel|Chimichurri|Cider|Americano|White|Pilsen)\b/gi;
+
+  // Name node: EN span (always English casing) + TR span (Turkish casing, but
+  // international words wrapped lang="en"; whole span English when value.latin).
+  function nameNode(value) {
+    var frag = document.createDocumentFragment();
+    var tr = el("span", "lang tr", { lang: value && value.latin ? "en" : "tr" });
+    var trText = value && value.tr != null ? value.tr : "";
+    if (value && value.latin) {
+      tr.textContent = trText;
+    } else {
+      var parts = trText.split(LATIN_WORD_RE);
+      parts.forEach(function (part, i) {
+        if (!part) return;
+        if (i % 2 === 1) {
+          var w = el("span", null, { lang: "en" });
+          w.textContent = part;
+          tr.appendChild(w);
+        } else {
+          tr.appendChild(document.createTextNode(part));
+        }
+      });
+    }
+    var en = el("span", "lang en", { lang: "en" });
+    en.textContent = value && value.en != null ? value.en : trText;
+    frag.appendChild(tr);
+    frag.appendChild(en);
+    return frag;
+  }
+
+  /* ---- card ------------------------------------------------------------- */
+  function renderItem(item) {
+    var multi = Array.isArray(item.prices) && item.prices.length;
+    var li = el("li", "item" + (multi ? " item--multiprice" : ""));
+
+    var head = el("div", "item__head");
+    var name = el("h4", "item__name");
+    name.appendChild(nameNode(item.name));
+    head.appendChild(name);
+
+    if (!multi) {
+      var hasPrice = item.price != null && item.price !== "";
+      // only draw the dotted leader when there is something (price/volume) to
+      // lead to — otherwise a priceless item shows orphan dots
+      if (hasPrice || item.vol) {
+        head.appendChild(el("span", "item__leader", { "aria-hidden": "true" }));
+      }
+      if (item.vol) {
+        var vol = el("span", "item__vol");
+        vol.textContent = item.vol;
+        head.appendChild(vol);
+      }
+      if (hasPrice) {
+        head.appendChild(priceNode(item.price));
+      }
+    }
+    li.appendChild(head);
+
+    // multi-serving prices (spirits / rakı)
+    if (multi) {
+      var prices = el("div", "item__prices");
+      item.prices.forEach(function (pr) {
+        if (pr.value == null || pr.value === "") return;
+        var pair = el("span", "item__price-pair");
+        var m = el("span", "measure");
+        m.appendChild(bilingual("span", null, pr.label));
+        var a = el("span", "amount");
+        a.textContent = String(pr.value) + " " + CUR;
+        pair.appendChild(m);
+        pair.appendChild(a);
+        prices.appendChild(pair);
+      });
+      li.appendChild(prices);
+    }
+
+    // ingredients
+    if (item.desc && (item.desc.tr || item.desc.en)) {
+      var d = bilingual("p", "item__desc", item.desc);
+      li.appendChild(d);
+    }
+
+    // calories (kcal — universal, shown the same in both languages)
+    if (item.kcal != null && item.kcal !== "") {
+      var k = el("p", "item__kcal");
+      var kv = el("span", "item__kcal-val");
+      kv.textContent = String(item.kcal);
+      var ku = el("span", "item__kcal-unit");
+      ku.textContent = "kcal";
+      k.appendChild(kv);
+      k.appendChild(document.createTextNode(" "));
+      k.appendChild(ku);
+      li.appendChild(k);
+    }
+
+    // allergens (Poppins Light Italic — the only non-serif text in the menu)
+    if (item.allergens && (item.allergens.tr || item.allergens.en)) {
+      var aWrap = el("p", "item__allergen");
+      var labelTr = el("span", "lang tr", { lang: "tr" });
+      labelTr.innerHTML = '<span class="item__allergen-label">Alerjen:</span> ' + escapeHtml(item.allergens.tr || item.allergens.en);
+      var labelEn = el("span", "lang en", { lang: "en" });
+      labelEn.innerHTML = '<span class="item__allergen-label">Allergens:</span> ' + escapeHtml(item.allergens.en || item.allergens.tr);
+      aWrap.appendChild(labelTr);
+      aWrap.appendChild(labelEn);
+      li.appendChild(aWrap);
+    }
+    return li;
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+
+  /* ---- category + section ------------------------------------------------ */
+  function renderCategory(group, sectionId, gi) {
+    var frag = document.createDocumentFragment();
+    var cat = el("div", "category", { id: "cat-" + sectionId + "-" + gi });
+    var label = el("h3", "category__label");
+    label.appendChild(bilingual("span", null, group.label));
+    cat.appendChild(label);
+    if (group.note && (group.note.tr || group.note.en)) {
+      var note = bilingual("p", "category__note", group.note);
+      cat.appendChild(note);
+    }
+    frag.appendChild(cat);
+
+    var list = el("ul", "item-list");
+    (group.items || []).forEach(function (it) { list.appendChild(renderItem(it)); });
+    frag.appendChild(list);
+    return frag;
+  }
+
+  // which sections belong to the "Drinks" macro-group (rest are "Food")
+  var DRINK_IDS = { kokteyl: 1, bira: 1, raki: 1, distile: 1, sarap: 1 };
+  var SOFT_IDS = { alkolsuz: 1 };
+  function macroGroup(id) {
+    if (SOFT_IDS[id]) return { tr: "İçecekler", en: "Beverages" };
+    return DRINK_IDS[id] ? { tr: "İçkiler", en: "Drinks" } : { tr: "Yemekler", en: "Food" };
+  }
+
+  function renderSection(section, index, sections) {
+    var sec = el("section", "menu-section",
+      { id: "sec-" + section.id, "aria-labelledby": "h-" + section.id, role: "tabpanel", tabindex: "-1" });
+
+    // page header — consistent across every page: eyebrow (Food/Drinks) + title
+    var head = el("div", "section-head");
+    var eye = el("span", "section-head__eyebrow");
+    // a section may carry its own eyebrow; otherwise fall back to Food/Drinks
+    var eyebrow = section.eyebrow && (section.eyebrow.tr || section.eyebrow.en)
+      ? section.eyebrow : macroGroup(section.id);
+    eye.appendChild(bilingual("span", null, eyebrow));
+    head.appendChild(eye);
+    var title = el("h2", "section-head__title", { id: "h-" + section.id });
+    title.appendChild(bilingual("span", null, section.label));
+    head.appendChild(title);
+    var orn = el("div", "section-head__ornament", { "aria-hidden": "true" });
+    head.appendChild(orn);
+    if (section.note && (section.note.tr || section.note.en)) {
+      head.appendChild(bilingual("p", "section-head__note", section.note));
+    }
+    sec.appendChild(head);
+
+    (section.groups || []).forEach(function (g, gi) {
+      sec.appendChild(renderCategory(g, section.id, gi));
+    });
+
+    // optional closing note for the whole section (e.g. service hours)
+    if (section.footnote && (section.footnote.tr || section.footnote.en)) {
+      var foot = el("div", "section-foot");
+      foot.appendChild(bilingual("p", "section-foot__note", section.footnote));
+      sec.appendChild(foot);
+    }
+
+    // page-to-page pager (← previous section · next section →)
+    var prev = sections[index - 1], next = sections[index + 1];
+    if (prev || next) {
+      var pager = el("nav", "pager", { "aria-label": "Sayfalar / Pages" });
+      if (prev) {
+        var pb = el("button", "pager__btn pager__prev", { type: "button", "data-target": "sec-" + prev.id });
+        pb.appendChild(arrowSpan("‹"));
+        var pl = el("span", "pager__label"); pl.appendChild(bilingual("span", null, prev.navLabel || prev.label));
+        pb.appendChild(pl);
+        pager.appendChild(pb);
+      } else { pager.appendChild(el("span", "pager__spacer")); }
+      if (next) {
+        var nb = el("button", "pager__btn pager__next", { type: "button", "data-target": "sec-" + next.id });
+        var nl = el("span", "pager__label"); nl.appendChild(bilingual("span", null, next.navLabel || next.label));
+        nb.appendChild(nl);
+        nb.appendChild(arrowSpan("›"));
+        pager.appendChild(nb);
+      } else { pager.appendChild(el("span", "pager__spacer")); }
+      sec.appendChild(pager);
+    }
+    return sec;
+  }
+
+  function arrowSpan(ch) {
+    var s = el("span", "pager__arrow", { "aria-hidden": "true" });
+    s.textContent = ch;
+    return s;
+  }
+
+  /* ---- sub-nav (page tabs) ----------------------------------------------- */
+  function renderNav(sectionsData) {
+    var track = document.getElementById("subnav-track");
+    if (!track) return;
+    track.setAttribute("role", "tablist");
+    sectionsData.forEach(function (s) {
+      var a = el("a", "subnav__link",
+        { href: "#sec-" + s.id, "data-target": "sec-" + s.id, role: "tab",
+          id: "tab-" + s.id, "aria-controls": "sec-" + s.id });
+      a.appendChild(bilingual("span", null, s.navLabel || s.label));
+      track.appendChild(a);
+    });
+  }
+
+  /* ---- language ---------------------------------------------------------- */
+  var langBound = false;
+  function setLang(lang) {
+    if (!SUPPORTED[lang]) lang = "tr";
+    body.setAttribute("data-lang", lang);
+    root.setAttribute("lang", lang);
+    var btns = document.querySelectorAll(".lang-toggle__btn");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].setAttribute("aria-pressed", String(btns[i].getAttribute("data-lang") === lang));
+    }
+    try { localStorage.setItem(STORE_LANG, lang); } catch (e) {}
+  }
+
+  function initLang() {
+    // Turkish is the house default; a guest's explicit choice is remembered.
+    var saved = null;
+    try { saved = localStorage.getItem(STORE_LANG); } catch (e) {}
+    if (!SUPPORTED[saved]) saved = "tr";
+    setLang(saved);
+    if (langBound) return;
+    langBound = true;
+    document.querySelectorAll(".lang-toggle__btn").forEach(function (b) {
+      b.addEventListener("click", function () { setLang(b.getAttribute("data-lang")); });
+    });
+  }
+
+  /* ---- view (cover ↔ menu) ---------------------------------------------- */
+  var viewBound = false;
+  function setView(view) {
+    body.setAttribute("data-view", view);
+    window.scrollTo(0, 0);
+    if (view === "menu") {
+      // replay the entrance animation on the active page now that it's visible
+      var active = document.querySelector(".menu-section.is-active");
+      if (active) {
+        active.classList.remove("page-enter");
+        void active.offsetWidth;
+        active.classList.add("page-enter");
+      }
+      // move focus into the menu for keyboard/AT users
+      var skip = document.getElementById("menu-main");
+      if (skip) { try { skip.focus({ preventScroll: true }); } catch (e) { skip.focus(); } }
+    }
+  }
+
+  function initView() {
+    if (!viewBound) {
+      viewBound = true;
+      var enter = document.getElementById("enter-menu");
+      var back = document.getElementById("back-btn");
+      if (enter) enter.addEventListener("click", function () { setView("menu"); });
+      if (back) back.addEventListener("click", function () { setView("cover"); });
+    }
+    setView("cover");
+  }
+
+  /* ---- header compaction ------------------------------------------------- */
+  var scrollBound = false;
+  function initScrollChrome() {
+    if (scrollBound) return;
+    scrollBound = true;
+    var onScroll = function () {
+      body.setAttribute("data-scrolled", String(window.scrollY > 24));
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* ---- paging (one section = one page) ----------------------------------- */
+  // Only the active section is shown. Pages are switched by: the section tabs,
+  // the prev/next pager, or a horizontal swipe. Paging state is hoisted to
+  // module scope so the menu can be fully re-rendered on a live update without
+  // re-binding the global (document/window) listeners.
+  var currentSection = null;
+  var sections = [];
+  var sectionById = {};
+  var tabs = {};
+  var pageEls = [];
+  var pagenav = null, pagenavTrack = null;
+  var catObserver = null, catSetActive = null, catScrollSpy = null;
+  var pagingGlobalsBound = false;
+
+  function indexOf(secId) {
+    for (var i = 0; i < sections.length; i++) if ("sec-" + sections[i].id === secId) return i;
+    return -1;
+  }
+  function tabInView(tab) {
+    if (!tab || !tab.parentNode) return;
+    var track = tab.parentNode, pad = 16;
+    var l = tab.offsetLeft - pad, r = tab.offsetLeft + tab.offsetWidth + pad;
+    if (l < track.scrollLeft) elScrollX(track, l, true);
+    else if (r > track.scrollLeft + track.clientWidth)
+      elScrollX(track, r - track.clientWidth, true);
+  }
+  // pixels of sticky chrome above the content (compact header + the sub-nav)
+  function stickyOffset() {
+    var sub = document.querySelector(".subnav");
+    var hc = parseInt(getComputedStyle(root).getPropertyValue("--header-h-compact"), 10) || 64;
+    return hc + (sub ? sub.offsetHeight : 0) + 10;
+  }
+
+  // Build the in-page quick-jump strip for the active section's categories.
+  function buildPageNav(section) {
+    pagenavTrack.innerHTML = "";
+    var groups = section.groups || [];
+    if (groups.length <= 1) { pagenav.hidden = true; return; }
+    pagenav.hidden = false;
+    groups.forEach(function (g, gi) {
+      var id = "cat-" + section.id + "-" + gi;
+      var a = el("a", "pagenav__link", { href: "#" + id, "data-cat": id });
+      a.appendChild(bilingual("span", null, g.label));
+      pagenavTrack.appendChild(a);
+    });
+    elScrollX(pagenavTrack, 0, false);
+    observeCategories(section);
+  }
+
+  // True only when the page is actually scrollable AND scrolled to its end.
+  function atBottomScrollable() {
+    var se = document.scrollingElement || document.documentElement;
+    var ch = se.clientHeight || window.innerHeight;
+    if ((se.scrollHeight || 0) <= ch + 8) return false; // not scrollable
+    var st = window.scrollY || se.scrollTop || 0;
+    return (st + ch) >= (se.scrollHeight - 4);
+  }
+
+  // Highlight the quick-jump pill for whichever category is in view.
+  function observeCategories(section) {
+    if (catObserver) catObserver.disconnect();
+    if (catScrollSpy) { window.removeEventListener("scroll", catScrollSpy); catScrollSpy = null; }
+    catSetActive = null;
+    if (pagenav.hidden) return;
+    var links = {}, ids = [];
+    pagenavTrack.querySelectorAll(".pagenav__link").forEach(function (l) {
+      var id = l.getAttribute("data-cat");
+      links[id] = l; ids.push(id);
+    });
+    var cur = null;
+    catSetActive = function (id) {
+      if (!links[id] || id === cur) return;
+      cur = id;
+      for (var k in links) links[k].setAttribute("aria-current", String(k === id));
+      tabInView(links[id]);
+    };
+    if ("IntersectionObserver" in window) {
+      catObserver = new IntersectionObserver(function (entries) {
+        // at the very bottom the last category owns the highlight (it can't
+        // scroll high enough to enter this zone) — let the scroll spy win
+        if (atBottomScrollable()) return;
+        entries.forEach(function (e) {
+          if (e.isIntersecting) catSetActive(e.target.id);
+        });
+      }, { rootMargin: "-" + (stickyOffset() + 4) + "px 0px -55% 0px", threshold: 0 });
+      (section.groups || []).forEach(function (g, gi) {
+        var elc = document.getElementById("cat-" + section.id + "-" + gi);
+        if (elc) catObserver.observe(elc);
+      });
+    }
+    // Fallback: when scrolled to the bottom, activate the final category so its
+    // underline shows even though it never reaches the observer's zone.
+    catScrollSpy = function () {
+      if (atBottomScrollable() && ids.length) catSetActive(ids[ids.length - 1]);
+    };
+    window.addEventListener("scroll", catScrollSpy, { passive: true });
+  }
+
+  function showSection(secId, opts) {
+    if (!secId || secId === currentSection) return;
+    var dirBack = indexOf(secId) < indexOf(currentSection);
+    currentSection = secId;
+    for (var i = 0; i < pageEls.length; i++) {
+      pageEls[i].classList.toggle("is-active", pageEls[i].id === secId);
+    }
+    var active = document.getElementById(secId);
+    if (active) {
+      active.classList.remove("page-enter", "is-back");
+      void active.offsetWidth; // reflow → re-trigger the entrance animation
+      active.classList.add("page-enter");
+      if (dirBack) active.classList.add("is-back");
+    }
+    for (var key in tabs) {
+      var on = key === secId;
+      tabs[key].setAttribute("aria-current", String(on));
+      tabs[key].setAttribute("aria-selected", String(on));
+      tabs[key].setAttribute("tabindex", on ? "0" : "-1"); // roving tabindex
+    }
+    tabInView(tabs[secId]);
+    if (sectionById[secId]) buildPageNav(sectionById[secId]);
+    if (!opts || opts.scroll !== false) winScroll(0, false);
+  }
+
+  // Global (document/window) listeners — bound exactly once for the page's life.
+  function bindPagingGlobals() {
+    if (pagingGlobalsBound) return;
+    pagingGlobalsBound = true;
+    pagenav = document.getElementById("pagenav");
+    pagenavTrack = document.getElementById("pagenav-track");
+    // WAI-ARIA Tabs keyboard contract: arrow keys / Home / End move between tabs
+    var subTrack = document.getElementById("subnav-track");
+    if (subTrack) {
+      subTrack.addEventListener("keydown", function (e) {
+        var k = e.key;
+        if (k !== "ArrowRight" && k !== "ArrowLeft" && k !== "Home" && k !== "End") return;
+        if (!sections.length) return;
+        e.preventDefault();
+        var i = indexOf(currentSection), ni = i;
+        if (k === "ArrowRight") ni = (i + 1) % sections.length;
+        else if (k === "ArrowLeft") ni = (i - 1 + sections.length) % sections.length;
+        else if (k === "Home") ni = 0;
+        else if (k === "End") ni = sections.length - 1;
+        var target = "sec-" + sections[ni].id;
+        showSection(target);
+        if (tabs[target]) tabs[target].focus();
+      });
+    }
+    // pager (delegated on the menu container)
+    var mainEl = document.getElementById("menu-main");
+    if (mainEl) {
+      mainEl.addEventListener("click", function (e) {
+        var btn = e.target.closest ? e.target.closest(".pager__btn") : null;
+        if (btn) { showSection(btn.getAttribute("data-target")); }
+      });
+    }
+    // in-page quick-jump (delegated)
+    if (pagenavTrack) {
+      pagenavTrack.addEventListener("click", function (e) {
+        var a = e.target.closest ? e.target.closest(".pagenav__link") : null;
+        if (!a) return;
+        e.preventDefault();
+        var id = a.getAttribute("data-cat");
+        var target = document.getElementById(id);
+        if (target) {
+          var y = target.getBoundingClientRect().top + window.scrollY - stickyOffset();
+          winScroll(y, true);
+        }
+        if (catSetActive) catSetActive(id); // instant underline, even for the last category
+      });
+    }
+    initSwipe();
+  }
+
+  // Per-render wiring: rebuild lookup maps, bind the (fresh) tab links, and show
+  // either the section the guest was already on or the first one.
+  function setupPaging(newSections) {
+    sections = newSections || [];
+    bindPagingGlobals();
+    sectionById = {};
+    sections.forEach(function (s) { sectionById["sec-" + s.id] = s; });
+    tabs = {};
+    document.querySelectorAll(".subnav__link").forEach(function (l) {
+      var t = l.getAttribute("data-target");
+      tabs[t] = l;
+      l.addEventListener("click", function (e) { e.preventDefault(); showSection(t); });
+    });
+    pageEls = document.querySelectorAll(".menu-section");
+    if (catObserver) { catObserver.disconnect(); catObserver = null; }
+    if (catScrollSpy) { window.removeEventListener("scroll", catScrollSpy); catScrollSpy = null; }
+    catSetActive = null;
+    var want = (currentSection && sectionById[currentSection]) ? currentSection
+             : (sections.length ? "sec-" + sections[0].id : null);
+    currentSection = null; // force showSection to run even for the same id
+    showSection(want, { scroll: false });
+  }
+
+  /* ---- swipe ------------------------------------------------------------- */
+  function initSwipe() {
+    var menuEl = document.querySelector(".menu");
+    if (!menuEl) return;
+    var x0 = null, y0 = null, t0 = 0, ok = false;
+    menuEl.addEventListener("touchstart", function (e) {
+      if (e.touches.length !== 1) { ok = false; return; }
+      var tgt = e.target;
+      // let the horizontally-scrollable nav strips scroll themselves
+      if (tgt.closest && tgt.closest(".subnav")) { ok = false; return; }
+      var t = e.touches[0];
+      x0 = t.clientX; y0 = t.clientY; t0 = Date.now(); ok = true;
+    }, { passive: true });
+    menuEl.addEventListener("touchend", function (e) {
+      if (!ok || x0 === null) return;
+      ok = false;
+      var t = e.changedTouches[0];
+      var dx = t.clientX - x0, dy = t.clientY - y0, dt = Date.now() - t0;
+      x0 = null;
+      if (dt > 700 || Math.abs(dx) < 64 || Math.abs(dx) < Math.abs(dy) * 1.6) return;
+      var cur = indexOf(currentSection);
+      var target = dx < 0 ? sections[cur + 1] : sections[cur - 1];
+      if (target) showSection("sec-" + target.id);
+    }, { passive: true });
+  }
+
+  /* ---- boot -------------------------------------------------------------- */
+  var currentRevision = null;
+
+  function renderMenu(data) {
+    window.MENU_DATA = data;
+    var main = document.getElementById("menu-main");
+    if (!main) return;
+    if (data && data.tagline) {
+      var tg = document.getElementById("cover-tagline");
+      if (tg) { tg.innerHTML = ""; tg.appendChild(bilingual("span", null, data.tagline)); }
+    }
+    var sectionsData = (data && data.sections) || [];
+    var nav = document.getElementById("subnav-track");
+    if (nav) nav.innerHTML = "";
+    renderNav(sectionsData);
+    main.innerHTML = "";
+    var frag = document.createDocumentFragment();
+    sectionsData.forEach(function (s, i) { frag.appendChild(renderSection(s, i, sectionsData)); });
+    main.appendChild(frag);
+    setupPaging(sectionsData);
+  }
+
+  function menuEndpoint() {
+    return (location.pathname.replace(/\/+$/, "") === "/preview") ? "/api/menu/draft" : "/api/menu";
+  }
+  function loadAndRender() {
+    var url = menuEndpoint();
+    return fetch(url, { headers: { Accept: "application/json" }, credentials: "same-origin" })
+      .then(function (r) {
+        // draft preview may be unauthorised → fall back to the live menu
+        if (!r.ok && url !== "/api/menu") {
+          return fetch("/api/menu", { headers: { Accept: "application/json" } }).then(function (x) { return x.json(); });
+        }
+        return r.json();
+      })
+      .then(function (d) {
+        if (d && typeof d.revision !== "undefined") currentRevision = d.revision;
+        renderMenu((d && d.menu) || { sections: [] });
+      })
+      .catch(function () { /* network blip — keep whatever is on screen */ });
+  }
+
+  function connectLive() {
+    // only the live menu auto-refreshes; the draft preview is a snapshot
+    if (!window.EventSource || menuEndpoint() !== "/api/menu") return;
+    try {
+      var es = new EventSource("/api/events");
+      es.addEventListener("menu", function (ev) {
+        var rev = null;
+        try { rev = JSON.parse(ev.data).revision; } catch (e) {}
+        if (rev !== null && rev === currentRevision) return; // already current
+        loadAndRender();
+      });
+    } catch (e) {}
+  }
+
+  function start() {
+    initLang();
+    initView();
+    initScrollChrome();
+    loadAndRender().then(connectLive);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start);
+  } else {
+    start();
+  }
+})();
