@@ -41,7 +41,7 @@ async function check(name, fn) {
     assert.ok(Array.isArray(r.body.menu.sections) && r.body.menu.sections.length >= 1, "no sections");
     assert.ok(r.body.revision >= 1, "no revision");
     const k = r.body.menu.sections.find((s) => s.id === "kahvalti");
-    assert.ok(k && k.footnote && /13\.00/.test(k.footnote.tr), "breakfast footnote missing");
+    assert.ok(k && k.note && /13\.00/.test(k.note.tr), "breakfast service-hours note missing");
   });
 
   await check("writes are rejected without auth", async () => {

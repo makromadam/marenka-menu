@@ -585,7 +585,7 @@ module.exports = {
           "en": "Food"
         }
       },
-      "footnote": {
+      "note": {
         "tr": "Kahvaltı servisimiz 13.00'a kadardır.",
         "en": "Breakfast is served until 1:00 PM."
       }
