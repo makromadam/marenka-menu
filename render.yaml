@@ -1,0 +1,40 @@
+# Render.com Blueprint — Marenka menüsünü tek tıkla internette yayınlar.
+#
+# Adımlar:
+#   1) Bu depo GitHub'da (makromadam/marenka-menu).
+#   2) https://dashboard.render.com → "New +" → "Blueprint" → bu depoyu seçin.
+#   3) Render bu dosyayı okur, servisi ve kalıcı diski otomatik kurar.
+#   4) Yayınlandıktan sonra "Environment" sekmesinden ADMIN_PASSWORD değerini görün.
+#
+# Not: SQLite verisinin (menü) kalıcı olması için bir disk gerekir; bu da ücretli
+# bir plan (Starter) ister. Tamamen ücretsiz denemek için aşağıdaki `plan` ve
+# `disk` satırlarını kaldırabilirsiniz; ancak o zaman her yeniden başlatmada menü
+# tohum (seed) haline döner.
+
+services:
+  - type: web
+    name: marenka-menu
+    runtime: node
+    rootDir: cms
+    plan: starter
+    buildCommand: npm install
+    startCommand: node server.js
+    autoDeploy: true
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        generateValue: true   # Render güçlü bir şifre üretir (panelde görürsünüz)
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: COOKIE_SECURE
+        value: "1"
+      - key: DB_PATH
+        value: /var/data/menu.db
+    disk:
+      name: marenka-data
+      mountPath: /var/data
+      sizeGB: 1

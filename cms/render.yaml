@@ -1,0 +1,35 @@
+# Render.com Blueprint — bu "cms" klasörü deponun KÖKÜ olduğunda kullanın.
+# (Tüm depoyu yayınlıyorsanız, deponun kökündeki render.yaml dosyasını kullanın.)
+#
+# Render → New + → Blueprint → repoyu seçin. Yayınlandıktan sonra Environment
+# sekmesinden üretilen ADMIN_PASSWORD'ü görün.
+#
+# Not: Menü verisinin kalıcı olması için disk gerekir (ücretli Starter plan).
+# Ücretsiz denemek için `plan` ve `disk`'i kaldırın (veri her başlatmada sıfırlanır).
+
+services:
+  - type: web
+    name: marenka-menu
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: node server.js
+    autoDeploy: true
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        generateValue: true
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: COOKIE_SECURE
+        value: "1"
+      - key: DB_PATH
+        value: /var/data/menu.db
+    disk:
+      name: marenka-data
+      mountPath: /var/data
+      sizeGB: 1
